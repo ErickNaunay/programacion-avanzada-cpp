@@ -43,12 +43,24 @@ private:
 
 public:
     ReservaSala(int capacidadInicial) {
-        // TODO
+         if (capacidadInicial <= 0 || capacidadInicial > 50) {
+            capacidadPersonas = 5;
+            std::cout << "Reserva creada, capacidad segura por defecto (5)" << std::endl;
+        } else {
+            capacidadPersonas = capacidadInicial;
+            std::cout << "Reserva creada, capacidad " << capacidadPersonas << std::endl;
+        }
     }
 
     bool setHorario(double inicio, double fin) {
-        // TODO
+        if (inicio < 0 || fin > 24 || inicio >= fin) {
+
         return false;
+        }
+        horaInicio = inicio;
+        horaFin = fin;
+
+        return true;
     }
 
     int getCapacidadPersonas() {
@@ -56,7 +68,8 @@ public:
     }
 
     ~ReservaSala() {
-        // TODO
+        std::cout << "Reserva liberada" << std::endl;
+        
     }
 };
 
