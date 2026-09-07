@@ -8,7 +8,7 @@
 // Promedio: 30.1667
 //
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio2_arreglos.cpp -o bin/ejercicio2
-// Ejecutar:  ./bin/ejercicio2
+// Ejecutar:  ./bin/ejercicio2  
 
 #include <iostream>
 
@@ -20,6 +20,18 @@ int main() {
     int minimo = datos[0];
     int maximo = datos[0];
     int suma = 0;
+
+    for (int i = 0; i < n; i++) {
+        suma += datos[i];
+
+        if (datos[i] < minimo) {
+            minimo = datos[i];
+        }
+
+        if (datos[i] > maximo) {
+            maximo = datos[i];
+        }
+    }
 
     double promedio = static_cast<double>(suma) / n;
 

@@ -29,24 +29,35 @@ public:
     double getAltura() { return altura; }
 
     bool setBase(double nuevaBase) {
-        // TODO: si nuevaBase no es positiva, devuelve false sin modificar base.
-        // Si es positiva, asigna base = nuevaBase y devuelve true.
+        
+         if (nuevaBase <= 0.0) {
         return false;
     }
+    base = nuevaBase;
+
+    return true;
+}
 
     bool setAltura(double nuevaAltura) {
-        // TODO: mismo patron que setBase(), pero para altura.
-        return false;
+        
+        if (nuevaAltura <= 0.0) {
+
+            return false;
+        }
+
+        altura = nuevaAltura;   
+
+        return true;
     }
 
     double area() {
         // TODO: retorna base * altura
-        return 0.0;
+        return base * altura;
     }
 
     double perimetro() {
         // TODO: retorna 2 * (base + altura)
-        return 0.0;
+        return 2 * (base + altura);
     }
 };
 

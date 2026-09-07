@@ -19,7 +19,7 @@ private:
 
 public:
     Cronometro(double segundosIniciales) {
-        // TODO: asigna segundosIniciales a segundos
+        segundos = segundosIniciales;
     }
 
     double getSegundos() {
