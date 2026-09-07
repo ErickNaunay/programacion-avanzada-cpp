@@ -9,7 +9,7 @@
 //
 // Tu main() debe:
 // 1. Crear una Escalera con numeroPeldanos = 10.
-// 2. Crear una Escalera con numeroPeldanos = 15.
+// 2. Crear una Escalera con numeroPeldanos = 15.   
 // 3. Imprimir, para cada una, si es segura o no.
 //
 // Salida esperada, exactamente:
@@ -18,3 +18,30 @@
 //
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio11_escalera.cpp -o bin/ejercicio11
 // Ejecutar:  ./bin/ejercicio11
+
+#include <iostream>
+
+struct Escalera {
+    int numeroPeldanos;
+
+    bool esSegura() {
+        return numeroPeldanos <= 12;
+    }
+};
+
+int main() {
+    Escalera e1;
+    e1.numeroPeldanos = 10;
+
+    Escalera e2;
+    e2.numeroPeldanos = 15;
+
+    std::cout << "Escalera de " << e1.numeroPeldanos << " peldanos: "
+              << (e1.esSegura() ? "segura" : "no segura") << std::endl;
+
+    std::cout << "Escalera de " << e2.numeroPeldanos << " peldanos: "
+              << (e2.esSegura() ? "segura" : "no segura") << std::endl;
+
+    return 0;
+}
+

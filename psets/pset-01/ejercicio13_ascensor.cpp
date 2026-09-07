@@ -31,3 +31,45 @@
 //
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio13_ascensor.cpp -o bin/ejercicio13
 // Ejecutar:  ./bin/ejercicio13
+
+#include <iostream>
+
+class Ascensor {
+private:
+    int pisoMinimo;
+    int pisoMaximo;
+
+public:
+    bool setRangoPisos(int minimo, int maximo) {
+        if (minimo < -2 || maximo > 50 || minimo >= maximo) {
+            return false;
+        }
+        pisoMinimo = minimo;
+        pisoMaximo = maximo;
+        return true;
+    }
+
+    int getPisoMinimo() {
+        return pisoMinimo;
+    }
+
+    int getPisoMaximo() {
+        return pisoMaximo;
+    }
+};
+
+int main() {
+    Ascensor a;
+
+    bool resultado1 = a.setRangoPisos(-1, 20);
+    std::cout << "Rango aceptado (-1 a 20): " << std::boolalpha << resultado1 << std::endl;
+    std::cout << "Minimo: " << a.getPisoMinimo() << std::endl;
+    std::cout << "Maximo: " << a.getPisoMaximo() << std::endl;
+
+    bool resultado2 = a.setRangoPisos(30, 10);
+    std::cout << "Rango aceptado (30 a 10): " << std::boolalpha << resultado2 << std::endl;
+    std::cout << "Minimo: " << a.getPisoMinimo() << std::endl;
+    std::cout << "Maximo: " << a.getPisoMaximo() << std::endl;
+
+    return 0;
+}
