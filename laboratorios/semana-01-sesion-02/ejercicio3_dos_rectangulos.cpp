@@ -5,7 +5,9 @@
 //
 // TODO (escribe tu respuesta como comentario justo aqui):
 // En que linea esta el bug, y que deberia decir en su lugar?
-//
+// el bug esta en las llamadas del rectangulo 2
+// se usa altura1 con base2
+// deberia usarse  altura2
 //
 // Parte B: usa el struct Rectangulo del ejercicio 2 para
 // reescribir el mismo resumen con dos objetos, rect1 y rect2, en vez de 4
@@ -49,11 +51,18 @@ struct Rectangulo {
 };
 
 void imprimirConObjetos() {
-    // TODO: declara rect1 (base 10, altura 5) y rect2 (base 6, altura 4),
-    // igual que declaraste 'r' en el ejercicio 2.
+    Rectangulo rect1;
+    rect1.base = 10.0;
+    rect1.altura = 5.0;
 
-    // TODO: imprime el resumen de cada uno, en el mismo formato de arriba,
-    // usando rect1.area(), rect1.perimetro(), rect2.area(), rect2.perimetro()
+    Rectangulo rect2;
+    rect2.base = 6.0;
+    rect2.altura = 4.0;
+
+    std::cout << "Rectangulo 1, Area: " << rect1.area()
+              << ", Perimetro: " << rect1.perimetro() << std::endl;
+    std::cout << "Rectangulo 2, Area: " << rect2.area()
+              << ", Perimetro: " << rect2.perimetro() << std::endl;
 }
 
 int main() {

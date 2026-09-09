@@ -19,9 +19,10 @@ struct PuntoCartesiano {
     double x, y;
 
     double distancia(PuntoCartesiano otro) {
-        // TODO: calcula dx = x - otro.x, dy = y - otro.y, y retorna
-        // std::sqrt(dx * dx + dy * dy)
-        return 0.0;
+        double dx = x - otro.x;
+        double dy = y - otro.y;
+
+           return std::sqrt(dx * dx + dy * dy);
     }
 };
 
