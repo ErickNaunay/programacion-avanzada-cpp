@@ -1,5 +1,5 @@
 #include <iostream>
-
+using namespace std;
 class Vehiculo {
     private:
         double velocidadKmh;
@@ -60,8 +60,31 @@ class Motor {
 // TODO: Carro sigue heredando de Vehiculo (relacion "es un", correcta).
 // En vez de heredar tambien de Motor, agrega un atributo privado "Motor motor;"
 // (relacion "tiene un", composicion) y escribe arrancar() delegando en el.
-class Carro: public Vehiculo, public Motor {
+
+
+
+
+class Carro: public Vehiculo {
+    private:
+    Motor motor;
     public:
+    
+  
+    bool arrancar(int potencia){
+    motor.setPotenciaHP(potencia);
+        motor = Motor();
+
+    motor.encender();
+    if (!potencia or !motor.estaEncendido()){
+        return false;
+    }
+    return true;
+}
+
+    void tocarBocina() {
+        cout << "piiiiii!";}
+
+
         // TODO: reemplaza esta herencia forzada por un atributo Motor,
         // y escribe:
         // bool arrancar(int potenciaHP): configura la potencia del motor,

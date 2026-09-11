@@ -19,12 +19,10 @@ private:
 
 public:
     Cronometro(double segundosIniciales) {
-        // TODO: asigna segundosIniciales a segundos
+        segundos = segundosIniciales;
     }
 
-    double getSegundos() {
-        return segundos;
-    }
+    double getSegundos() { return segundos;  }
 };
 
 int main() {

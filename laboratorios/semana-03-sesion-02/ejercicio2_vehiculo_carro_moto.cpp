@@ -14,7 +14,7 @@
 // Ejecutar:  ./bin/ejercicio2
 
 #include <iostream>
-
+using namespace std;
 class Vehiculo {
 private:
     double velocidadKmh;
@@ -27,22 +27,39 @@ public:
     }
 
     bool setVelocidadKmh(double nuevaVelocidad) {
+        if(nuevaVelocidad<0){
+            return false;
+        }else{
+            velocidadKmh=nuevaVelocidad;
+            return true;
+        }
+        
+        
         // TODO: si nuevaVelocidad es negativa, devuelve false sin modificar
         // velocidadKmh. Si no, asigna velocidadKmh = nuevaVelocidad y
         // devuelve true.
-        return false;
     }
 
     bool setKilometraje(double nuevoKilometraje) {
+        if(nuevoKilometraje<0){
+            return false;
+        }else{
+            kilometraje=nuevoKilometraje;
+            return true;
+        }
+        
+        
         // TODO: mismo patron que setVelocidadKmh(), pero para kilometraje
         // (no puede ser negativo).
-        return false;
     }
 
     double getVelocidadKmh() { return velocidadKmh; }
     double getKilometraje() { return kilometraje; }
 
     void describir() {
+        cout<<"Vehiculo a: "<<getVelocidadKmh()<<" km/h "<<getKilometraje()<<"km recorridos."<<endl;
+        
+        
         // TODO: imprime "Vehiculo a " + velocidadKmh + " km/h, " +
         // kilometraje + " km recorridos"
     }
@@ -51,14 +68,14 @@ public:
 class Carro : public Vehiculo {
 public:
     void tocarBocina() {
-        std::cout << "Piii!" << std::endl;
+        cout << "Piii!" << std::endl;
     }
 };
 
 class Moto : public Vehiculo {
 public:
     void acelerar() {
-        std::cout << "Vrrrm!" << std::endl;
+        cout << "Vrrrm!" << std::endl;
     }
 };
 

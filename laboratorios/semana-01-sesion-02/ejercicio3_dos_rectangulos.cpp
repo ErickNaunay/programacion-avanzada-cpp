@@ -22,12 +22,13 @@
 //
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio3_dos_rectangulos.cpp -o bin/ejercicio3
 // Ejecutar:  ./bin/ejercicio3
-
+using namespace std;
 #include <iostream>
 
 // Funciones sueltas
 double area(double base, double altura) { return base * altura; }
 double perimetro(double base, double altura) { return 2 * (base + altura); }
+
 
 void imprimirConFuncionesSueltas() {
     double base1 = 10.0, altura1 = 5.0;
@@ -36,8 +37,8 @@ void imprimirConFuncionesSueltas() {
     std::cout << "Rectangulo 1, Area: " << area(base1, altura1)
               << ", Perimetro: " << perimetro(base1, altura1) << std::endl;
 
-    std::cout << "Rectangulo 2, Area: " << area(base2, altura1)
-              << ", Perimetro: " << perimetro(base2, altura1) << std::endl;
+     std::cout << "Rectangulo 2, Area: " << area(base2, altura1) //en estas dos lineas esta el bug deberia ser altura 2
+    << ", Perimetro: " << perimetro(base2, altura1) << std::endl;
 }
 
 // Struct Rectangulo
@@ -49,11 +50,22 @@ struct Rectangulo {
 };
 
 void imprimirConObjetos() {
-    // TODO: declara rect1 (base 10, altura 5) y rect2 (base 6, altura 4),
-    // igual que declaraste 'r' en el ejercicio 2.
+    Rectangulo rect1;
+    rect1.altura=5;
+    rect1.base=10;
 
-    // TODO: imprime el resumen de cada uno, en el mismo formato de arriba,
-    // usando rect1.area(), rect1.perimetro(), rect2.area(), rect2.perimetro()
+    Rectangulo rect2;
+    rect2.altura=4;
+    rect2.base=6;    
+   
+    cout<<"Rectangulo 1: "<<endl ;
+    cout<<"Area: "<<rect1.area()<<endl;
+    cout<<"Perimetro: "<<rect1.perimetro()<<endl;
+    cout<<endl;
+    cout<<"Rectangulo 2: "<<endl ;
+    cout<<"Area: "<<rect2.area()<<endl;
+    cout<<"Perimetro: "<<rect2.perimetro()<<endl;
+    
 }
 
 int main() {

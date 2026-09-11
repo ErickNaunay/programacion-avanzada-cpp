@@ -30,16 +30,25 @@ public:
     double getMaxima() { return maxima; }
 
     bool setRango(double nuevaMinima, double nuevaMaxima) {
+        if(nuevaMinima<0 or nuevaMaxima >100 or nuevaMinima > nuevaMaxima){
+            return false;} 
+        else {
+        maxima=nuevaMaxima;
+        minima=nuevaMinima;
+        return true;} 
+        
         // TODO: si nuevaMinima es menor que 0, o nuevaMaxima es mayor que
         // 100, o nuevaMinima es mayor que nuevaMaxima, devuelve false sin
         // modificar minima ni maxima. Si las tres condiciones son
         // validas, asigna minima y maxima, y devuelve true.
-        return false;
+        
     }
 
     bool estaEnRango(double nota) {
+        if(nota<=maxima and nota >=minima ){ 
         // TODO: retorna true si nota esta entre minima y maxima (incluidos).
-        return false;
+        return true;}
+        else {return false; }
     }
 };
 

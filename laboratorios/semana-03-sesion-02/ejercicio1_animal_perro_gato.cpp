@@ -18,7 +18,7 @@
 // Ejecutar:  ./bin/ejercicio1
 
 #include <iostream>
-
+using namespace std;
 class Animal {
 private:
     double edad;
@@ -30,26 +30,43 @@ public:
         pesoKg = 0.0;
     }
 
-    bool setEdad(double nuevaEdad) {
+    bool setedad(double nuevaEdad) {
+        
+        if(nuevaEdad<0){
+            return false;
+        }
+        edad=nuevaEdad;
+        return true;
+        
         // TODO: si nuevaEdad es negativa, devuelve false sin modificar edad.
         // Si no, asigna edad = nuevaEdad y devuelve true.
-        return false;
     }
 
-    bool setPesoKg(double nuevoPeso) {
+    bool setpesoKg(double nuevoPeso) {
+        if(nuevoPeso<=0){
+            return false;
+}else{
+        pesoKg=nuevoPeso;
+        return true; }
         // TODO: mismo patron que setEdad(), pero para pesoKg (debe ser mayor que 0).
-        return false;
     }
 
-    double getEdad() { return edad; }
-    double getPesoKg() { return pesoKg; }
+    double getedad() { return edad; }
+    double getpesoKg() { return pesoKg; }
 
     void describir() {
+        cout<<"Animal de: "<<getedad()<<" anios, "<<getpesoKg()<<"kg"<<endl;
+        
+        
         // TODO: imprime "Animal de " + edad + " anios, " + pesoKg + " kg"
     }
+
 };
 
+/// asi se hace para heredar : public animal, privado tambien se hereda pero no tiene acceso ///
+
 class Perro : public Animal {
+
 public:
     void ladrar() {
         std::cout << "Guau!" << std::endl;
@@ -65,14 +82,14 @@ public:
 
 int main() {
     Perro p;
-    p.setEdad(3.0);
-    p.setPesoKg(12.0);
+    p.setedad(3.0);
+    p.setpesoKg(12.0);
     p.describir();
     p.ladrar();
 
     Gato g;
-    g.setEdad(2.0);
-    g.setPesoKg(4.5);
+    g.setedad(2.0);
+    g.setpesoKg(4.5);
     g.describir();
     g.maullar();
 

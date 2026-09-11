@@ -20,6 +20,10 @@ struct ContadorRegresivo {
     int valor;
 
     void decrementar() {
+       if(valor > 0){
+        valor=valor-1; 
+    }
+       
         // TODO: si valor > 0, resta 1 a valor. Si no, no hagas nada.
     }
 };

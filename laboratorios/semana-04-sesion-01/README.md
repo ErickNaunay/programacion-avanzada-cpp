@@ -12,7 +12,7 @@ Evaluar los riesgos de la herencia múltiple, incluido el problema del diamante,
 
 Según el artículo, ¿qué hace que el problema del diamante sea un problema real, y no simplemente "otro caso más" de herencia múltiple?
 
-_(tu respuesta)_
+que 2 clases tengan el mismo atributo, y eso hace que su descendencia no sepa de donde coger esa accion 
 
 La sesión pasada terminó con un ConcepTest sobre `Impresora` y `Escaner`, dos clases sin relación conceptual que necesitaban el mismo método. Si en cambio las dos heredaran de una clase común, `Dispositivo`, y las combináramos en una tercera clase `ImpresoraMultifuncion`, ¿qué le pasaría a `numeroSerie`?
 
@@ -40,15 +40,79 @@ Archivo: [`ejercicio2_dispositivo_multifuncion_virtual.cpp`](./ejercicio2_dispos
 
 **Respuesta 1, antes de ver la solución:** si agrego `virtual` a las dos declaraciones de herencia, ¿cuántas copias de `numeroSerie` tiene ahora un objeto `ImpresoraMultifuncion`?
 
-_(tu respuesta)_
+solo una
 
 **Respuesta 2:** ¿qué costo tiene la herencia virtual, más allá de resolver la ambigüedad?
 
-_(tu respuesta)_
+se hace mas lento
 
 **La formulación completa, tal como la resuelvo yo:**
 
-_(anota aquí los dos cambios exactos y la salida verificada, mientras se revisa en clase)_
+lass Dispositivo {
+    private:
+        int numeroSerie;
+        bool encendido;
+    public:
+        Dispositivo() {
+            numeroSerie = 0;
+            encendido = false;
+        }
+
+        bool setNumeroSerie(int nuevoNumero) {
+            if (nuevoNumero <= 0) { return false; }
+            numeroSerie = nuevoNumero;
+            return true;
+        }
+
+        void encender() {
+            encendido = true;
+        }
+
+        void describir() {
+            std::cout << "Dispositivo #" << numeroSerie << ", encendido: " << (encendido ? "si" : "no") << std::endl;
+        }
+};
+
+class Impresora: public virtual Dispositivo {
+    private:
+        int paginasPorMinuto;
+    public:
+        Impresora() {
+            paginasPorMinuto = 0;
+        }
+
+        bool setPaginasPorMinuto(int nuevasPpm) {
+            if (nuevasPpm <= 0) { return false; }
+            paginasPorMinuto = nuevasPpm;
+            return true;
+        }
+
+        void imprimir() {
+            std::cout << "Imprimiendo a " << paginasPorMinuto << " paginas por minuto" << std::endl;
+        }
+};
+
+// TODO: lo mismo aqui.
+class Escaner: public virtual Dispositivo {
+    private:
+        int resolucionDPI;
+    public:
+        Escaner() {
+            resolucionDPI = 0;
+        }
+
+        bool setResolucionDPI(int nuevaResolucion) {
+            if (nuevaResolucion <= 0) { return false; }
+            resolucionDPI = nuevaResolucion;
+            return true;
+        }
+
+        void escanear() {
+            std::cout << "Escaneando a " << resolucionDPI << " DPI" << std::endl;
+        }
+};
+
+
 
 ## Durante el ConcepTest
 
@@ -70,7 +134,7 @@ Archivo: [`ejercicio3_robot_aspiradora.cpp`](./ejercicio3_robot_aspiradora.cpp).
 
 **Antes de escribir código:** un compañero propone que `RobotAspiradora` herede de dos clases nuevas, `Aspiradora` y `RobotMovil`, y que ambas hereden de `DispositivoElectronico` para reutilizar `numeroSerie`. Explica por qué ese diseño reproduciría el problema del diamante, y qué miembro quedaría ambiguo.
 
-_(tu respuesta)_
+Ambas clases heredarían por separado de DispositivoElectronico, así que RobotAspiradora terminaría con dos copias de esa clase
 
 Diseña en su lugar `RobotAspiradora` con herencia simple, heredando directamente de `DispositivoElectronico` (ya dado en el archivo), y agrega:
 
@@ -96,4 +160,4 @@ Herencia múltiple (`class Derivada: public Base1, public Base2`) y herencia vir
 
 `RobotAspiradora` resolvió todo con una sola relación "es un". Pero ¿qué pasa cuando la clase de verdad necesita algo de una segunda clase con la que no tiene esa relación? Por ejemplo, un `Carro` no es un `Motor`, pero sí tiene un `Motor`.
 
-_(tu respuesta)_
+se usaria una composicion 

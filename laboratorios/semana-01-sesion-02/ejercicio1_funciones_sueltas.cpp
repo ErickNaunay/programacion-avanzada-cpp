@@ -12,38 +12,35 @@
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio1_funciones_sueltas.cpp -o bin/ejercicio1
 // Ejecutar:  ./bin/ejercicio1
 
+//crear una clase
 #include <iostream>
+using namespace std;
+double Area(double base,double altura){
+return base * altura; 
+};
 
-double area(double base, double altura) {
-    // TODO: retorna base * altura
-    return 0.0;
+double perimetro(double base,double altura){
+  return base*2 + altura*2;
+
+};
+
+double nuevo(double base){
+  return base *2;
+}
+double nuevo2(double altura){
+
+  return altura *2;
 }
 
-double perimetro(double base, double altura) {
-    // TODO: retorna 2 * (base + altura)
-    return 0.0;
-}
 
-double nuevaBase(double base, double factor) {
-    // TODO: retorna base * factor
-    return 0.0;
-}
-
-double nuevaAltura(double altura, double factor) {
-    // TODO: retorna altura * factor
-    return 0.0;
-}
 
 int main() {
-    double base = 10.0;
-    double altura = 5.0;
+  
+  double altura = 5;
+  double base =10;
+cout<<"Area: " << Area(altura,base)<< endl;
+cout<<"Perimetro: "<<perimetro(altura,base)<< endl;  
+cout<<"Despues de escalar por 2 "<<"Altura: "<<nuevo2(altura)<<", base: "<<nuevo(base)<<endl;
 
-    std::cout << "Area: " << area(base, altura) << std::endl;
-    std::cout << "Perimetro: " << perimetro(base, altura) << std::endl;
-
-    base = nuevaBase(base, 2.0);
-    altura = nuevaAltura(altura, 2.0);
-    std::cout << "Despues de escalar x2 -> base: " << base << ", altura: " << altura << std::endl;
-
-    return 0;
+return 0;
 }

@@ -27,7 +27,7 @@ class Dispositivo {
 
 // TODO: agrega "virtual" a la herencia de Impresora y de Escaner, para que
 // las dos compartan una sola copia de Dispositivo.
-class Impresora: public Dispositivo {
+class Impresora: public virtual Dispositivo {
     private:
         int paginasPorMinuto;
     public:
@@ -47,7 +47,7 @@ class Impresora: public Dispositivo {
 };
 
 // TODO: lo mismo aqui.
-class Escaner: public Dispositivo {
+class Escaner: public virtual Dispositivo {
     private:
         int resolucionDPI;
     public:

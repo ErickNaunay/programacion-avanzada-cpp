@@ -16,12 +16,17 @@
 #include <cmath>
 
 struct PuntoCartesiano {
-    double x, y;
+    double x;
+    double y;
 
-    double distancia(PuntoCartesiano otro) {
+    double distancia(PuntoCartesiano oooo) {
+        
+        double dx= x- oooo.x;  
+        double dy= y-oooo.y;
+        return std::sqrt(dx*dx+dy*dy);
         // TODO: calcula dx = x - otro.x, dy = y - otro.y, y retorna
         // std::sqrt(dx * dx + dy * dy)
-        return 0.0;
+        
     }
 };
 

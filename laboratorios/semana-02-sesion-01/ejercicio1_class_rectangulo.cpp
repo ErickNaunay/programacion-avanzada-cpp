@@ -1,22 +1,3 @@
-// Ejercicio 1: Rectangulo encapsulado
-//
-// La sesion pasada, Rectangulo era un struct con base y altura publicos:
-// cualquiera podia escribir r.base = -5.0 y el compilador lo aceptaba sin
-// aviso, aunque un rectangulo con base negativa no tiene sentido.
-//
-// Hoy, base y altura son privados: la unica forma de cambiarlos es a
-// traves de setBase() y setAltura(), y esos metodos primero verifican
-// que el valor sea positivo antes de aceptarlo. Si el valor no es
-// valido, el metodo lo rechaza (devuelve false) y el atributo no cambia.
-//
-// Salida esperada:
-// Area: 50, Perimetro: 30
-// setBase(-3) rechazado: true, base sigue en: 10
-// Area: 200, Perimetro: 60
-//
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio1_class_rectangulo.cpp -o bin/ejercicio1
-// Ejecutar:  ./bin/ejercicio1
-
 #include <iostream>
 
 class Rectangulo {
@@ -29,24 +10,23 @@ public:
     double getAltura() { return altura; }
 
     bool setBase(double nuevaBase) {
-        // TODO: si nuevaBase no es positiva, devuelve false sin modificar base.
-        // Si es positiva, asigna base = nuevaBase y devuelve true.
-        return false;
+        if(nuevaBase<=0){return false;}
+        base =nuevaBase;
+        return true;
     }
 
     bool setAltura(double nuevaAltura) {
-        // TODO: mismo patron que setBase(), pero para altura.
-        return false;
+        if(nuevaAltura<=0){return false;}
+        altura = nuevaAltura;
+        return true;
     }
 
     double area() {
-        // TODO: retorna base * altura
-        return 0.0;
+        return base * altura;
     }
 
     double perimetro() {
-        // TODO: retorna 2 * (base + altura)
-        return 0.0;
+        return base*2+altura*2;
     }
 };
 

@@ -45,3 +45,108 @@
 //
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio15_sesion_estudio.cpp -o bin/ejercicio15
 // Ejecutar:  ./bin/ejercicio15
+
+
+#include <iostream>
+using namespace std;
+// Diseña una class SesionEstudio con:
+// - Atributos privados horaInicio, horaFin (double) y
+//   minutosDescansoAsignado (entero).
+
+
+
+
+class SesionEstudio {
+private:
+double horaInicio;
+double horaFin;
+int minutosDescansoAsignado;
+
+
+public:
+SesionEstudio(int minutosDescanso){
+if(minutosDescanso<= 0 or minutosDescanso >60){
+
+    cout<<"Descanso invalido, se asignan 10 minutos por defecto";
+minutosDescansoAsignado=10;
+
+}else{
+
+    minutosDescansoAsignado= minutosDescanso;
+}
+cout<<endl;
+}
+
+bool setHorario(double inicio, double fin ){
+ if(inicio >= 0 and fin <= 24 and  inicio < fin){
+    horaInicio=inicio;
+    horaFin=fin;
+    return true;}else{
+
+return false;
+
+    }
+}
+
+double getminutosdescanso(){return minutosDescansoAsignado;}
+
+
+
+// - Constructor SesionEstudio(int minutosDescanso): si minutosDescanso
+//   es menor o igual a 0, o mayor a 60, imprime exactamente "Descanso
+//   invalido, se asignan 10 minutos por defecto" y asigna
+//   minutosDescansoAsignado = 10. Si es válido, lo asigna directamente,
+//   sin imprimir nada.
+// - Un setter que devuelva bool, setHorario(double inicio, double fin),
+//   con el mismo invariante conjunto de otros ejercicios de este PSet:
+//   inicio >= 0, fin <= 24, inicio < fin.
+// - El getter getMinutosDescanso().
+// - Un destructor que imprima exactamente "Sesion de estudio
+//   finalizada".
+
+
+~SesionEstudio(){cout<<"Sesion de estudio finalizada"<<endl;}
+};
+
+
+
+int main (){
+{
+SesionEstudio s1(20);
+s1.setHorario(8,10);
+cout<<"Horario 1 aceptado: "<<std::boolalpha<<s1.setHorario(8,10)<<endl;
+
+SesionEstudio s2(90);
+s2.setHorario(23,0);
+cout<<"Horario 2 aceptado: "<<std::boolalpha<<s2.setHorario(23,0)<<endl;
+
+SesionEstudio s3(15);
+s3.setHorario(14,16);
+cout<<"Horario 3 aceptado: "<<std::boolalpha<<s3.setHorario(14,16)<<endl;
+ 
+cout<< "--- fin del bloque ---"<<endl;
+
+ }
+
+// Salida esperada, exactamente:
+// Horario 1 aceptado: true
+// Descanso invalido, se asignan 10 minutos por defecto
+// Horario 2 aceptado: false
+// Horario 3 aceptado: true
+// --- fin del bloque ---
+// Sesion de estudio finalizada
+// Sesion de estudio finalizada
+// Sesion de estudio finalizada
+
+
+
+    return 0;
+}
+
+
+
+
+
+
+
+

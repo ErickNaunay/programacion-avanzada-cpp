@@ -14,18 +14,24 @@
 // Ejecutar:  ./bin/ejercicio9
 
 #include <iostream>
-
+using namespace std;
 class VelaEncendida {
 private:
     double minutosRestantes;
 
 public:
-    VelaEncendida(double minutosIniciales) {
+
+   double getminutosrestantes(){return minutosRestantes; }
+      VelaEncendida(double minutosIniciales) {
+       minutosRestantes=minutosIniciales;
+       cout<<"Vela encendida con "<< minutosRestantes<<" minutos"<<endl;
         // TODO: asigna minutosIniciales a minutosRestantes e imprime
         // "Vela encendida con " + minutosRestantes + " minutos"
     }
 
     ~VelaEncendida() {
+     cout<< "La vela se apago";
+
         // TODO: imprime "La vela se apago"
     }
 };

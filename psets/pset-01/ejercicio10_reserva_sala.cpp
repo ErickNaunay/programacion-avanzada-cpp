@@ -13,6 +13,8 @@
 //   segura por defecto (5)" y asigna capacidadPersonas = 5. Si es
 //   valida, imprime "Reserva creada, capacidad " + capacidadInicial y
 //   la asigna.
+
+
 // - setHorario(double inicio, double fin): mismo invariante conjunto
 //   del Ejercicio 6 (inicio >= 0, fin <= 24, inicio < fin).
 // - getCapacidadPersonas().
@@ -33,8 +35,8 @@
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio10_reserva_sala.cpp -o bin/ejercicio10
 // Ejecutar:  ./bin/ejercicio10
 
-#include <iostream>
-
+ #include <iostream>
+ using namespace std;
 class ReservaSala {
 private:
     double horaInicio;
@@ -43,12 +45,27 @@ private:
 
 public:
     ReservaSala(int capacidadInicial) {
-        // TODO
+    if (capacidadInicial<=0 or capacidadInicial >50){
+     cout<<"Reserva creada, capacidad segura por defecto (5)"<<endl;   
+    capacidadPersonas=5;
+    }else{
+        capacidadPersonas= capacidadInicial;
+        cout<<"Reserva creada, capacidad "<<capacidadPersonas<<endl;
+    }
+    
+        
     }
 
+//(inicio >= 0, fin <= 24, inicio < fin).
+
     bool setHorario(double inicio, double fin) {
-        // TODO
-        return false;
+       if(inicio >=0 and fin <=24 and inicio <fin){
+        horaInicio= inicio;
+        horaFin=fin;
+        return true;}else{
+            return false;
+        }
+
     }
 
     int getCapacidadPersonas() {
@@ -56,7 +73,7 @@ public:
     }
 
     ~ReservaSala() {
-        // TODO
+        cout<<"Reserva liberada"<<endl;
     }
 };
 

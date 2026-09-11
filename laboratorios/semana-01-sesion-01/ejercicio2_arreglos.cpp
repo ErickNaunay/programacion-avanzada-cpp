@@ -1,6 +1,5 @@
 // Diagnostico 2: Arreglos
-// Objetivo: calcular el minimo, el maximo y el promedio de un arreglo de enteros,
-// usando un solo ciclo, sin funciones de la biblioteca estandar (<algorithm>).
+// Objetivo: recorrer un arreglo y calcular su minimo, maximo y promedio.
 //
 // Salida esperada:
 // Minimo: 2
@@ -16,10 +15,15 @@ int main() {
     int datos[] = {12, 45, 2, 91, 7, 24};
     int n = sizeof(datos) / sizeof(datos[0]);
 
-    // TODO: recorre 'datos' con un ciclo y calcula minimo, maximo y suma.
     int minimo = datos[0];
     int maximo = datos[0];
     int suma = 0;
+
+    for(int i = 0; i < n; ++i) {
+        if(datos[i] < minimo) minimo = datos[i];
+        if(datos[i] > maximo) maximo = datos[i];
+        suma += datos[i];
+    }
 
     double promedio = static_cast<double>(suma) / n;
 

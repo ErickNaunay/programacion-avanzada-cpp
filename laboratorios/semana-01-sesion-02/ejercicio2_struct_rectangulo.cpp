@@ -18,24 +18,24 @@
 // Ejecutar:  ./bin/ejercicio2
 
 #include <iostream>
+using namespace std;
 
 struct Rectangulo {
     double base;
     double altura;
 
     double area() {
-        // TODO: retorna base * altura
-        return 0.0;
+        return base * altura;
     }
 
     double perimetro() {
-        // TODO: retorna 2 * (base + altura)
-        return 0.0;
+        return base*2+altura*2;
     }
 
     void escalar(double factor) {
-        // TODO: reasigna base y altura multiplicandolos por factor
-        // (usa base = ... y altura = ..., como en cualquier funcion que ya conoces)
+       base= base * factor;
+       altura= altura *factor;
+    cout<< "Despues de escalar x"<<factor<<"->"<<"base: "<<base<<", altura:"<<altura<<endl;    
     }
 };
 
@@ -44,11 +44,10 @@ int main() {
     r.base = 10.0;
     r.altura = 5.0;
 
-    std::cout << "Area: " << r.area() << std::endl;
-    std::cout << "Perimetro: " << r.perimetro() << std::endl;
+    cout << "Area: " << r.area() << endl;
+    cout << "Perimetro: " << r.perimetro() << endl;
 
     r.escalar(2.0);
-    std::cout << "Despues de escalar x2 -> base: " << r.base << ", altura: " << r.altura << std::endl;
 
     return 0;
 }

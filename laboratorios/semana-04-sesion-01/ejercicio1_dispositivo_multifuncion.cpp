@@ -1,4 +1,6 @@
 #include <iostream>
+using namespace std;
+
 
 class Dispositivo {
     private:
@@ -68,14 +70,21 @@ class ImpresoraMultifuncion: public Impresora, public Escaner {
 
 int main() {
     ImpresoraMultifuncion mfp;
-
+    mfp.encender();
     mfp.setPaginasPorMinuto(20);
     mfp.imprimir();
+
 
     mfp.setResolucionDPI(600);
     mfp.escanear();
 
-    // TODO: antes de descomentar, predice: ¿que error da el compilador
+   mfp.setNumeroSerie(1234);
+   mfp.describir();
+
+// creo que falta la palabra virtual en las clases de en medio porque de eso trata esta clase .
+
+
+   // TODO: antes de descomentar, predice: ¿que error da el compilador
     // y sobre que palabra exactamente?
     // mfp.setNumeroSerie(1234);
     // mfp.describir();

@@ -1,5 +1,5 @@
 #include <iostream>
-
+using namespace std;
 class DispositivoElectronico {
     private:
         int numeroSerie;
@@ -29,12 +29,16 @@ class DispositivoElectronico {
         }
 };
 
+
+
 // TODO: RobotAspiradora hereda de una sola clase base (herencia simple,
 // sin herencia multiple). Agrega:
 // - void aspirar(): imprime "Aspirando el polvo del piso"
 // - void moverse(int distanciaCm): imprime "Moviendose <distanciaCm> cm hacia adelante"
-class RobotAspiradora {
-    // TODO
+class RobotAspiradora : public virtual DispositivoElectronico {
+    public:
+    void aspirar(){ cout<<"Aspirando el polvo del piso. "; }
+    void moverse(int movimiento){ cout<<"Moviendose "<<movimiento<< "cm hacia adelante. "; }
 };
 
 int main() {

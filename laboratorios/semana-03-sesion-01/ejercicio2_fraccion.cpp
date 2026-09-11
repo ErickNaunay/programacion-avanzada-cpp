@@ -17,7 +17,7 @@
 // Ejecutar:  ./bin/ejercicio2
 
 #include <iostream>
-
+using namespace std;
 class Fraccion {
 private:
     int numerador;
@@ -38,16 +38,36 @@ public:
     int getNumerador() { return numerador; }
     int getDenominador() { return denominador; }
 
+
+
+
+
     Fraccion operator+(Fraccion otra) {
-        // TODO: calcula nuevoNumerador = numerador * otra.getDenominador()
-        // + otra.getNumerador() * denominador, y nuevoDenominador =
-        // denominador * otra.getDenominador(). Retorna un Fraccion nuevo
-        // con esos dos valores.
-        return Fraccion(0, 1);
+        int nuevonumerador;
+        int nuevodenominador;
+        
+        nuevonumerador =numerador * otra.getDenominador()+ otra.getNumerador() * denominador;
+        nuevodenominador= denominador * otra.getDenominador();
+        
+        return Fraccion(nuevonumerador, nuevodenominador);
     }
 };
 
+
+//cout/////////////////////////////////////////////////////////////
+//std::ostream& operator<<(std::ostream& cout , vector2d unvector){
+    
+    
+//    cout<<unvector.getx() << " - "<< unvector.gety()<<")";
+//    return cout ;
+//}
+///////////////////////////////////////////////////////////////////
+
+
 std::ostream& operator<<(std::ostream& os, Fraccion f) {
+    os <<f.getNumerador()<<"/"<<f.getDenominador();
+    
+
     // TODO: escribe en os algo como "numerador/denominador", usando
     // f.getNumerador() y f.getDenominador(), y despues retorna os.
     return os;

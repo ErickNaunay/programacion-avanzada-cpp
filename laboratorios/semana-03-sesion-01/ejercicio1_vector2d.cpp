@@ -19,40 +19,45 @@
 // Ejecutar:  ./bin/ejercicio1
 
 #include <iostream>
-
-class Vector2D {
-private:
+using namespace std;
+class vector2d{
+    private:
     double x;
     double y;
 
-public:
-    Vector2D(double xInicial, double yInicial) {
-        x = xInicial;
-        y = yInicial;
+    public:
+    vector2d(double xinicial, double yinicial){
+    x = xinicial;
+    y= yinicial;
     }
+    double getx(){return x;}
+    double gety(){return y;}
 
-    double getX() { return x; }
-    double getY() { return y; }
-
-    Vector2D operator+(Vector2D otro) {
-        // TODO: retorna un Vector2D nuevo con x + otro.getX() como
-        // primera coordenada, y y + otro.getY() como segunda.
-        return Vector2D(0.0, 0.0);
+   //sumar////////////////////////////////////////////////////////////////
+    vector2d operator+(vector2d otrovector){
+        return vector2d(x + otrovector.getx(), y + otrovector.gety());
     }
+    //////////////////////////////////////////////////////////////////////
+
 };
 
-std::ostream& operator<<(std::ostream& os, Vector2D v) {
-    // TODO: escribe en os algo como "(x, y)", usando v.getX() y
-    // v.getY(), y despues retorna os.
-    return os;
+//cout/////////////////////////////////////////////////////////////
+std::ostream& operator<<(std::ostream& cout , vector2d unvector){
+    
+    
+    cout<<unvector.getx() << " - "<< unvector.gety()<<")";
+    return cout ;
+
+
 }
+///////////////////////////////////////////////////////////////////
 
-int main() {
-    Vector2D v1(2.0, 3.0);
-    Vector2D v2(4.0, -1.0);
-    Vector2D suma = v1 + v2;
+int main(){
 
-    std::cout << v1 << " + " << v2 << " = " << suma << std::endl;
-
+  vector2d v1(2, 3);  
+  vector2d v2(4,-1);
+  
+  vector2d v3 = v1 + v2;
+   cout <<"("<<v1 <<" + "<<"("<<v2<< "= "<<"("<<v3 ;
     return 0;
 }

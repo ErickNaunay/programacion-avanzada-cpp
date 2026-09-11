@@ -25,22 +25,46 @@ public:
     double getSaldo() { return saldo; }
 
     bool inicializarSaldo(double saldoInicial) {
+        if (saldoInicial<0){
+            return false; }
+        else{
+            saldo = saldoInicial;
+            return true;
+        }
+        
+        
         // TODO: si saldoInicial es negativo, devuelve false sin asignar.
         // Si no, asigna saldo = saldoInicial y devuelve true.
-        return false;
     }
 
     bool depositar(double monto) {
+        if(monto<=0){
+            return false;
+        }
+        else{
+            saldo=saldo+monto;
+            return true;
+        }
+
         // TODO: si monto no es positivo, devuelve false sin modificar saldo.
         // Si es positivo, suma monto a saldo y devuelve true.
-        return false;
+    
     }
 
     bool retirar(double monto) {
+        
+        if(monto<=0 or monto >saldo){
+            return false; 
+        }else {
+        saldo=saldo-monto;    
+        return true;
+        }
+        
+        
+        
         // TODO: si monto no es positivo, o si monto es mayor que saldo,
         // devuelve false sin modificar saldo. Si no, resta monto de saldo
         // y devuelve true.
-        return false;
     }
 };
 
@@ -50,7 +74,7 @@ int main() {
     std::cout << "Saldo inicial: " << cuenta.getSaldo() << std::endl;
 
     bool ok1 = cuenta.depositar(-50.0);
-    std::cout << "depositar(-50) rechazado: " << (!ok1 ? "true" : "false")
+    std::cout << "depositar(50) rechazado: " << (!ok1 ? "true" : "false")
               << ", saldo sigue en: " << cuenta.getSaldo() << std::endl;
 
     cuenta.depositar(50.0);

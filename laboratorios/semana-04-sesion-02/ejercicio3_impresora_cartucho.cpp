@@ -9,19 +9,16 @@ class Dispositivo {
             numeroSerie = 0;
             encendido = false;
         }
-
         bool setNumeroSerie(int nuevoNumero) {
             if (nuevoNumero <= 0) { return false; }
             numeroSerie = nuevoNumero;
             return true;
         }
-
         void encender() {
             encendido = true;
         }
-
         void describir() {
-            std::cout << "Dispositivo #" << numeroSerie << ", encendido: " << (encendido ? "si" : "no") << std::endl;
+            std::cout<<"Dispositivo #"<<numeroSerie<<", encendido: "<<(encendido ? "si" : "no")<<std::endl;
         }
 };
 
@@ -31,6 +28,24 @@ class Dispositivo {
 // - void consumir(int porcentaje): reduce nivelTintaPorc en ese porcentaje,
 //   sin bajar de 0
 // - int getNivelTintaPorc(): devuelve el nivel actual
+class Cartucho {
+    private:
+        int nivelTintaPorc;
+    public:
+        Cartucho() {
+            nivelTintaPorc = 100;
+        }
+        bool tieneTinta() {
+            return nivelTintaPorc > 0;
+        }
+        void consumir(int porcentaje) {
+            nivelTintaPorc -= porcentaje;
+            if (nivelTintaPorc < 0) { nivelTintaPorc = 0; }
+        }
+        int getNivelTintaPorc() {
+            return nivelTintaPorc;
+        }
+};
 
 // Un companero propone "class Impresora: public virtual Dispositivo, public Cartucho".
 // Antes de escribir el codigo, responde en el README por que ese diseno
@@ -46,18 +61,28 @@ class Dispositivo {
 class Impresora: public virtual Dispositivo {
     private:
         int paginasPorMinuto;
+        Cartucho cartucho;
     public:
         Impresora() {
             paginasPorMinuto = 0;
         }
-
         bool setPaginasPorMinuto(int nuevasPpm) {
             if (nuevasPpm <= 0) { return false; }
             paginasPorMinuto = nuevasPpm;
             return true;
         }
-
-        // TODO
+        bool imprimir(int paginas) {
+            if (!cartucho.tieneTinta()) {
+                std::cout<<"Sin tinta, no se puede imprimir"<<std::endl;
+                return false;
+            }
+            std::cout<<"Imprimiendo "<<paginas<<" paginas a "<<paginasPorMinuto<<" paginas por minuto"<<std::endl;
+            cartucho.consumir(paginas * 2);
+            return true;
+        }
+        int getNivelTintaPorc() {
+            return cartucho.getNivelTintaPorc();
+        }
 };
 
 int main() {
@@ -66,9 +91,9 @@ int main() {
     i.encender();
     i.setPaginasPorMinuto(20);
     i.imprimir(10);
-    std::cout << "Tinta restante: " << i.getNivelTintaPorc() << "%" << std::endl;
+    std::cout<<"Tinta restante: "<<i.getNivelTintaPorc()<<"%"<<std::endl;
     i.imprimir(45);
-    std::cout << "Tinta restante: " << i.getNivelTintaPorc() << "%" << std::endl;
+    std::cout<<"Tinta restante: "<<i.getNivelTintaPorc()<<"%"<<std::endl;
     i.imprimir(10);
     return 0;
 }
