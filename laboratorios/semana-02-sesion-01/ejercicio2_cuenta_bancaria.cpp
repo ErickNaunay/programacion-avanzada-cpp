@@ -25,22 +25,37 @@ public:
     double getSaldo() { return saldo; }
 
     bool inicializarSaldo(double saldoInicial) {
+        if (saldoInicial>0){
+            saldo=saldoInicial;
+            return true;
+        }
         // TODO: si saldoInicial es negativo, devuelve false sin asignar.
         // Si no, asigna saldo = saldoInicial y devuelve true.
-        return false;
+        else{
+        return false;}
     }
 
     bool depositar(double monto) {
+        if(monto>0){
+            saldo=saldo+monto;
+            return true;
+        }
         // TODO: si monto no es positivo, devuelve false sin modificar saldo.
         // Si es positivo, suma monto a saldo y devuelve true.
-        return false;
+        else{
+        return false;}
     }
 
     bool retirar(double monto) {
         // TODO: si monto no es positivo, o si monto es mayor que saldo,
         // devuelve false sin modificar saldo. Si no, resta monto de saldo
         // y devuelve true.
-        return false;
+        if(monto<0 or monto>saldo){
+        return false;}
+        else{
+            saldo=saldo-monto;
+            return true;
+        }
     }
 };
 

@@ -31,21 +31,32 @@ public:
     }
 
     bool setEdad(double nuevaEdad) {
+        if (nuevaEdad>0){
+            edad=nuevaEdad;
+            return true;
+        }
         // TODO: si nuevaEdad es negativa, devuelve false sin modificar edad.
         // Si no, asigna edad = nuevaEdad y devuelve true.
-        return false;
+        else{
+        return false;}
     }
 
     bool setPesoKg(double nuevoPeso) {
+        if(nuevoPeso>0){
+            pesoKg=nuevoPeso;
+            return true;
+        }
         // TODO: mismo patron que setEdad(), pero para pesoKg (debe ser mayor que 0).
-        return false;
+        else{
+        return false;}
     }
 
     double getEdad() { return edad; }
     double getPesoKg() { return pesoKg; }
 
     void describir() {
-        // TODO: imprime "Animal de " + edad + " anios, " + pesoKg + " kg"
+        // TODO: imprime "Animal de " + edad + " anios, " + pesoKg + " kg "
+        std::cout<<"Animal de "<<edad<<" anios, "<<pesoKg<<" kg "; 
     }
 };
 

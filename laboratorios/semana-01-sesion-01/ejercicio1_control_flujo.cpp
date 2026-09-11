@@ -10,11 +10,20 @@
 // Ejecutar:  ./bin/ejercicio1
 
 #include <iostream>
+using namespace std;
 
 bool esPrimo(int n) {
-    // TODO: retorna true si n es primo, false si no lo es.
-    // Pista: un numero es primo si no tiene divisores entre 2 y n-1.
-    return false;
+    int h=0;
+    for (int i=1; i<=n;i++){
+    if (n%i==0){
+        h++;
+    }
+    }
+    if (h==2){
+        return true;
+    }
+    else{
+    return false;}
 }
 
 int main() {
