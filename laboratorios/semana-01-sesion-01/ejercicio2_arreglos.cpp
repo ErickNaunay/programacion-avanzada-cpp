@@ -16,11 +16,21 @@ int main() {
     int datos[] = {12, 45, 2, 91, 7, 24};
     int n = sizeof(datos) / sizeof(datos[0]);
 
-    // TODO: recorre 'datos' con un ciclo y calcula minimo, maximo y suma.
     int minimo = datos[0];
     int maximo = datos[0];
     int suma = 0;
 
+        for(int i = 0; i < n; ++i){
+            suma += datos[i];
+
+                if(datos[i] < minimo){
+                    minimo = datos[i];
+                }
+                if(datos[i] > maximo){
+                    maximo = datos[i];
+                }
+            }
+    
     double promedio = static_cast<double>(suma) / n;
 
     std::cout << "Minimo: " << minimo << std::endl;
