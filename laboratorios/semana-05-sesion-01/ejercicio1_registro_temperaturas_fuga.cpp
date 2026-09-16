@@ -22,6 +22,7 @@ class RegistroTemperaturas {
         // TODO: falta el destructor. Sin el, la memoria de "lecturas"
         // nunca se libera cuando el objeto deja de existir.
         ~RegistroTemperaturas(){
+            delete[] lecturas;
             std::cout<<"Memoria liberada"<<std::endl; 
         }
 };
