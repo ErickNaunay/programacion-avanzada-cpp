@@ -1,40 +1,44 @@
 #include <iostream>
 
 class Animal {
-    private:
-        int edad;
-        double peso;
-    public:
-        
-        Animal() {
-            edad = 0;
-            peso = 0;
-        }
+private:
+    double edad;
+    double pesoKg;
 
-        Animal(int edad_inicial, double peso_inicial){
-            if (!setEdad(edad_inicial)) { edad = 0; }
-            if (!setPeso(peso_inicial)) { peso = 0.0; }
-        }
+public:
+    Animal() {
+        edad = 0.0;
+        pesoKg = 0.0;
+    }
 
-        bool setEdad(double nueva_edad){
-            if(nueva_edad < 0) { return false; }
-            edad = nueva_edad;
+    bool setEdad(double nuevaEdad) {
+        if (nuevaEdad>0){
+            edad=nuevaEdad;
             return true;
         }
+        // TODO: si nuevaEdad es negativa, devuelve false sin modificar edad.
+        // Si no, asigna edad = nuevaEdad y devuelve true.
+        else{
+        return false;}
+    }
 
-        bool setPeso(double nuevo_peso){
-            if(nuevo_peso <= 0) { return false; }
-            peso = nuevo_peso;
+    bool setPesoKg(double nuevoPeso) {
+        if(nuevoPeso>0){
+            pesoKg=nuevoPeso;
             return true;
         }
+        // TODO: mismo patron que setEdad(), pero para pesoKg (debe ser mayor que 0).
+        else{
+        return false;}
+    }
 
-        double getPeso(){ return peso; }
-        int getEdad(){ return edad; }
+    double getEdad() { return edad; }
+    double getPesoKg() { return pesoKg; }
 
-        void describir(){
-            std::cout << "Animal de: " << edad << " anios, " << peso << " kg" << std::endl;
-        }
-
+    void describir() {
+        // TODO: imprime "Animal de " + edad + " anios, " + pesoKg + " kg "
+        std::cout<<"Animal de "<<edad<<" anios, "<<pesoKg<<" kg "; 
+    }
 };
 class Perro: public Animal {
     public:

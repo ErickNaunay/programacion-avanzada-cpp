@@ -18,6 +18,10 @@ class RegistroTemperaturas {
         double obtener(int indice) {
             return lecturas[indice];
         }
+        ~RegistroTemperaturas(){
+            delete[] lecturas;
+            std::cout<<"Memoria liberada"<<std::endl;
+        }
 
         // TODO: agrega el destructor. Debe liberar "lecturas" con delete[]
         // e imprimir "Memoria liberada", para atar la vida de ese recurso

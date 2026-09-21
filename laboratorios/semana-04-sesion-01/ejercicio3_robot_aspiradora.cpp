@@ -33,7 +33,15 @@ class DispositivoElectronico {
 // sin herencia multiple). Agrega:
 // - void aspirar(): imprime "Aspirando el polvo del piso"
 // - void moverse(int distanciaCm): imprime "Moviendose <distanciaCm> cm hacia adelante"
-class RobotAspiradora {
+class RobotAspiradora: public DispositivoElectronico {
+    public:
+    void aspirar(){
+        std::cout<<"Aspirando el polvo del piso"<<std::endl;
+    }
+
+    void moverse(int distanciaCm){
+        std::cout<<"Moviendose "<<distanciaCm<<" cm hacia adelante"<<std::endl;
+    }
     // TODO
 };
 

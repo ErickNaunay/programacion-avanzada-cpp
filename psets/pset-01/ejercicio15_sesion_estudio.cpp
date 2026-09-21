@@ -45,3 +45,55 @@
 //
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio15_sesion_estudio.cpp -o bin/ejercicio15
 // Ejecutar:  ./bin/ejercicio15
+
+#include<iostream>
+
+class SesionEstudio{
+private:
+    double horaInicio, horaFin;
+    int minutosDescansoAsignado;
+
+    public:
+    SesionEstudio(int minutosDescanso){
+        if(minutosDescanso<=0 or minutosDescanso>60){
+            std::cout<<"Descanso invalido, se asignan 10 minutos por defecto"<<std::endl;
+            minutosDescansoAsignado=10;
+        }
+        else{
+            minutosDescansoAsignado=minutosDescanso;
+        }
+    }
+
+    bool setHorario(double inicio, double fin){
+        if(inicio >= 0 and fin <= 24 and inicio < fin){
+            horaInicio=inicio;
+            horaFin=fin;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    int getMinutosDescanso(){
+        return minutosDescansoAsignado;
+    }
+
+    ~SesionEstudio(){
+        std::cout<<"Sesion de estudio finalizada"<<std::endl;
+    }
+};
+
+int main(){{
+    SesionEstudio s1(20);
+    std::cout<<"Horario 1 aceptado: "<<std::boolalpha<<s1.setHorario(8.0, 10.0)<<std::endl;
+
+    SesionEstudio s2(90);
+    std::cout<<"Horario 2 aceptado: "<<std::boolalpha<<s2.setHorario(23.0, 22.0)<<std::endl;
+
+    SesionEstudio s3(15);
+    std::cout<<"Horario 3 aceptado: "<<std::boolalpha<<s3.setHorario(14.0, 16.0)<<std::endl;
+
+    std::cout<<"--- fin del bloque ---"<<std::endl;}
+    return 0;
+}

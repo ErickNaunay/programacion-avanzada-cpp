@@ -21,6 +21,12 @@ int main() {
     int maximo = datos[0];
     int suma = 0;
 
+    for(int i=0;i<n;i++){
+        if (maximo<datos[i])maximo=datos[i];
+        if(minimo>datos[i])minimo=datos[i];
+        suma+=datos[i];
+    }
+
     double promedio = static_cast<double>(suma) / n;
 
     std::cout << "Minimo: " << minimo << std::endl;

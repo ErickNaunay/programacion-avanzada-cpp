@@ -18,6 +18,7 @@ class LecturaSensor {
 
 // TODO: predice antes de compilar. ¿que advertencia esperas que de
 // el compilador sobre esta funcion?
+//-fuga de memoria
 int* obtenerLecturaInsegura(int valorSensor) {
     int lectura = valorSensor * 2;
     return &lectura;
