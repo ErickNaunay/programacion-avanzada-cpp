@@ -14,9 +14,9 @@ Sobrecargar operadores aritméticos y de flujo en una clase propia, y justificar
 
 Los tres ejercicios usan el mismo patrón: `operator+` como método miembro de la clase, y `operator<<` como función libre que recibe el stream por referencia.
 
-1. **`ejercicio1_vector2d.cpp`**: `Vector2D`, sin invariante. Lo resolvemos juntos en clase.
-2. **`ejercicio2_fraccion.cpp`**: `Fraccion`, con invariante (denominador != 0). Lo resolvemos juntos en clase.
-3. **`ejercicio3_numero_complejo.cpp`**: `NumeroComplejo`. Lo resuelves tú solo o en pareja.
+1. **`ejercicio1_vector2d.cpp`**: `Vector2D`, sin invariante.
+2. **`ejercicio2_fraccion.cpp`**: `Fraccion`, con invariante (denominador != 0).
+3. **`ejercicio3_numero_complejo.cpp`**: `NumeroComplejo`. Solo o en pareja.
 
 Cada archivo tiene, en su encabezado, la salida exacta que debe producir cuando esté completo.
 

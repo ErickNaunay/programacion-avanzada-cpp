@@ -16,9 +16,9 @@ Repasa el `struct Rectangulo` de la sesión pasada (`laboratorios/semana-01-sesi
 
 Los tres ejercicios usan el mismo patrón (atributos privados protegidos por métodos que verifican un invariante), en tres dominios distintos:
 
-1. **`ejercicio1_class_rectangulo.cpp`**: encapsula `Rectangulo`. Lo resolvemos juntos en clase.
-2. **`ejercicio2_cuenta_bancaria.cpp`**: el mismo patrón, aplicado a una cuenta bancaria cuyo saldo nunca puede quedar negativo. Lo resolvemos juntos en clase.
-3. **`ejercicio3_rango_notas.cpp`**: lo resuelves tú solo o en pareja. El invariante aquí junta dos atributos a la vez (`minima <= maxima`), no uno solo.
+1. **`ejercicio1_class_rectangulo.cpp`**: encapsula `Rectangulo`.
+2. **`ejercicio2_cuenta_bancaria.cpp`**: el mismo patrón, aplicado a una cuenta bancaria cuyo saldo nunca puede quedar negativo.
+3. **`ejercicio3_rango_notas.cpp`**: solo o en pareja. El invariante aquí junta dos atributos a la vez (`minima <= maxima`), no uno solo.
 
 Cada archivo tiene, en su encabezado, la salida exacta que debe producir cuando esté completo.
 

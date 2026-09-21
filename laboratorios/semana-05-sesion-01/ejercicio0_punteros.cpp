@@ -1,5 +1,6 @@
 #include <iostream>
 
+
 int main(){
 
     int notas[5]={100,90,80,70,60};

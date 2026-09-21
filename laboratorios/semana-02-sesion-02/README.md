@@ -14,9 +14,9 @@ La sesión pasada, `Rectangulo` y `CuentaBancaria` se inicializaban en dos pasos
 
 ## Ejercicios
 
-1. **`ejercicio1_rectangulo_constructor.cpp`**: agrega constructor y destructor a `Rectangulo`. Lo resolvemos juntos en clase.
-2. **`ejercicio2_cuenta_constructor.cpp`**: agrega constructor y destructor a `CuentaBancaria`. Lo resolvemos juntos en clase.
-3. **`ejercicio3_termometro.cpp`**: lo resuelves tú solo o en pareja. A diferencia de los dos anteriores, aquí construyes la clase completa, no solo el constructor y el destructor.
+1. **`ejercicio1_rectangulo_constructor.cpp`**: agrega constructor y destructor a `Rectangulo`.
+2. **`ejercicio2_cuenta_constructor.cpp`**: agrega constructor y destructor a `CuentaBancaria`.
+3. **`ejercicio3_termometro.cpp`**: solo o en pareja. A diferencia de los dos anteriores, aquí construyes la clase completa, no solo el constructor y el destructor.
 
 Cada archivo tiene, en su encabezado, la salida exacta que debe producir cuando esté completo.
 

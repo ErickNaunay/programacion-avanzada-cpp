@@ -14,9 +14,9 @@ Refactorizar código duplicado entre clases relacionadas usando herencia, e iden
 
 Los tres ejercicios usan el mismo patrón: una clase base agrupa los atributos, setters, getters y métodos que dos o más clases relacionadas comparten; cada clase derivada hereda de la base (`class Derivada : public Base`) y solo agrega lo que es propio de ella.
 
-1. **`ejercicio1_animal_perro_gato.cpp`**: `Animal`, con `Perro` y `Gato` heredando de ella. Lo resolvemos juntos en clase.
-2. **`ejercicio2_vehiculo_carro_moto.cpp`**: `Vehiculo`, con `Carro` y `Moto`. Lo resolvemos juntos en clase.
-3. **`ejercicio3_empleado_gerente_vendedor.cpp`**: `Empleado`, con `Gerente` y `Vendedor`. Lo resuelves tú solo o en pareja.
+1. **`ejercicio1_animal_perro_gato.cpp`**: `Animal`, con `Perro` y `Gato` heredando de ella.
+2. **`ejercicio2_vehiculo_carro_moto.cpp`**: `Vehiculo`, con `Carro` y `Moto`.
+3. **`ejercicio3_empleado_gerente_vendedor.cpp`**: `Empleado`, con `Gerente` y `Vendedor`. Solo o en pareja.
 
 Cada archivo tiene, en su encabezado, la salida exacta que debe producir cuando esté completo.
 
