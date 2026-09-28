@@ -39,3 +39,81 @@
 // Alerta con 110.0: true
 // Consumo: 5.5
 // Canal: 6
+
+#include <iostream>
+using namespace std;
+
+class Dispositivo {
+private:
+    double consumoWatts;
+
+public:
+    bool setConsumoWatts(double c) {
+        if (c > 0 && c <= 100) {
+            consumoWatts = c;
+            return true;
+        }
+        return false;
+    }
+
+    double getConsumoWatts() {
+        return consumoWatts;
+    }
+};
+
+class DispositivoConectado : public Dispositivo {
+private:
+    int canalRed;
+
+public:
+    bool setCanalRed(int c) {
+        if (c >= 1 && c <= 11) {
+            canalRed = c;
+            return true;
+        }
+        return false;
+    }
+
+    int getCanalRed() {
+        return canalRed;
+    }
+};
+
+class SensorTemperatura : public DispositivoConectado {
+private:
+    double lecturaActual;
+
+public:
+    bool setLecturaActual(double l) {
+        if (l >= -40 && l <= 125) {
+            lecturaActual = l;
+            return true;
+        }
+        return false;
+    }
+
+    double getLecturaActual() {
+        return lecturaActual;
+    }
+
+    bool alertaCritica() {
+        return lecturaActual > 100;
+    }
+};
+
+int main() {
+    SensorTemperatura sensor;
+
+    sensor.setConsumoWatts(5.5);
+    sensor.setCanalRed(6);
+    sensor.setLecturaActual(45.0);
+
+    cout << boolalpha;
+    cout << "Alerta con 45.0: "<< sensor.alertaCritica()<< endl;
+    sensor.setLecturaActual(110.0);
+    cout << "Alerta con 110.0: "<< sensor.alertaCritica()<< endl;
+    cout << "Consumo: " << sensor.getConsumoWatts()<< endl;
+    cout << "Canal: "<< sensor.getCanalRed()<< endl;
+
+    return 0;
+}
