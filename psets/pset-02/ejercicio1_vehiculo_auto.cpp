@@ -16,14 +16,21 @@ private:
     double velocidadMaxima;
 public:
     bool setVelocidadMaxima(double v) {
+        if(v>0 and v<=300){
+            velocidadMaxima=v;
+            return true;
+        }
+
         // TODO: valida que v sea mayor a 0 y menor o igual a 300.
         // Si es valido, asigna velocidadMaxima y devuelve true.
         // Si no, devuelve false sin modificar el atributo.
-        return false;
+        else{
+        return false;}
     }
     double getVelocidadMaxima() {
+
         // TODO: devuelve velocidadMaxima.
-        return 0;
+        return velocidadMaxima;
     }
 };
 
@@ -32,14 +39,19 @@ private:
     int numeroPuertas;
 public:
     bool setNumeroPuertas(int n) {
+        if(n==2 or n==4){
+            numeroPuertas=n;
+            return true;
+        }
         // TODO: valida que n sea 2 o 4.
         // Si es valido, asigna numeroPuertas y devuelve true.
         // Si no, devuelve false sin modificar el atributo.
-        return false;
+        else{
+        return false;}
     }
     int getNumeroPuertas() {
         // TODO: devuelve numeroPuertas.
-        return 0;
+        return numeroPuertas;
     }
 };
 
