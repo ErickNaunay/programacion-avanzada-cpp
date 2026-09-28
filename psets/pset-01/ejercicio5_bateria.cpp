@@ -12,7 +12,7 @@
 // Carga aceptada (150): false
 // Porcentaje de carga: 80
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio5_bateria.cpp -o bin/ejercicio5
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g psets/pset-01/ejercicio5_bateria.cpp -o bin/ejercicio5
 // Ejecutar:  ./bin/ejercicio5
 
 #include <iostream>
@@ -23,9 +23,13 @@ private:
 
 public:
     bool setPorcentajeCarga(double p) {
-        // TODO: si p < 0 o p > 100, retorna false sin modificar el
-        // atributo. Si no, asigna porcentajeCarga = p y retorna true.
-        return false;
+        if(p<0 or p>100){
+            return false;
+        }
+        else{
+            porcentajeCarga=p;
+            return true;
+        }
     }
 
     double getPorcentajeCarga() {

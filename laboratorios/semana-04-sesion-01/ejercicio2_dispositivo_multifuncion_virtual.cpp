@@ -27,7 +27,7 @@ class Dispositivo {
 
 // TODO: agrega "virtual" a la herencia de Impresora y de Escaner, para que
 // las dos compartan una sola copia de Dispositivo.
-class Impresora: public Dispositivo {
+class Impresora: virtual public Dispositivo {
     private:
         int paginasPorMinuto;
     public:
@@ -47,7 +47,7 @@ class Impresora: public Dispositivo {
 };
 
 // TODO: lo mismo aqui.
-class Escaner: public Dispositivo {
+class Escaner: virtual public Dispositivo {
     private:
         int resolucionDPI;
     public:
@@ -83,3 +83,5 @@ int main() {
 
     return 0;
 }
+
+//g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-04-sesion-01/ejercicio2_dispositivo_multifuncion_virtual.cpp -o bin/ejercicio2

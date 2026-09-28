@@ -10,7 +10,7 @@
 // Vela encendida con 30 minutos
 // La vela se apago
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio9_vela_encendida.cpp -o bin/ejercicio9
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g psets/pset-01/ejercicio9_vela_encendida.cpp -o bin/ejercicio9
 // Ejecutar:  ./bin/ejercicio9
 
 #include <iostream>
@@ -21,11 +21,14 @@ private:
 
 public:
     VelaEncendida(double minutosIniciales) {
+        minutosRestantes=minutosIniciales;
+        std::cout<<"Vela encendida con "<<minutosRestantes<<" minutos"<<std::endl;
         // TODO: asigna minutosIniciales a minutosRestantes e imprime
         // "Vela encendida con " + minutosRestantes + " minutos"
     }
 
     ~VelaEncendida() {
+        std::cout<<"La vela se apago"<<std::endl;
         // TODO: imprime "La vela se apago"
     }
 };

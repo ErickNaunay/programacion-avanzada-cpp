@@ -11,7 +11,6 @@ class RegistroDeVuelo {
             alturas = new double[capacidad];
             std::cout << "Registro de vuelo creado para " << capacidad << " lecturas" << std::endl;
         }
-
         // TODO: constructor de movimiento. Recibe RegistroDeVuelo&& otro,
         // roba su puntero "alturas" y su "capacidad" (sin reservar memoria
         // nueva ni copiar ningun elemento), y deja "otro" en un estado
@@ -21,6 +20,26 @@ class RegistroDeVuelo {
         // constructor de movimiento, pero primero libera con delete[] la
         // memoria que este objeto ya tenia, antes de robar la de "otro".
         // Recuerda comprobar "this != &otro" antes de liberar.
+        RegistroDeVuelo (RegistroDeVuelo&& otro){
+            std::cout<<"Moviendo registro(sin copia artificial)"<<std::endl;
+            alturas=otro.alturas;
+            capacidad=otro.capacidad;
+            delete[] alturas;
+            otro.alturas=nullptr;
+            otro.capacidad=0;
+        }
+
+        RegistroDeVuelo& operator=(RegistroDeVuelo&& otro){
+            std::cout<<"Moviendo registro de vuelo con algo ya asignado"<<std::endl;
+            if(this != &otro){
+                delete[] alturas;
+                alturas=otro.alturas;
+                capacidad=otro.capacidad;
+                otro.alturas=nullptr;
+                otro.capacidad=0;
+            }
+            return *this;
+        }
 
         void guardarAltura(int indice, double valor) {
             alturas[indice] = valor;

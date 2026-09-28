@@ -16,5 +16,28 @@
 // Escalera de 10 peldanos: segura
 // Escalera de 15 peldanos: no segura
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio11_escalera.cpp -o bin/ejercicio11
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g psets/pset-01/ejercicio11_escalera.cpp -o bin/ejercicio11
 // Ejecutar:  ./bin/ejercicio11
+
+#include <iostream>
+struct Escalera{
+    int numeroPeldanos;
+    bool esSegura(){
+        if(numeroPeldanos<=12){
+            return true;
+        }
+        return false;
+    }
+};
+
+int main(){
+    Escalera E1;
+    Escalera E2;
+    E1.numeroPeldanos=10;
+    E2.numeroPeldanos=15;
+    bool ok1 = E1.esSegura();
+    std::cout<<"Escalera de 10 peldanos: "<<(ok1 ? "segura" : "no segura") << std::endl;
+    bool ok2 = E2.esSegura();
+    std::cout<<"Escalera de 15 peldanos: "<<(ok2 ? "segura" : "no segura") << std::endl;
+    return 0;
+}

@@ -19,23 +19,22 @@
 
 #include <iostream>
 
-struct Rectangulo {
+struct Rectangulo {   //creacion de la clase
     double base;
     double altura;
 
-    double area() {
-        // TODO: retorna base * altura
-        return 0.0;
+    double area() {     // el metodo ya tiene acceso a los atributos por lo tanto no es
+        return base*altura;    //necesario poner parametros en esto
     }
 
     double perimetro() {
-        // TODO: retorna 2 * (base + altura)
-        return 0.0;
+        return 2*(base+altura);
     }
 
     void escalar(double factor) {
-        // TODO: reasigna base y altura multiplicandolos por factor
-        // (usa base = ... y altura = ..., como en cualquier funcion que ya conoces)
+        base=base*factor;
+        altura=altura*factor;
+        
     }
 };
 
@@ -52,3 +51,4 @@ int main() {
 
     return 0;
 }
+

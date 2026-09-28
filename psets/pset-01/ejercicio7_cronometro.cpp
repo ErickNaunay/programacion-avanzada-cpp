@@ -8,7 +8,7 @@
 // Salida esperada:
 // Segundos: 90
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio7_cronometro.cpp -o bin/ejercicio7
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g psets/pset-01/ejercicio7_cronometro.cpp -o bin/ejercicio7
 // Ejecutar:  ./bin/ejercicio7
 
 #include <iostream>
@@ -19,7 +19,7 @@ private:
 
 public:
     Cronometro(double segundosIniciales) {
-        // TODO: asigna segundosIniciales a segundos
+        segundos=segundosIniciales;
     }
 
     double getSegundos() {
