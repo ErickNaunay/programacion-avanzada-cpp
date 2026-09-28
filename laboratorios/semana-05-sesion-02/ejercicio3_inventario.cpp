@@ -25,6 +25,7 @@ int contarProductosAgotados(int* stock, int cantidadProductos) {
     }
     // TODO BUG 1: identifica que falta aqui antes de que la funcion
     // termine, y corrigelo.
+    delete[] agotados; // Liberar la memoria asignada dinámicamente
     return totalAgotados;
 }
 
@@ -36,7 +37,8 @@ int* obtenerReporteFinal(int* stock, int cantidadProductos) {
     // TODO BUG 2: esta funcion devuelve la direccion de una variable
     // local. Corrigelo (revisa si de verdad necesitas devolver un
     // puntero para esto).
-    return &totalUnidades;
+    int* totalPtr = new int(totalUnidades);
+    return totalPtr;
 }
 
 int main() {

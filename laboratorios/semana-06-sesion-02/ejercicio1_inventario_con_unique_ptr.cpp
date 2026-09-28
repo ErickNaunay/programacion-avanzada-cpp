@@ -1,10 +1,11 @@
 #include <iostream>
+#include <memory>
 
 // TODO: cambia el tipo de retorno a std::unique_ptr<int[]>, y crea el
 // arreglo con std::make_unique<int[]>(cantidadProductos) en vez de
 // "new int[cantidadProductos]" directo.
-int* crearInventario(int cantidadProductos) {
-    int* stock = new int[cantidadProductos];
+std::unique_ptr<int[]> crearInventario(int cantidadProductos) {
+    auto stock = std::make_unique<int[]>(cantidadProductos);
     for (int i = 0; i < cantidadProductos; i++) {
         stock[i] = 0;
     }
@@ -37,17 +38,16 @@ int main() {
     // Las tres funciones de abajo siguen recibiendo int*: pasales
     // stock.get(), el puntero crudo que unique_ptr administra por
     // dentro, sin ceder la propiedad del recurso.
-    int* stock = crearInventario(cantidadProductos);
-    stock[0] = 10;
-    stock[1] = 5;
-    stock[3] = 8;
+    std::unique_ptr<int[]> stock = crearInventario(cantidadProductos);
+    stock.get()[0] = 10;
+    stock.get()[1] = 5;
+    stock.get()[3] = 8;
 
-    mostrarInventario(stock, cantidadProductos);
-    std::cout << "Productos agotados: " << contarProductosAgotados(stock, cantidadProductos) << std::endl;
-    std::cout << "Total de unidades: " << obtenerReporteFinal(stock, cantidadProductos) << std::endl;
+    mostrarInventario(stock.get(), cantidadProductos);
+    std::cout << "Productos agotados: " << contarProductosAgotados(stock.get(), cantidadProductos) << std::endl;
+    std::cout << "Total de unidades: " << obtenerReporteFinal(stock.get(), cantidadProductos) << std::endl;
 
     // TODO: elimina este delete[] por completo. Con unique_ptr, "stock"
     // libera su memoria solo cuando sale de alcance al terminar main.
-    delete[] stock;
     return 0;
 }
