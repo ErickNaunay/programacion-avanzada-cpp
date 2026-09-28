@@ -1,18 +1,19 @@
 #include <iostream>
 #include <memory>
 #include <utility>
+using namespace std;
 
 class RegistroDeVuelo {
     private:
         // TODO: cambia "double* alturas" por std::unique_ptr<double[]>.
-        double* alturas;
+        unique_ptr<double[]> alturas;
         int capacidad;
     public:
         RegistroDeVuelo(int nuevaCapacidad) {
             capacidad = nuevaCapacidad;
             // TODO: crea "alturas" con std::make_unique<double[]>(capacidad)
             // en vez de "new double[capacidad]".
-            alturas = new double[capacidad];
+            alturas = make_unique <double[]> (capacidad);
             std::cout << "Registro de vuelo creado para " << capacidad << " lecturas" << std::endl;
         }
 
@@ -26,24 +27,24 @@ class RegistroDeVuelo {
 
         // TODO: con unique_ptr como atributo, ya no hace falta nada de
         // esto. Borra el destructor completo (unique_ptr libera solo).
-        ~RegistroDeVuelo() {
-            std::cout << "Destruyendo registro (capacidad " << capacidad << ")" << std::endl;
-            delete[] alturas;
-        }
+        
 };
 
 class MonitorDeVuelo {
     private:
         // TODO: declara "registro" como std::shared_ptr<RegistroDeVuelo>.
         int idMonitor;
+        shared_ptr<RegistroDeVuelo> registro;
     public:
         // TODO: el constructor recibe std::shared_ptr<RegistroDeVuelo>
         // unRegistro por valor, y lo guarda con
         // registro = std::move(unRegistro); (mover el shared_ptr local
         // hacia el atributo evita una copia de mas, aunque la clase ya
         // permite copiar shared_ptr sin ningun riesgo).
-        MonitorDeVuelo(int unId) {
+        MonitorDeVuelo(shared_ptr<RegistroDeVuelo>nuevoregistro, int unId) {
             idMonitor = unId;
+            registro = move(nuevoregistro);
+            cout<<"monitor: " << idMonitor <<" conectado cuentas: "<< registro.use_count() << endl;
         }
 
         void reportar(int indice) {
@@ -73,6 +74,20 @@ int main() {
     // reportar(0) en cada uno. Al cerrar el bloque, los monitores se
     // destruyen; muestra compartido.use_count() una vez mas para
     // confirmar que volvio a bajar.
+    shared_ptr<RegistroDeVuelo> registroCompartido = make_shared<RegistroDeVuelo>(5);
+    registroCompartido-> guardarAltura(0,200);
+    cout<<"Cuenta antes de monitoreo: "<<registroCompartido.use_count()<< endl;
 
+    {
+        MonitorDeVuelo torre_quito(registroCompartido, 1);
+        MonitorDeVuelo torre_ambato(registroCompartido, 2);
+        MonitorDeVuelo torre_cuenca(registroCompartido, 3);
+        cout<<"Cuenta despues de monitoreos: "<<registroCompartido.use_count()<< endl;
+
+        torre_quito.reportar(0);
+        torre_ambato.reportar(0);
+        torre_cuenca.reportar(0);
+    }
+    cout<<"Cuenta despues de cerrar monitores: "<<registroCompartido.use_count()<< endl;
     return 0;
 }

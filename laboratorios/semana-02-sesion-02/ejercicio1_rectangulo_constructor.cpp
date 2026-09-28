@@ -26,62 +26,53 @@
 
 #include <iostream>
 
-class Rectangulo {
-private:
-    double base;
-    double altura;
 
-public:
-    Rectangulo(double baseInicial, double alturaInicial) {
-        // TODO: llama setBase(baseInicial). Si devuelve false, asigna
-        // base = 1.0 y avisa por consola:
-        // "Aviso: base invalida, se uso 1.0 por defecto"
+class rectangulo {
 
-        // TODO: haz lo mismo con setAltura(alturaInicial) y altura.
-    }
+        private:
+                double base;
+                double altura;
+        public: 
+                rectangulo(double base_i,double altura_i){
+                if(!set_base(base_i)){base = 1;
+                std:: cout<< "base invalida";}
+                if(!set_altura(altura_i)){altura = 1;}
+                base =base_i;
+                altura= altura_i;
+                }
 
-    ~Rectangulo() {
-        // TODO: imprime "Rectangulo destruido: base=" seguido de base,
-        // ", altura=" y altura.
-    }
+                bool set_base(double n_base){
+                    if (n_base <= 0){return false;}
+                    base = n_base; 
+                    return true;
+                }
+                
+                bool set_altura(double n_altura){
+                    if (n_altura <= 0){return false;}
+                    base = n_altura; 
+                    return true;
+                }
 
-    double getBase() { return base; }
-    double getAltura() { return altura; }
-
-    bool setBase(double nuevaBase) {
-        if (nuevaBase <= 0.0) {
-            return false;
-        }
-        base = nuevaBase;
-        return true;
-    }
-
-    bool setAltura(double nuevaAltura) {
-        if (nuevaAltura <= 0.0) {
-            return false;
-        }
-        altura = nuevaAltura;
-        return true;
-    }
-
-    double area() {
-        return base * altura;
-    }
-
-    double perimetro() {
-        return 2 * (base + altura);
-    }
+                double area (){
+                    return base * altura;
+                }
+                double perimetro() {
+                    return 2 * (base + altura);
+                }
+            
 };
 
 int main() {
     std::cout << "Creando r1..." << std::endl;
-    Rectangulo r1(10.0, 5.0);
+    rectangulo r1(10.0, 5.0);
     std::cout << "Area r1: " << r1.area() << std::endl;
 
     std::cout << "Creando r2 con base invalida..." << std::endl;
-    Rectangulo r2(-3.0, 5.0);
+    rectangulo r2(-3.0, 5.0);
     std::cout << "Area r2: " << r2.area() << std::endl;
 
     std::cout << "Fin de main" << std::endl;
     return 0;
 }
+
+

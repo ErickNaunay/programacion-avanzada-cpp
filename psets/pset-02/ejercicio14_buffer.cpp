@@ -16,6 +16,7 @@
 // Fin del programa
 
 #include <iostream>
+using namespace std;
 
 class Buffer {
 private:
@@ -33,6 +34,8 @@ public:
     ~Buffer() {
         // TODO: esta es la fuga. Libera datos con delete[], y despues imprime
         // "Buffer liberado" seguido de un salto de linea.
+          delete [] datos;
+          cout<<"Buffer liberado"<<endl;
     }
     bool setDato(int indice, int valor) {
         if (indice >= 0 && indice < tamano) {

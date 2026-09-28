@@ -12,11 +12,12 @@ Aplicar el principio "has-a" frente a "is-a" para refactorizar una jerarquía de
 
 Según el artículo, ¿qué gana un diseño con composición que un diseño con herencia forzada no tiene, más allá de evitar el problema del diamante de la sesión pasada?
 
-_(tu respuesta)_
+
+_( gana la selecion de los metodos que queremos heredar puede ayudar  areducir la memoria de uso)_
 
 La sesión pasada cerré con esta pregunta: un `Carro` no es un `Motor`, pero sí tiene un `Motor`. ¿Sigue siendo el mismo tipo de relación que herencia?
 
-_(tu respuesta)_
+_(no no es el mismo tipo porque no es lo mismo ser  a tener por ejemplo un perro es un vertebrado pero no es un corazon tiene un corazon, la diferencia radica en base a lo que esta compuesto el objeto y lo que es el objeto)_
 
 ## Ejercicio 1: Carro y Motor
 
@@ -24,11 +25,11 @@ Archivo: [`ejercicio1_carro_motor.cpp`](./ejercicio1_carro_motor.cpp). El diseñ
 
 **Respuesta 1, antes de ver la solución:** si `Carro` heredara de `Motor`, ¿qué método heredaría que no debería tener sentido llamar directamente sobre un carro completo?
 
-_(tu respuesta)_
+_(encendido porque carro se enciende con un atributo que prenda el carro y no solo el carro)_
 
 **Respuesta 2:** ¿qué necesita hacer `arrancar()` con el objeto `motor` que va a tener adentro, en vez de con código propio?
 
-_(tu respuesta)_
+_(arrancar() necesita configurar la potencia del objeto motor encenderlo y comporbar si quedo  encendido. Para eso debe delegar esas tareas al objeto Motor)_
 
 **La formulación completa, tal como la resuelvo yo:**
 
@@ -40,15 +41,15 @@ Archivo: [`ejercicio2_dron_bateria.cpp`](./ejercicio2_dron_bateria.cpp).
 
 **Respuesta 1, antes de ver la solución:** ¿qué debería revisar `despegar()` antes de permitir que el dron despegue?
 
-_(tu respuesta)_
+_(despegar() debería revisar que la batería tenga suficiente carga antes de permitir que el dron despegue.)_
 
 **Respuesta 2:** ¿por qué `Dron` no debería heredar de `Bateria`, ni siquiera para reutilizar `estaCargada()`?
 
-_(tu respuesta)_
+_(despegar() debería revisar que la batería tenga suficiente carga antes de permitir que el dron despegue.)_
 
 **La formulación completa, tal como la resuelvo yo:**
 
-_(anota aquí el diseño refactorizado, mientras se revisa en clase)_
+_(Dron tiene un atributo Bateria bateria. despegar() consulta estaCargada() y getNivelCargaPorc() del objeto interno, mientras que descargar() modifica el nivel de carga de esa batería)_
 
 ## Durante el ConcepTest
 
@@ -72,7 +73,7 @@ Tu `Impresora` de la sesión pasada (con herencia virtual de `Dispositivo`, sin 
 
 **Antes de escribir código:** explica por qué ese diseño es forzado, igual que `Carro` heredando de `Motor` en el Ejercicio 1.
 
-_(tu respuesta)_
+_(El diseño es forzado porque una impresora no es un cartucho, sino que tiene un cartucho. Heredar de Cartucho haría que la impresora tuviera los métodos y características de un cartucho como si fueran propios. La relación correcta es composición: Impresora tiene un objeto Cartucho.)_
 
 Diseña en su lugar:
 
@@ -98,4 +99,4 @@ Composición: un atributo de una clase cuyo tipo es otra clase del curso (`Motor
 
 Hasta hoy, el objeto compuesto se crea exactamente cuando se crea el objeto que lo contiene. ¿Qué pasaría si necesitaras crear ese objeto interno más tarde, o decidir en tiempo de ejecución qué tipo de objeto crear ahí?
 
-_(tu respuesta)_
+_(El diseño es forzado porque una impresora no es un cartucho, sino que tiene un cartucho. Heredar de Cartucho haría que la impresora tuviera los métodos y características de un cartucho como si fueran propios. La relación correcta es composición: Impresora tiene un objeto Cartucho.)_

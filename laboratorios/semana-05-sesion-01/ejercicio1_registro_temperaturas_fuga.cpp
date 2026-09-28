@@ -18,7 +18,9 @@ class RegistroTemperaturas {
         double obtener(int indice) {
             return lecturas[indice];
         }
-
+        ~ RegistroTemperaturas(){
+            //limpio memoria 
+        }
         // TODO: falta el destructor. Sin el, la memoria de "lecturas"
         // nunca se libera cuando el objeto deja de existir.
 };

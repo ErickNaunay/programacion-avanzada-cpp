@@ -34,7 +34,7 @@
 // Ejecutar:  ./bin/ejercicio10
 
 #include <iostream>
-
+using namespace std;
 class ReservaSala {
 private:
     double horaInicio;
@@ -44,10 +44,22 @@ private:
 public:
     ReservaSala(int capacidadInicial) {
         // TODO
-    }
-
+        if(capacidadInicial<= 0 || capacidadInicial > 50)
+        {
+            cout<< "Reserva creada, capacidad por defecto (5)"<<endl;
+            capacidadPersonas = 5;
+        }else{
+            capacidadPersonas = capacidadInicial;
+            cout<<"Reserva creada, capacidad "<< capacidadInicial<<endl;
+            }
+        }
     bool setHorario(double inicio, double fin) {
         // TODO
+        if(inicio >= 0 && fin <= 24 && inicio < fin){
+            horaInicio = inicio;
+            horaFin = fin;
+            return true;
+        }
         return false;
     }
 
@@ -57,6 +69,7 @@ public:
 
     ~ReservaSala() {
         // TODO
+        cout<<"Reserva liberada"<<endl;
     }
 };
 
