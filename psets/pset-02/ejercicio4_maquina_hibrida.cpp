@@ -1,0 +1,98 @@
+// Ejercicio 4: Maquina, MaquinaElectrica, MaquinaTermica e Hibrida
+// (herencia multiple con el problema del diamante, ya resuelto con herencia virtual)
+//
+// Completa los metodos marcados con TODO. No cambies las firmas, la jerarquia
+// de herencia ni el main(). Fijate que MaquinaElectrica y MaquinaTermica heredan
+// de Maquina con "public virtual": por eso Hibrida termina con una sola copia
+// de Maquina en vez de dos copias ambiguas.
+//
+// Compilar: g++ -std=c++20 -Wall -Wextra -g -o ejercicio4 ejercicio4_maquina_hibrida.cpp
+// Ejecutar: ./ejercicio4
+//
+// Salida esperada:
+// Potencia: 3200
+// Voltaje: 220
+// Temperatura maxima: 450
+// Modo electrico: true
+
+#include <iostream>
+
+class Maquina {
+private:
+    double potenciaWatts;
+public:
+    bool setPotenciaWatts(double p) {
+        if (p <= 0 || p > 5000) {
+            return false;
+        }
+
+        potenciaWatts = p;
+        return true;
+    }
+
+    double getPotenciaWatts() {
+        return potenciaWatts;
+    }
+};
+
+class MaquinaElectrica : public virtual Maquina {
+private:
+    double voltaje;
+public:
+    bool setVoltaje(double v) {
+    if (v <= 0 || v > 240) {
+            return false;
+        }
+
+        voltaje = v;
+        return true;
+    }
+
+    double getVoltaje() {
+        return voltaje;
+    }
+};
+
+class MaquinaTermica : public virtual Maquina {
+private:
+    double temperaturaMaxima;
+public:
+    bool setTemperaturaMaxima(double t) {
+    if (t <= 0 || t > 1000) {
+            return false;
+        }
+
+        temperaturaMaxima = t;
+        return true;
+    }
+
+    double getTemperaturaMaxima() {
+        return temperaturaMaxima;
+    }
+};
+
+class Hibrida : public MaquinaElectrica, public MaquinaTermica {
+private:
+    bool modoElectrico;
+public:
+    void setModoElectrico(bool m) {
+         modoElectrico = m;
+    }
+
+    bool getModoElectrico() {
+        return modoElectrico;
+    }
+};
+
+int main() {
+    Hibrida h1;
+    h1.setPotenciaWatts(3200);
+    h1.setVoltaje(220);
+    h1.setTemperaturaMaxima(450);
+    h1.setModoElectrico(true);
+    std::cout << "Potencia: " << h1.getPotenciaWatts() << std::endl;
+    std::cout << "Voltaje: " << h1.getVoltaje() << std::endl;
+    std::cout << "Temperatura maxima: " << h1.getTemperaturaMaxima() << std::endl;
+    std::cout << "Modo electrico: " << std::boolalpha << h1.getModoElectrico() << std::endl;
+    return 0;
+}
