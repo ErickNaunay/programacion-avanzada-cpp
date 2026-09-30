@@ -31,6 +31,25 @@ class Dispositivo {
 // - void consumir(int porcentaje): reduce nivelTintaPorc en ese porcentaje,
 //   sin bajar de 0
 // - int getNivelTintaPorc(): devuelve el nivel actual
+class Cartucho{
+    private:
+    int nivelTintaPorc{100};
+    public:
+    bool tieneTinta(){
+        if(nivelTintaPorc > 0){return true;}
+        return false;
+    }
+    void consumir(int porcentaje){
+        if(porcentaje > nivelTintaPorc){
+            nivelTintaPorc = 0;
+        }else{nivelTintaPorc = nivelTintaPorc - porcentaje; }
+        
+    }
+    int getNivelTintaPorc(){
+        return nivelTintaPorc;
+    }
+
+};
 
 // Un companero propone "class Impresora: public virtual Dispositivo, public Cartucho".
 // Antes de escribir el codigo, responde en el README por que ese diseno
@@ -46,6 +65,7 @@ class Dispositivo {
 class Impresora: public virtual Dispositivo {
     private:
         int paginasPorMinuto;
+        Cartucho cartucho;
     public:
         Impresora() {
             paginasPorMinuto = 0;
@@ -58,6 +78,18 @@ class Impresora: public virtual Dispositivo {
         }
 
         // TODO
+        bool imprimir(int paginas){
+            if(cartucho.tieneTinta()){
+                std::cout<<"Imprimiendo "<<paginas<<" paginas a "<<paginasPorMinuto<<" paginas por minuto"<<std::endl;
+                cartucho.consumir(paginas * 2);
+                return true;
+            }
+            std::cout<<"Sin tinta, no se puede imprimir"<<std::endl;
+            return false;
+        }
+        int getNivelTintaPorc(){
+            return cartucho.getNivelTintaPorc();
+        }
 };
 
 int main() {

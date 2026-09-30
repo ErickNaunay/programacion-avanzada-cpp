@@ -12,11 +12,11 @@ Aplicar el principio "has-a" frente a "is-a" para refactorizar una jerarquía de
 
 Según el artículo, ¿qué gana un diseño con composición que un diseño con herencia forzada no tiene, más allá de evitar el problema del diamante de la sesión pasada?
 
-_(tu respuesta)_
+_(independencia entre clases)_
 
 La sesión pasada cerré con esta pregunta: un `Carro` no es un `Motor`, pero sí tiene un `Motor`. ¿Sigue siendo el mismo tipo de relación que herencia?
 
-_(tu respuesta)_
+_(no, ahora carro puede utilizar atributos de motor pero no es un motor en el codigo)_
 
 ## Ejercicio 1: Carro y Motor
 
@@ -24,11 +24,11 @@ Archivo: [`ejercicio1_carro_motor.cpp`](./ejercicio1_carro_motor.cpp). El diseñ
 
 **Respuesta 1, antes de ver la solución:** si `Carro` heredara de `Motor`, ¿qué método heredaría que no debería tener sentido llamar directamente sobre un carro completo?
 
-_(tu respuesta)_
+_(setpotenciaHP no tiene sentido un setter de potencia en el propio carro eso debe ser solo del motor)_
 
 **Respuesta 2:** ¿qué necesita hacer `arrancar()` con el objeto `motor` que va a tener adentro, en vez de con código propio?
 
-_(tu respuesta)_
+_(necesita llamar a un metodo de motor ya que motor es un metodo de carro)_
 
 **La formulación completa, tal como la resuelvo yo:**
 
@@ -40,11 +40,11 @@ Archivo: [`ejercicio2_dron_bateria.cpp`](./ejercicio2_dron_bateria.cpp).
 
 **Respuesta 1, antes de ver la solución:** ¿qué debería revisar `despegar()` antes de permitir que el dron despegue?
 
-_(tu respuesta)_
+_(que tenga bateria suficiente para hacerlo)_
 
 **Respuesta 2:** ¿por qué `Dron` no debería heredar de `Bateria`, ni siquiera para reutilizar `estaCargada()`?
 
-_(tu respuesta)_
+_(porque dron "no es" una bateria, el dron "tiene una" bateria, heredarlo puede dar problemas de thight couopling)_
 
 **La formulación completa, tal como la resuelvo yo:**
 
@@ -72,7 +72,7 @@ Tu `Impresora` de la sesión pasada (con herencia virtual de `Dispositivo`, sin 
 
 **Antes de escribir código:** explica por qué ese diseño es forzado, igual que `Carro` heredando de `Motor` en el Ejercicio 1.
 
-_(tu respuesta)_
+_(es forzado porque al heredar se dice que Impresor es un cartucho y esto no es correct, por eso se tiene que utilizar composicion porque Impresora tiene un cartucho no es uno.)_
 
 Diseña en su lugar:
 

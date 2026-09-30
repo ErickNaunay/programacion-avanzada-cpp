@@ -37,13 +37,14 @@ public:
     Vector2D operator+(Vector2D otro) {
         // TODO: retorna un Vector2D nuevo con x + otro.getX() como
         // primera coordenada, y y + otro.getY() como segunda.
-        return Vector2D(0.0, 0.0);
+        return Vector2D(x + otro.getX(), y + otro.getY());
     }
 };
 
 std::ostream& operator<<(std::ostream& os, Vector2D v) {
     // TODO: escribe en os algo como "(x, y)", usando v.getX() y
     // v.getY(), y despues retorna os.
+    os << v.getX() << " , " << v.getY();
     return os;
 }
 
