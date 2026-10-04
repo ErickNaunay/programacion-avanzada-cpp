@@ -14,14 +14,15 @@
 
 int main() {
     int temperatura = 25;
-
+    int* punteroTemp=&temperatura;
     // TODO: declara un puntero a int llamado punteroTemp que apunte a la
     // direccion de memoria de temperatura (usa el operador &).
 
     // TODO: usando el puntero (desreferenciandolo con *), suma 10 al valor
     // de temperatura.
+    *punteroTemp=*punteroTemp+10;
 
     std::cout << "Temperatura (variable): " << temperatura << std::endl;
-    std::cout << "Temperatura (via puntero): " << /* TODO: desreferencia el puntero aqui */ 0 << std::endl;
+    std::cout << "Temperatura (via puntero): " << /* TODO: desreferencia el puntero aqui */ * punteroTemp << std::endl;
     return 0;
 }

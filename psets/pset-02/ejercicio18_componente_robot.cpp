@@ -42,3 +42,77 @@
 // Peso: 12.5
 // Version: 3
 // Autonomo: true
+#include <iostream>
+
+class Componente{
+    private:
+    int codigoSerie;
+    public:
+    bool setCodigoSerie(int c){
+        if(c>=1000 and c<=9999){
+            codigoSerie=c;
+            return true;
+        }
+        return false;
+    }
+    int getCodigoSerie(){
+        return codigoSerie;
+    }
+};
+
+class ComponenteMecanico :virtual public Componente{
+    private:
+    double pesoKg;
+    public:
+    bool setPesoKg(double p){
+        if(p>0 and p<=50){
+            pesoKg=p;
+            return true;
+        }
+        return false;
+    }
+    double getPesoKg(){
+        return pesoKg;
+    }
+};
+
+class ComponenteDigital : virtual public Componente{
+    private:
+    int version;
+    public:
+    bool setVersion(int v){
+        if(v>=1 and v<=99){
+            version=v;
+            return true;
+        }
+        return false;
+    }
+    int getVersion(){
+        return version;
+    }
+};
+
+class Robot : public ComponenteMecanico , public ComponenteDigital{
+    private:
+    bool autonomo;
+    public:
+    void setAutonomo(bool a){
+        autonomo=a;
+    }
+    bool getAutonomo(){
+        return autonomo;
+    }
+};
+
+int main(){
+    Robot r;
+    r.setCodigoSerie(4821);
+    r.setPesoKg(12.5);
+    r.setVersion(3);
+    r.setAutonomo(true);
+    std::cout<<"Codigo serie: "<<r.getCodigoSerie()<<std::endl;
+    std::cout<<"Peso: "<<r.getPesoKg()<<std::endl;
+    std::cout<<"Version: "<<r.getVersion()<<std::endl;
+    std::cout<<"Autonomo: "<<std::boolalpha<<r.getAutonomo()<<std::endl;
+    return 0;
+}
