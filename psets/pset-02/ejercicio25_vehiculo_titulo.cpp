@@ -77,3 +77,165 @@
 // Motor del vehiculo 2 antes: Vehiculo sin motor
 // Motor del vehiculo 1 despues: Vehiculo sin motor
 // Motor del vehiculo 2 despues: Motor de 180 HP
+
+#include <iostream>
+#include <memory>
+
+
+class Motor{
+    private:
+    double potencialHP;
+
+    public:
+    bool setPotenciaHP(double p){
+        if(p > 0 and p <=1000){
+            potencialHP = p;
+            return true;
+        }
+        return false;
+    }
+
+    double getPotenciaHP(){
+        return potencialHP;
+    }
+
+};
+
+std::ostream& operator<<(std::ostream& os, Motor m){
+    os << "Motor de "<<m.getPotenciaHP()<<" HP"<<std::endl;
+    return os;
+}
+
+
+class TributoPropiedad{
+    private:
+    int numeroRegistro;
+
+    public:
+    bool setNumeroRegistro(int n){
+        if(n >= 1000 and n <= 999999){
+            numeroRegistro = n;
+            return true;
+        }
+        return false;
+    }
+
+    int getNumeroRegistro(){
+        return numeroRegistro;
+    }
+};
+
+
+class Vehiculo{
+    private:
+    std::unique_ptr<Motor> motor = std::make_unique<Motor>();
+    std::shared_ptr<TributoPropiedad> titulo;
+    public:
+
+    Vehiculo(){
+        motor = nullptr;
+    }
+
+    Vehiculo(std::unique_ptr<Motor> motorInicial){
+        motor = std::move(motorInicial);
+    }
+    
+    void registrarTitulo(std::shared_ptr<TributoPropiedad> t){
+        titulo = t;
+    }
+
+    bool tieneMotor(){
+        if(motor != nullptr){
+            return true;
+        }
+        return false;
+    }
+
+    void mostrarMotor(){
+        if(tieneMotor()){
+            std::cout<< *motor;
+        }else{
+            std::cout<<"Vehiculo sin motor"<<std::endl;
+        }
+    }
+
+    std::unique_ptr<Motor> extraerMotor(){
+        return std::move(motor);
+    }
+
+    void recibirMotor(std::unique_ptr<Motor> nuevoMotor){
+        motor = std::move(nuevoMotor);
+    }
+
+};
+
+
+class Concesionario{
+    private:
+    std::shared_ptr<TributoPropiedad> titulo;
+
+    public:
+    void archivar(std::shared_ptr<TributoPropiedad> t){
+        titulo = t;
+    }
+    int referenciasTitulo(){
+        return titulo.use_count();
+    }
+
+};
+
+// En main(), en este orden exacto:
+// 1. Crea un std::shared_ptr<TituloPropiedad> con std::make_shared,
+//    llamalo titulo, y asignale numeroRegistro = 4521.
+// 2. Crea un std::unique_ptr<Motor> con std::make_unique, llamalo motor1,
+//    y asignale potenciaHP = 180.
+// 3. Crea un Vehiculo llamado vehiculo1, pasando motor1 movido con
+//    std::move al constructor que recibe un motor.
+// 4. Llama a vehiculo1.registrarTitulo(titulo).
+
+
+// 5. Crea un Concesionario llamado concesionario1 y llama a
+//    concesionario1.archivarTitulo(titulo).
+// 6. Imprime concesionario1.referenciasTitulo(), precedido por
+//    "Referencias al titulo: ".
+
+
+// 7. Imprime "Motor del vehiculo 1: " (sin salto de linea) y despues
+//    llama a vehiculo1.mostrarMotor().
+// 8. Crea un segundo Vehiculo llamado vehiculo2, con el constructor sin
+//    parametros (sin motor). Imprime "Motor del vehiculo 2 antes: " (sin
+//    salto de linea) y despues llama a vehiculo2.mostrarMotor().
+// 9. Llama a vehiculo2.recibirMotor(vehiculo1.extraerMotor()) (el motor
+//    pasa del vehiculo 1 al vehiculo 2).
+// 10. Imprime "Motor del vehiculo 1 despues: " (sin salto de linea) y
+//     llama a vehiculo1.mostrarMotor(). Imprime "Motor del vehiculo 2
+//     despues: " (sin salto de linea) y llama a vehiculo2.mostrarMotor().
+
+int main(){
+    std::shared_ptr<TributoPropiedad> titulo = std::make_shared<TributoPropiedad>();
+    std::unique_ptr<Motor> motor1 = std::make_unique<Motor>();
+
+    titulo ->setNumeroRegistro(4521);
+    motor1->setPotenciaHP(180);
+
+    Vehiculo vehivculo1(std::move(motor1));
+    vehivculo1.registrarTitulo(titulo);
+
+    Concesionario concesionario1;
+    concesionario1.archivar(titulo);
+
+    std::cout<<"Referencias al titulo: "<< concesionario1.referenciasTitulo()<<std::endl;
+    std::cout<<"Motor del vehiculo 1: ";
+    vehivculo1.mostrarMotor();
+
+    Vehiculo vehiculo2;
+    std::cout<<"Motor del vehiculo 2 antes: ";
+    vehiculo2.mostrarMotor();
+    vehiculo2.recibirMotor(vehivculo1.extraerMotor());
+
+    std::cout<<"Motor del vehiculo 1 despues: ";
+    vehivculo1.mostrarMotor();
+    std::cout<<"Motor del vehiculo 2 despues: ";
+    vehiculo2.mostrarMotor();
+
+}

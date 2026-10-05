@@ -20,6 +20,59 @@
 // - Destructor ~BitacoraDeVuelo(): libera con delete[] e imprime
 //   "Destruyendo bitacora (capacidad <capacidad>)".
 class BitacoraDeVuelo {
+    private:
+    double* consumos;
+    int capacidad;
+    public:
+
+        BitacoraDeVuelo(int nuevaCacidad){
+            capacidad = nuevaCacidad;
+            consumos = new double[capacidad];
+            std::cout<<"Bitacora creada para "<<capacidad<<" tramos"<<std::endl;
+        }
+
+        BitacoraDeVuelo(BitacoraDeVuelo&& otro){
+                std::cout<< "Moviemndo registro (sin copiar superficialmente)"<<std::endl;
+                consumos = otro.consumos;
+                capacidad = otro.capacidad;
+
+                otro.consumos = nullptr;
+                otro.capacidad = 0;
+            }
+
+        void guardarConsumo(int indice, double valor){
+            consumos[indice] = valor;
+        }
+
+        BitacoraDeVuelo& operator=(BitacoraDeVuelo&& otro){
+                std::cout<< "Moviemnod registro a objeto ya creado (asignado)" <<std::endl;
+
+                if(this !=&otro) {
+                    delete[] consumos;
+                    consumos = otro.consumos;
+                    capacidad = otro.capacidad;
+                    otro.consumos = nullptr;
+                    otro.capacidad = 0;
+                }
+
+                return *this;
+
+            }
+
+        double getConsumo(int indice){
+            if(consumos == nullptr){
+                std::cout<<"Bitacora vacia (fue mvovida)"<<std::endl;
+                return 0.0;
+            }
+            return consumos[indice];
+        }
+
+
+        ~BitacoraDeVuelo() {
+                std::cout << "Destruyendo registro (capacidad " << capacidad << ")" << std::endl;
+                delete[] consumos;
+            }
+
 };
 
 int main() {

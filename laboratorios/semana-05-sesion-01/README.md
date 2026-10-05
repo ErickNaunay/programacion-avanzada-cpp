@@ -12,11 +12,11 @@ Aplicar el patrón RAII para atar la vida de un recurso dinámico al ciclo de vi
 
 Según el artículo, ¿qué significa "atar" la vida de un recurso a la vida de un objeto, y qué evita exactamente ese amarre?
 
-_(tu respuesta)_
+_(significa que se maneja al recurso como un objeto, evita un memory leak)_
 
 La sesión pasada, el `motor` dentro de `Carro` se creaba siempre junto con su contenedor, con un tamaño y una cantidad fijos desde que se escribe el código. ¿Qué pasaría si necesitaras un arreglo cuyo tamaño no se conoce hasta que el programa corre?
 
-_(tu respuesta)_
+_(se puede crear al objeto con un puntero dentro del constructor para manejar el espacio al correr el programa )_
 
 ## Ejercicio 1: reproducir la fuga
 
@@ -24,15 +24,15 @@ Archivo: [`ejercicio1_registro_temperaturas_fuga.cpp`](./ejercicio1_registro_tem
 
 **Respuesta 1, antes de ver la solución:** si `registrarDia` crea un `RegistroTemperaturas` local y la función termina, ¿qué pasa con la memoria que reservó ese objeto?
 
-_(tu respuesta)_
+_(se pierde)_
 
 **Respuesta 2:** si `main` llama a `registrarDia` tres veces seguidas, ¿cuántas veces esperas ver "Memoria liberada" en la salida?
 
-_(tu respuesta)_
+_(3 veces)_
 
 **La formulación completa, tal como la resuelvo yo:**
 
-_(anota aquí lo que confirma la salida real, mientras se revisa en clase)_
+_(sale 3 veces)_
 
 ## Ejercicio 2: arreglar con RAII
 
@@ -40,11 +40,11 @@ Archivo: [`ejercicio2_registro_temperaturas_raii.cpp`](./ejercicio2_registro_tem
 
 **Respuesta 1, antes de ver la solución:** ¿qué necesita hacer el destructor de `RegistroTemperaturas` para que la memoria se libere sola, sin que nadie tenga que acordarse de llamar `delete[]` a mano?
 
-_(tu respuesta)_
+_(colocar delete dentro del destructor)_
 
 **Respuesta 2:** después de agregar el destructor, ¿en qué momento exacto se ejecuta, si `registro` es una variable local de `registrarDia`?
 
-_(tu respuesta)_
+_(al terminar el ciclo de vida)_
 
 **La formulación completa, tal como la resuelvo yo:**
 

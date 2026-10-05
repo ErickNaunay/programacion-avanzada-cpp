@@ -54,3 +54,89 @@
 // Referencias tras reset del original: 1
 // Documento existe (observador): true
 // Documento existe (observador): false
+
+// (un weak_ptr se puede asignar desde un
+// shared_ptr,
+#include <iostream>
+
+class Documento{
+    private:
+    int numeroVersion;
+
+    public:
+    bool setNumeroVersion(int n){
+        if(n >= 1 and n <= 999){
+            numeroVersion = n;
+            return true;
+        }
+        return false;
+    }
+
+    int getNumeroVersion(){
+        return numeroVersion;
+    }
+
+};
+
+
+class Propetiario{
+    private:
+    std::shared_ptr<Documento> documento;
+
+    public:
+    void adoptar(std::shared_ptr<Documento> doc){
+        documento = doc;
+    }
+
+    void soltar(){
+        documento.reset();
+    }
+
+    int contadorRefetencias(){
+        return documento.use_count();
+    }
+
+};
+
+
+class Observador{
+    private:
+    std::weak_ptr<Documento> documento;
+
+    public:
+    void observar(std::shared_ptr<Documento> doc){
+        documento = doc;
+    }
+
+    bool documentoTodaviaExiste(){
+        if(!documento.expired()){
+            return true;
+        }
+        return false;
+    }
+
+};
+
+
+int main(){
+    std::shared_ptr<Documento> doc = std::make_shared<Documento>();
+    std::cout<<std::boolalpha;
+
+    doc->setNumeroVersion(3);
+
+    Propetiario dueno;
+    dueno.adoptar(doc);
+    
+    Observador obs;
+
+    obs.observar(doc);
+
+    std::cout<<"Referencias tras adoptar: "<<dueno.contadorRefetencias()<<std::endl;
+    std::cout<<"Documento existe (observador): "<<obs.documentoTodaviaExiste()<<std::endl;
+    std::cout<<"Referencias despues de observar: "<<dueno.contadorRefetencias()<<std::endl;
+    doc.reset();
+    std::cout<<"Referencias tras reset del original: "<<dueno.contadorRefetencias()<<std::endl;
+    std::cout<<"Documento existe (observador): "<<obs.documentoTodaviaExiste()<<std::endl;
+    dueno.soltar();
+    std::cout<<"Documento existe (observador): "<<obs.documentoTodaviaExiste()<<std::endl;
+}

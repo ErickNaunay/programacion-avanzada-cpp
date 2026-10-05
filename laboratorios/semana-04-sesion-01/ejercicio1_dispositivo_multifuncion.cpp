@@ -77,8 +77,9 @@ int main() {
 
     // TODO: antes de descomentar, predice: ¿que error da el compilador
     // y sobre que palabra exactamente?
-    // mfp.setNumeroSerie(1234);
-    // mfp.describir();
+    // da un error de (ambiguedad), ya que no contiene el metodo virtual
+    mfp.setNumeroSerie(1234);
+    mfp.describir();
 
     return 0;
 }

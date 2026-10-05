@@ -23,11 +23,15 @@ private:
 public:
     bool setPotenciaWatts(double p) {
         // TODO: valida que p sea mayor a 0 y menor o igual a 5000.
+        if(p > 0 and p <= 5000){
+            potenciaWatts = p;
+            return true;
+        }
         return false;
     }
     double getPotenciaWatts() {
         // TODO: devuelve potenciaWatts.
-        return 0;
+        return potenciaWatts;
     }
 };
 
@@ -37,11 +41,16 @@ private:
 public:
     bool setVoltaje(double v) {
         // TODO: valida que v sea mayor a 0 y menor o igual a 240.
+        if(v > 0 and v <= 240){
+            voltaje = v;
+            return true;
+        }
         return false;
     }
     double getVoltaje() {
         // TODO: devuelve voltaje.
-        return 0;
+        return voltaje;
+
     }
 };
 
@@ -51,10 +60,15 @@ private:
 public:
     bool setTemperaturaMaxima(double t) {
         // TODO: valida que t sea mayor a 0 y menor o igual a 1000.
+        if(t > 0 and t <= 1000){
+            temperaturaMaxima = t;
+            return true;
+        }
         return false;
     }
     double getTemperaturaMaxima() {
         // TODO: devuelve temperaturaMaxima.
+        return temperaturaMaxima;
         return 0;
     }
 };
@@ -65,10 +79,12 @@ private:
 public:
     void setModoElectrico(bool m) {
         // TODO: asigna modoElectrico. No hay invariante que validar.
+        modoElectrico = m;
     }
     bool getModoElectrico() {
         // TODO: devuelve modoElectrico.
-        return false;
+        return modoElectrico;
+    
     }
 };
 

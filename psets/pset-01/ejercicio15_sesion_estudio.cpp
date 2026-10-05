@@ -45,3 +45,54 @@
 //
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio15_sesion_estudio.cpp -o bin/ejercicio15
 // Ejecutar:  ./bin/ejercicio15
+
+#include <iostream>
+using namespace std;
+
+class sesion_estudio{
+    private:
+    double hora_inicio{0};
+    double hora_fin{0};
+    int minuto_descanso_asignado{0};
+    public:
+    sesion_estudio(int minutos_descanso){
+        if(minutos_descanso <= 0 or minutos_descanso > 60){
+            cout<<"Descanso invalido, se asignan 10 minutos por defecto"<<endl;
+            minuto_descanso_asignado = 10.0;
+        }else{
+            minuto_descanso_asignado = minutos_descanso;
+        }
+    }
+
+    bool set_horario(double inicio, double fin){
+        if(inicio >= 0, fin <= 24, fin > inicio){
+            hora_inicio = inicio;
+            hora_fin = fin;
+            return true;
+        }
+        return false;
+    }
+
+    int get_minutos_descanso(){
+        return minuto_descanso_asignado;
+    }
+
+    ~sesion_estudio(){
+        cout<<"Sesion de estudio finalizada"<<endl;
+    }
+
+};
+
+int main(){
+
+    sesion_estudio s1(20);
+    cout<<boolalpha;
+    cout<< "Horario 1 aceptado: "<< s1.set_horario(8.0, 10.0)<<endl;
+    sesion_estudio s2(90);
+    cout<< "Horario 2 aceptado: "<< s2.set_horario(23.0,22.0)<<endl;
+    sesion_estudio s3(15);
+    cout<<"Horario 3 aceptado: "<< s3.set_horario(14.0,16.0)<<endl;
+    cout<<"--- fin del bloque ---"<<endl;
+
+
+}

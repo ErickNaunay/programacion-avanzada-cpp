@@ -24,3 +24,38 @@
 // 20.5 grados
 // 5.5 grados
 // 26 grados
+
+#include <iostream>
+
+class Temperatura{
+    private:
+    double grados;
+    public:
+    Temperatura(double gradosIniciales){
+        grados = gradosIniciales;
+    }
+
+    double getGrados(){
+        return grados;
+    }
+
+    Temperatura operator+(Temperatura otro){
+        return grados + otro.grados;
+    }
+
+};
+
+std::ostream& operator<<(std::ostream& os, Temperatura t){
+    os << t.getGrados() << " grados" << std::endl;
+    return os;
+}
+
+int main(){
+    Temperatura t1(20.5);
+    Temperatura t2(5.5);
+    Temperatura t3 = t1 + t2;
+    std::cout<< t1;
+    std::cout<< t2;
+    std::cout<< t3;
+}
+
