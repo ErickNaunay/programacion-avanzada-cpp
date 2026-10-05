@@ -31,7 +31,13 @@ public:
         // TODO: valida apertura >= 0, cierre <= 24, apertura < cierre.
         // Si algo falla, retorna false sin modificar los atributos. Si
         // todo es valido, asigna los dos atributos juntos y retorna true.
-        return false;
+        if(apertura>=0 and cierre<=24 and apertura<cierre){
+            horaApertura=apertura;
+            horaCierre=cierre;
+            return true;
+        }
+        else{
+        return false;}
     }
 
     double getHoraApertura() {

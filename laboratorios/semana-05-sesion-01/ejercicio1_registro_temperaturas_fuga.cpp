@@ -18,6 +18,10 @@ class RegistroTemperaturas {
         double obtener(int indice) {
             return lecturas[indice];
         }
+        ~RegistroTemperaturas(){
+            delete[]lecturas;
+            std::cout<<"Memoria liberada"<<std::endl;
+        }
 
         // TODO: falta el destructor. Sin el, la memoria de "lecturas"
         // nunca se libera cuando el objeto deja de existir.

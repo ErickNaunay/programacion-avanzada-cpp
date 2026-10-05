@@ -31,6 +31,8 @@ public:
         std::cout << "Buffer de " << tamano << " creado" << std::endl;
     }
     ~Buffer() {
+        delete[] datos;
+        std::cout<<"Buffer liberado"<<std::endl;
         // TODO: esta es la fuga. Libera datos con delete[], y despues imprime
         // "Buffer liberado" seguido de un salto de linea.
     }

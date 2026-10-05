@@ -20,6 +20,53 @@
 // - Destructor ~BitacoraDeVuelo(): libera con delete[] e imprime
 //   "Destruyendo bitacora (capacidad <capacidad>)".
 class BitacoraDeVuelo {
+    private:
+    double* consumos;
+    int capacidad;
+
+    public:
+    BitacoraDeVuelo(int nuevaCapacidad) {
+            capacidad = nuevaCapacidad;
+            consumos = new double[capacidad];
+            std::cout << "Bitacora creada para " << capacidad << " tramos" << std::endl;
+        }
+    BitacoraDeVuelo(BitacoraDeVuelo&& otra) noexcept {
+            consumos = otra.consumos;
+            capacidad = otra.capacidad;
+            
+            otra.consumos = nullptr;
+            otra.capacidad = 0;
+        }
+
+    void operator=(BitacoraDeVuelo&& otra) noexcept {
+            if (consumos != otra.consumos) {
+                delete[] consumos;
+
+                consumos = otra.consumos;
+                capacidad = otra.capacidad;
+
+                otra.consumos = nullptr;
+                otra.capacidad = 0;
+            }
+        }
+
+    void guardarConsumo(int indice, double valor) {
+            consumos[indice] = valor;
+        }
+
+    double getConsumo(int indice) {
+            if (consumos == nullptr) {
+                std::cout << "Bitacora vacia (fue movida)" << std::endl;
+                return 0.0;
+            }
+            return consumos[indice];
+        }
+
+    ~BitacoraDeVuelo() {
+            std::cout << "Destruyendo bitacora (capacidad " << capacidad << ")" << std::endl;
+            delete[] consumos;
+        }
+
 };
 
 int main() {

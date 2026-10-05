@@ -12,6 +12,8 @@
 #include <iostream>
 
 int main() {
+    int *valores=new int[5]{10,20,30,40,50};
+
     // TODO: reserva dinamicamente un arreglo de 5 int con new[] y guarda el
     // puntero en una variable llamada valores.
 
@@ -20,11 +22,14 @@ int main() {
 
     int suma = 0;
     for (int i = 0; i < 5; i++) {
+        suma+=valores[i];
         // TODO: suma valores[i] a suma.
     }
     std::cout << "Suma: " << suma << std::endl;
 
     // TODO: libera la memoria reservada con delete[].
+    delete[] valores;
+    valores=nullptr;
 
     return 0;
 }

@@ -39,3 +39,44 @@
 // Asignar llave1: true
 // Asignar llave2: false
 // Tiene llave despues: true
+
+#include<iostream>
+#include<memory>
+
+class Llave{
+    private:
+    int numeroSerie;
+
+    public:
+
+    Llave(){
+        numeroSerie=0;
+    }
+
+    void setNumeroSerie(int n){
+        numeroSerie=n;
+    }
+
+    int getNumeroSerie(){
+        return numeroSerie;
+    }
+};
+
+class Cerradura{
+    private:
+    std::unique_ptr<Llave> llaveAsignada;
+
+    bool asignarLLave(std::unique_ptr<Llave> nuevaLlave){
+        
+    }
+    
+
+};
+
+
+
+int main(){
+
+
+    return 0;
+}

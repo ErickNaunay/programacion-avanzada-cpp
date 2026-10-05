@@ -25,6 +25,26 @@ class Dispositivo {
         }
 };
 
+class Cartucho{
+    private: 
+    int nivelTintaPorc=100;
+
+    public:
+    bool tieneTinta(){
+        return nivelTintaPorc>0;
+    }
+
+    void consumir (int porcentaje){
+        nivelTintaPorc=nivelTintaPorc-porcentaje;
+        if (nivelTintaPorc < 0) {
+        nivelTintaPorc = 0;
+    }
+    }
+
+    int getNivelTintaPorc(){
+        return nivelTintaPorc;
+    }
+};
 // TODO: Cartucho todavia no existe. Agregala con:
 // - un atributo privado nivelTintaPorc (int), que empieza en 100
 // - bool tieneTinta(): devuelve si nivelTintaPorc > 0
@@ -45,8 +65,11 @@ class Dispositivo {
 // int getNivelTintaPorc(): devuelve el nivel de tinta del cartucho.
 class Impresora: public virtual Dispositivo {
     private:
+    Cartucho cartucho;
         int paginasPorMinuto;
     public:
+
+
         Impresora() {
             paginasPorMinuto = 0;
         }
@@ -56,7 +79,21 @@ class Impresora: public virtual Dispositivo {
             paginasPorMinuto = nuevasPpm;
             return true;
         }
+        int getNivelTintaPorc() {
+            return cartucho.getNivelTintaPorc();
+        }
 
+        bool imprimir(int paginas){
+            if(!cartucho.tieneTinta()){
+            std::cout << "Sin tinta, no se puede imprimir" << std::endl;
+            return false;
+            }
+            else{
+                std::cout << "Imprimiendo " << paginas << " paginas a " << paginasPorMinuto << " paginas por minuto" << std::endl;
+            cartucho.consumir(paginas * 2);
+                return true;
+            }
+        }
         // TODO
 };
 

@@ -12,6 +12,25 @@ class RegistroDeVuelo {
             std::cout << "Registro de vuelo creado para " << capacidad << " lecturas" << std::endl;
         }
 
+        RegistroDeVuelo(RegistroDeVuelo&& otro) noexcept {
+            alturas = otro.alturas;
+            capacidad = otro.capacidad;
+
+            otro.alturas = nullptr;
+            otro.capacidad = 0;
+        }
+
+        void operator=(RegistroDeVuelo&& otro) noexcept {
+            if (alturas != otro.alturas) {
+                delete[] alturas;
+                
+                alturas = otro.alturas;
+                capacidad = otro.capacidad;
+
+                otro.alturas = nullptr;
+                otro.capacidad = 0;
+            }
+        }
         // TODO: constructor de movimiento. Recibe RegistroDeVuelo&& otro,
         // roba su puntero "alturas" y su "capacidad" (sin reservar memoria
         // nueva ni copiar ningun elemento), y deja "otro" en un estado
