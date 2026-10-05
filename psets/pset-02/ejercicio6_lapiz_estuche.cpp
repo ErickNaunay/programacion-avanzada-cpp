@@ -16,11 +16,16 @@ private:
 public:
     bool setLongitudCm(double l) {
         // TODO: valida que l sea mayor a 1 y menor o igual a 30.
+        if(l>1 && l<=30){
+            longitudCm=l;
+            return true;
+        }
+        else
         return false;
     }
     double getLongitudCm() {
         // TODO: devuelve longitudCm.
-        return 0;
+        return longitudCm;
     }
 };
 
@@ -31,14 +36,18 @@ private:
 public:
     bool configurarLapiz1(double l) {
         // TODO: delega en lapiz1.setLongitudCm(l) y devuelve su resultado.
-        return false;
+        return lapiz1.setLongitudCm(l);
     }
     bool configurarLapiz2(double l) {
         // TODO: delega en lapiz2.setLongitudCm(l) y devuelve su resultado.
-        return false;
+        return lapiz2.setLongitudCm(l);
     }
     bool lapizMasLargo() {
         // TODO: devuelve true si la longitud de lapiz1 es mayor o igual a la de lapiz2.
+        if(lapiz1.getLongitudCm()>=lapiz2.getLongitudCm()){
+            return true;
+        }
+        else
         return false;
     }
 };

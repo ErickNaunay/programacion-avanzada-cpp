@@ -16,7 +16,7 @@ private:
     double velocidadMaxima;
 public:
     bool setVelocidadMaxima(double v) {
-        if(v>0 and v<=300){
+        if(v>0 && v<=300){
             velocidadMaxima=v;
             return true;
         }
@@ -39,7 +39,7 @@ private:
     int numeroPuertas;
 public:
     bool setNumeroPuertas(int n) {
-        if(n==2 or n==4){
+        if(n==2 || n==4){
             numeroPuertas=n;
             return true;
         }
