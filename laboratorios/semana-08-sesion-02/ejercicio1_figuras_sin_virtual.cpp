@@ -4,7 +4,7 @@ class Figura {
     public:
         // TODO (paso 2): antepone "virtual" a este metodo y vuelve a
         // compilar y ejecutar. Compara la salida con la del paso 1.
-        double area() {
+        virtual double area() {
             return 0.0;
         }
 
@@ -48,6 +48,17 @@ int main() {
     std::cout << "Llamada directa:" << std::endl;
     std::cout << "Circulo: " << circulo.area() << std::endl;
     std::cout << "Rectangulo: " << rectangulo.area() << std::endl;
+
+    Figura* figuras[2];
+
+    figuras[0]=&circulo;
+    figuras[1]=&rectangulo;
+
+    std::cout<<"Lista de figuras: "<<std::endl;
+
+    for (int i=0; i<2;i++){
+        figuras[i]->describir();
+    }
 
     // TODO (paso 1): declara un arreglo "Figura* figuras[2];", guarda en
     // figuras[0] la direccion de circulo y en figuras[1] la direccion de
