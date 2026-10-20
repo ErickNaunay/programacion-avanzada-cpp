@@ -11,7 +11,7 @@
 // Valor: 0
 // Valor: 0
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio2_contador_regresivo.cpp -o bin/ejercicio2
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g psets/pset-01/ejercicio2_contador_regresivo.cpp -o bin/ejercicio2
 // Ejecutar:  ./bin/ejercicio2
 
 #include <iostream>
@@ -20,7 +20,9 @@ struct ContadorRegresivo {
     int valor;
 
     void decrementar() {
-        // TODO: si valor > 0, resta 1 a valor. Si no, no hagas nada.
+        if (valor>0){
+            valor=valor-1;
+        }
     }
 };
 

@@ -14,7 +14,7 @@
 // Saldo despues de depositar 50: 150
 // CuentaBancaria destruida, saldo final: 150
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio2_cuenta_constructor.cpp -o bin/ejercicio2
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-02-sesion-02/ejercicio2_cuenta_constructor.cpp -o bin/ejercicio2
 // Ejecutar:  ./bin/ejercicio2
 
 #include <iostream>
@@ -25,17 +25,26 @@ private:
 
 public:
     CuentaBancaria(double saldoInicial) {
-        // TODO: si saldoInicial es negativo, asigna saldo = 0.0 y avisa
-        // por consola: "Aviso: saldo inicial invalido, se uso 0 por defecto"
-        // Si no es negativo, asigna saldo = saldoInicial.
+        if (!setSaldo(saldoInicial)){ 
+            saldo=0.0;
+            std::cout<<"Aviso:saldo inicial invalido, se uso 0 por defecto"<<std::endl;
+        }
+        saldo=saldoInicial;
     }
 
     ~CuentaBancaria() {
-        // TODO: imprime "CuentaBancaria destruida, saldo final: "
-        // seguido del saldo.
+        std::cout<<"CuentaBancaria destruida, saldo final: "<<saldo<<std::endl;
     }
 
     double getSaldo() { return saldo; }
+
+    bool setSaldo(double nuevoSaldo) {
+        if (nuevoSaldo <= 0.0) {
+            return false;
+        }
+        saldo=nuevoSaldo;
+        return true;
+    }
 
     bool depositar(double monto) {
         if (monto <= 0.0) {

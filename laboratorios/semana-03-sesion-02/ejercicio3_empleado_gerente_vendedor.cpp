@@ -15,7 +15,7 @@
 // Bono de antiguedad: 100
 // Venta registrada
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio3_empleado_gerente_vendedor.cpp -o bin/ejercicio3
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-03-sesion-02/ejercicio3_empleado_gerente_vendedor.cpp -o bin/ejercicio3
 // Ejecutar:  ./bin/ejercicio3
 
 #include <iostream>
@@ -32,29 +32,26 @@ public:
     }
 
     bool setSalarioBase(double nuevoSalario) {
-        // TODO: si nuevoSalario no es positivo, devuelve false sin
-        // modificar salarioBase. Si no, asigna salarioBase = nuevoSalario
-        // y devuelve true.
-        return false;
+        if(nuevoSalario<0){return false;}
+        salarioBase=nuevoSalario;
+        return true;
     }
 
     bool setAniosServicio(double nuevosAnios) {
-        // TODO: mismo patron que setSalarioBase(), pero para
-        // aniosServicio (no puede ser negativo).
-        return false;
+        if(nuevosAnios<0){return false;}
+        aniosServicio=nuevosAnios;
+        return true;
     }
 
     double getSalarioBase() { return salarioBase; }
     double getAniosServicio() { return aniosServicio; }
 
     void describir() {
-        // TODO: imprime "Empleado con salario base " + salarioBase +
-        // ", " + aniosServicio + " anios de servicio"
+        std::cout<<"Empleado con salario base "<<salarioBase<<", "<<aniosServicio<<" anios de servicio"<<std::endl;
     }
 
     double calcularBonoAntiguedad() {
-        // TODO: retorna aniosServicio * 100.0
-        return 0.0;
+        return aniosServicio*100.0;
     }
 };
 

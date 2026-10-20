@@ -13,7 +13,7 @@
 // Aviso: denominador invalido, se uso 0/1 por defecto
 // f3: 0/1
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio2_fraccion.cpp -o bin/ejercicio2
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-03-sesion-01/ejercicio2_fraccion.cpp -o bin/ejercicio2
 // Ejecutar:  ./bin/ejercicio2
 
 #include <iostream>
@@ -38,18 +38,15 @@ public:
     int getNumerador() { return numerador; }
     int getDenominador() { return denominador; }
 
-    Fraccion operator+(Fraccion otra) {
-        // TODO: calcula nuevoNumerador = numerador * otra.getDenominador()
-        // + otra.getNumerador() * denominador, y nuevoDenominador =
-        // denominador * otra.getDenominador(). Retorna un Fraccion nuevo
-        // con esos dos valores.
-        return Fraccion(0, 1);
+    Fraccion operator+(Fraccion otra) {    //operador + suma fraccion(primer elemento y clase)+ (fraccion otra) segundo objeto//miembros
+        double nuevoNumerador=numerador * otra.getDenominador()+otra.getNumerador()*denominador;
+        double nuevoDenominador=denominador*otra.getDenominador();
+        return Fraccion(nuevoNumerador,nuevoDenominador);
     }
 };
 
 std::ostream& operator<<(std::ostream& os, Fraccion f) {
-    // TODO: escribe en os algo como "numerador/denominador", usando
-    // f.getNumerador() y f.getDenominador(), y despues retorna os.
+    os<<f.getNumerador()<<"/"<<f.getDenominador();
     return os;
 }
 

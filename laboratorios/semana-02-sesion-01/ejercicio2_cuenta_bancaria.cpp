@@ -12,7 +12,7 @@
 // retirar(200) rechazado: true, saldo sigue en: 150
 // Saldo despues de retirar 30: 120
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio2_cuenta_bancaria.cpp -o bin/ejercicio2
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-02-sesion-01/ejercicio2_cuenta_bancaria.cpp -o bin/ejercicio2
 // Ejecutar:  ./bin/ejercicio2
 
 #include <iostream>
@@ -25,22 +25,33 @@ public:
     double getSaldo() { return saldo; }
 
     bool inicializarSaldo(double saldoInicial) {
-        // TODO: si saldoInicial es negativo, devuelve false sin asignar.
-        // Si no, asigna saldo = saldoInicial y devuelve true.
-        return false;
+        if(saldoInicial<=0){
+            return false;
+        }
+        else{
+        saldo=saldoInicial;
+        return true;
+        }
     }
 
     bool depositar(double monto) {
-        // TODO: si monto no es positivo, devuelve false sin modificar saldo.
-        // Si es positivo, suma monto a saldo y devuelve true.
-        return false;
+        if(monto<=0){
+            return false;
+        }
+        else{
+        saldo=saldo+monto;
+        return true;
+        }
     }
 
     bool retirar(double monto) {
-        // TODO: si monto no es positivo, o si monto es mayor que saldo,
-        // devuelve false sin modificar saldo. Si no, resta monto de saldo
-        // y devuelve true.
-        return false;
+        if(monto<=0 or monto>saldo){
+            return false;
+        }
+        else{
+        saldo=saldo-monto;
+        return true;
+        }
     }
 };
 

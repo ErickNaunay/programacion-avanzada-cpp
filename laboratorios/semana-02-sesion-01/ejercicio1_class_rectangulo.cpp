@@ -14,46 +14,48 @@
 // setBase(-3) rechazado: true, base sigue en: 10
 // Area: 200, Perimetro: 60
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio1_class_rectangulo.cpp -o bin/ejercicio1
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-02-sesion-01/ejercicio1_class_rectangulo.cpp -o bin/ejercicio1
 // Ejecutar:  ./bin/ejercicio1
 
 #include <iostream>
 
 class Rectangulo {
 private:
-    double base;
-    double altura;
+    double base; //se define la variabl, al estar en una privada nadie peude editarlo desde afuera
+    double altura;   
 
 public:
-    double getBase() { return base; }
+    double getBase() { return base; }    //llamamos
     double getAltura() { return altura; }
 
     bool setBase(double nuevaBase) {
-        // TODO: si nuevaBase no es positiva, devuelve false sin modificar base.
-        // Si es positiva, asigna base = nuevaBase y devuelve true.
-        return false;
+        if(nuevaBase<=0){      //set para colocar el nuevo valor para la variale
+            return false;
+        }
+        base=nuevaBase;
+        return true;
     }
-
     bool setAltura(double nuevaAltura) {
-        // TODO: mismo patron que setBase(), pero para altura.
-        return false;
+        if(nuevaAltura<=0){
+            return false;
+        }
+        altura=nuevaAltura;
+        return true;
     }
 
     double area() {
-        // TODO: retorna base * altura
-        return 0.0;
+        return base*altura;
     }
 
     double perimetro() {
-        // TODO: retorna 2 * (base + altura)
-        return 0.0;
+        return 2*(base+altura);
     }
 };
 
 int main() {
     Rectangulo r;
-    r.setBase(10.0);
-    r.setAltura(5.0);
+    bool resultadoSetBase=r.setBase(10.0);
+    bool resultadoSetAltura=r.setAltura(5.0);
 
     std::cout << "Area: " << r.area() << ", Perimetro: " << r.perimetro() << std::endl;
 
@@ -67,3 +69,6 @@ int main() {
 
     return 0;
 }
+
+//Si hay un error y no se ingresa el valor el programa tomara la direccion como valor
+//defecto para continuar

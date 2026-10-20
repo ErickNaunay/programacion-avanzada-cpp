@@ -24,5 +24,31 @@
 // Combinacion asignada: false
 // Numero: 4821
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio12_casillero.cpp -o bin/ejercicio12
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g psets/pset-01/ejercicio12_casillero.cpp -o bin/ejercicio12
 // Ejecutar:  ./bin/ejercicio12
+#include <iostream>
+class Casillero{
+    private:
+    int numeroCombinacion;
+    public:
+    bool setNumeroCombinacion(int n){
+        if(n<1000 or n>9999){
+            return false;
+        }
+        numeroCombinacion=n;
+        return true;
+    }
+    int getNumeroCombinacion(){
+        return numeroCombinacion;
+    }
+};
+
+int main(){
+    Casillero C1;
+    std::cout<<"Combinacion asignada: "<<std::boolalpha<<C1.setNumeroCombinacion(4821)<<std::endl;
+    std::cout<<"Numero: "<<C1.getNumeroCombinacion()<<std::endl;
+    std::cout<<"Combinacion asignada: "<<std::boolalpha<<C1.setNumeroCombinacion(87)<<std::endl;
+    std::cout<<"Numero: "<<C1.getNumeroCombinacion()<<std::endl;
+    
+    return 0;
+}

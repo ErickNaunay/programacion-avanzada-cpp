@@ -30,7 +30,7 @@
 // Reserva liberada
 // Reserva liberada
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio10_reserva_sala.cpp -o bin/ejercicio10
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g psets/pset-01/ejercicio10_reserva_sala.cpp -o bin/ejercicio10
 // Ejecutar:  ./bin/ejercicio10
 
 #include <iostream>
@@ -43,11 +43,22 @@ private:
 
 public:
     ReservaSala(int capacidadInicial) {
-        // TODO
+        if(capacidadInicial<=0 or capacidadInicial>50){
+            std::cout<<"Reserva creada, capacidad segura por defecto (5)"<<std::endl;
+            capacidadPersonas=5;
+        }
+        else{
+            capacidadPersonas=capacidadInicial;
+            std::cout<<"Reserva creada, capacidad "<<capacidadInicial<<std::endl;
+        }
     }
 
     bool setHorario(double inicio, double fin) {
-        // TODO
+    if(inicio>=0  and fin<=24 and inicio<fin){
+        horaInicio=inicio;
+        horaFin=fin;
+        return true;
+    }
         return false;
     }
 
@@ -56,7 +67,7 @@ public:
     }
 
     ~ReservaSala() {
-        // TODO
+        std::cout<<"Reserva liberada"<<std::endl;
     }
 };
 
