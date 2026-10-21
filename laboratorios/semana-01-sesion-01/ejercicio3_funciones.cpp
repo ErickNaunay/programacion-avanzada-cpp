@@ -16,6 +16,9 @@
 #include <iostream>
 
 // TODO: declara aqui tu funcion area_rectangulo(double base, double altura)
+double area_rectangulo(double base, double altura) {
+    return base * altura;
+}
 
 int main() {
     // Bloque 1 (duplicado, a reemplazar por una llamada a tu funcion)

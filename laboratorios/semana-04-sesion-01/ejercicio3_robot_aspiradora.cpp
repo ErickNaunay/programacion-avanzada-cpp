@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 class DispositivoElectronico {
     private:
@@ -33,8 +34,16 @@ class DispositivoElectronico {
 // sin herencia multiple). Agrega:
 // - void aspirar(): imprime "Aspirando el polvo del piso"
 // - void moverse(int distanciaCm): imprime "Moviendose <distanciaCm> cm hacia adelante"
-class RobotAspiradora {
+class RobotAspiradora : public  DispositivoElectronico {
     // TODO
+    public:
+    void aspirar(){
+        cout<<"Aspirando polvo del piso"<<endl;
+    }
+    void moverse(int distanciaCm){
+        cout<<"moviendose "<<distanciaCm<<" cm hacia adelante";
+    }
+
 };
 
 int main() {

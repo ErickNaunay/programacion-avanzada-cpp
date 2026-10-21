@@ -19,6 +19,7 @@
 // Ejecutar:  ./bin/ejercicio1
 
 #include <iostream>
+using namespace std;
 
 class Vector2D {
 private:
@@ -37,13 +38,16 @@ public:
     Vector2D operator+(Vector2D otro) {
         // TODO: retorna un Vector2D nuevo con x + otro.getX() como
         // primera coordenada, y y + otro.getY() como segunda.
-        return Vector2D(0.0, 0.0);
+        double nuevoX = x + otro.getX(); 
+        double nuevoY = y + otro.getY();
+        return Vector2D(nuevoX, nuevoY);
     }
 };
 
 std::ostream& operator<<(std::ostream& os, Vector2D v) {
     // TODO: escribe en os algo como "(x, y)", usando v.getX() y
     // v.getY(), y despues retorna os.
+    os << "(" << v.getX() << ", " << v.getY() << ")";
     return os;
 }
 

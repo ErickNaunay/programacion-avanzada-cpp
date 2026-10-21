@@ -13,10 +13,10 @@
 // Presion: 100
 //
 // Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio8_extintor.cpp -o bin/ejercicio8
-// Ejecutar:  ./bin/ejercicio8
+// Ejecutfar:  ./bin/ejercicio8
 
 #include <iostream>
-
+using namespace std;
 class ExtintorIncendios {
 private:
     double presionPSI;
@@ -26,6 +26,10 @@ public:
         // TODO: si presionInicial es invalida (<= 0 o > 200), imprime el
         // aviso y asigna presionPSI = 100.0. Si no, asigna presionPSI =
         // presionInicial.
+        if(presionInicial <= 0 or presionInicial > 200)
+        { 
+            presionPSI = 100; cout<<"Presion invalida, se asigna presion segura por defecto"<<endl; 
+        }else presionPSI = presionInicial;
     }
 
     double getPresionPSI() {

@@ -77,3 +77,143 @@
 // Motor del vehiculo 2 antes: Vehiculo sin motor
 // Motor del vehiculo 1 despues: Vehiculo sin motor
 // Motor del vehiculo 2 despues: Motor de 180 HP
+#include <iostream>
+#include <memory>
+using namespace std;
+
+class Motor {
+private:
+    double potenciaHP;
+
+public:
+    bool setPotenciaHP(double p) {
+        if (p > 0 && p <= 1000) {
+            potenciaHP = p;
+            return true;
+        }
+        return false;
+    }
+
+    double getPotenciaHP() {
+        return potenciaHP;
+    }
+};
+
+std::ostream& operator<<(std::ostream& os, Motor m) {
+    os << "Motor de " << m.getPotenciaHP() << " HP";
+    return os;
+}
+
+
+class TituloPropiedad {
+private:
+    int numeroRegistro;
+
+public:
+    bool setNumeroRegistro(int n) {
+        if (n >= 1000 && n <= 999999) {
+            numeroRegistro = n;
+            return true;
+        }
+        return false;
+    }
+
+    int getNumeroRegistro() {
+        return numeroRegistro;
+    }
+};
+
+
+class Vehiculo {
+private:
+    std::unique_ptr<Motor> motor;
+    std::shared_ptr<TituloPropiedad> titulo;
+
+public:
+    Vehiculo() {
+    }
+
+    Vehiculo(std::unique_ptr<Motor> motorInicial) {
+        motor = std::move(motorInicial);
+    }
+
+    void registrarTitulo(std::shared_ptr<TituloPropiedad> t) {
+        titulo = t;
+    }
+
+    bool tieneMotor() {
+        return motor != nullptr;
+    }
+
+    void mostrarMotor() {
+        if (tieneMotor()) {
+            cout << *motor << endl;
+        } else {
+            cout << "Vehiculo sin motor" << endl;
+        }
+    }
+
+    std::unique_ptr<Motor> extraerMotor() {
+        return std::move(motor);
+    }
+
+    void recibirMotor(std::unique_ptr<Motor> nuevoMotor) {
+        motor = std::move(nuevoMotor);
+    }
+};
+
+
+class Concesionario {
+private:
+    std::shared_ptr<TituloPropiedad> tituloEnRegistro;
+
+public:
+    void archivarTitulo(std::shared_ptr<TituloPropiedad> t) {
+        tituloEnRegistro = t;
+    }
+
+    int referenciasTitulo() {
+        return tituloEnRegistro.use_count();
+    }
+};
+
+
+int main() {
+
+    auto titulo = std::make_shared<TituloPropiedad>();
+    titulo->setNumeroRegistro(4521);
+
+    auto motor1 = std::make_unique<Motor>();
+    motor1->setPotenciaHP(180);
+
+    Vehiculo vehiculo1(std::move(motor1));
+
+    vehiculo1.registrarTitulo(titulo);
+
+    Concesionario concesionario1;
+    concesionario1.archivarTitulo(titulo);
+
+    cout << "Referencias al titulo: "
+         << concesionario1.referenciasTitulo()
+         << endl;
+
+    cout << "Motor del vehiculo 1: ";
+    vehiculo1.mostrarMotor();
+
+    Vehiculo vehiculo2;
+
+    cout << "Motor del vehiculo 2 antes: ";
+    vehiculo2.mostrarMotor();
+
+    vehiculo2.recibirMotor(
+        vehiculo1.extraerMotor()
+    );
+
+    cout << "Motor del vehiculo 1 despues: ";
+    vehiculo1.mostrarMotor();
+
+    cout << "Motor del vehiculo 2 despues: ";
+    vehiculo2.mostrarMotor();
+
+    return 0;
+}

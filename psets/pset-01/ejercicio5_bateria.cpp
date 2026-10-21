@@ -25,7 +25,9 @@ public:
     bool setPorcentajeCarga(double p) {
         // TODO: si p < 0 o p > 100, retorna false sin modificar el
         // atributo. Si no, asigna porcentajeCarga = p y retorna true.
-        return false;
+        if(p<0 or p>100){return false;}
+        porcentajeCarga = p;
+        return true;
     }
 
     double getPorcentajeCarga() {

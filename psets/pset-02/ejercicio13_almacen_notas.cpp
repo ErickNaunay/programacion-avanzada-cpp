@@ -13,6 +13,7 @@
 // Almacen de notas liberado
 
 #include <iostream>
+using namespace std;
 
 class AlmacenNotas {
 private:
@@ -23,19 +24,31 @@ public:
         // TODO: asigna cantidad = n.
         // TODO: reserva con new[] un arreglo de cantidad doubles y guardalo en notas.
         // TODO: en un bucle, inicializa cada posicion de notas en 0.0.
+        cantidad = n;
+        notas = new double[n];
+
+        for(int i = 0; i< n; i++){
+            notas[i] =  0.0;
+        }
     }
     ~AlmacenNotas() {
         // TODO: libera notas con delete[].
+        delete[] notas;
         // TODO: imprime "Almacen de notas liberado" seguido de un salto de linea.
+        cout<<"Almacen de notas liberado"<<endl;
     }
     bool setNota(int indice, double valor) {
         // TODO: valida que indice este entre 0 (incluido) y cantidad (excluido),
         // y que valor este entre 0 y 20 (ambos incluidos).
+        if( indice>=0 && indice< cantidad && valor >= 0 && valor <= 20){
+            notas[indice] = valor;
+            return true;
+        }
         return false;
     }
     double getNota(int indice) {
         // TODO: devuelve notas[indice].
-        return 0;
+        return notas[indice];
     }
 };
 
