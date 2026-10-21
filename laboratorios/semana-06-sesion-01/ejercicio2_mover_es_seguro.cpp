@@ -16,11 +16,25 @@ class RegistroDeVuelo {
         // roba su puntero "alturas" y su "capacidad" (sin reservar memoria
         // nueva ni copiar ningun elemento), y deja "otro" en un estado
         // vacio y seguro (alturas = nullptr, capacidad = 0).
+        RegistroDeVuelo(RegistroDeVuelo&& otro) : alturas(otro.alturas), capacidad(otro.capacidad) {
+            otro.alturas = nullptr;
+            otro.capacidad = 0;
+        }
 
         // TODO: operador de asignacion de movimiento. Misma idea que el
         // constructor de movimiento, pero primero libera con delete[] la
         // memoria que este objeto ya tenia, antes de robar la de "otro".
         // Recuerda comprobar "this != &otro" antes de liberar.
+        RegistroDeVuelo& operator=(RegistroDeVuelo&& otro) {
+            if (this != &otro) {
+                delete[] alturas;
+                alturas = otro.alturas;
+                capacidad = otro.capacidad;
+                otro.alturas = nullptr;
+                otro.capacidad = 0;
+            }
+            return *this;
+        }
 
         void guardarAltura(int indice, double valor) {
             alturas[indice] = valor;

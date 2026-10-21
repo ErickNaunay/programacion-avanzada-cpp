@@ -6,6 +6,11 @@
 // TODO (escribe tu respuesta como comentario justo aqui):
 // En que linea esta el bug, y que deberia decir en su lugar?
 //
+// El bug está en las líneas donde se calcula el área y el perímetro del 
+// Rectángulo 2, dentro de imprimirConFuncionesSueltas(). 
+// Se está pasando 'altura1' como argumento en lugar de 'altura2'.
+// Debería decir: 
+// area(base2, altura2) y perimetro(base2, altura2).
 //
 // Parte B: usa el struct Rectangulo del ejercicio 2 para
 // reescribir el mismo resumen con dos objetos, rect1 y rect2, en vez de 4
@@ -36,6 +41,7 @@ void imprimirConFuncionesSueltas() {
     std::cout << "Rectangulo 1, Area: " << area(base1, altura1)
               << ", Perimetro: " << perimetro(base1, altura1) << std::endl;
 
+    // Aquí está el bug demostrativo (usando altura1 en vez de altura2)
     std::cout << "Rectangulo 2, Area: " << area(base2, altura1)
               << ", Perimetro: " << perimetro(base2, altura1) << std::endl;
 }
@@ -49,11 +55,22 @@ struct Rectangulo {
 };
 
 void imprimirConObjetos() {
-    // TODO: declara rect1 (base 10, altura 5) y rect2 (base 6, altura 4),
-    // igual que declaraste 'r' en el ejercicio 2.
+    // Declaración e inicialización de rect1
+    Rectangulo rect1;
+    rect1.base = 10.0;
+    rect1.altura = 5.0;
 
-    // TODO: imprime el resumen de cada uno, en el mismo formato de arriba,
-    // usando rect1.area(), rect1.perimetro(), rect2.area(), rect2.perimetro()
+    // Declaración e inicialización de rect2
+    Rectangulo rect2;
+    rect2.base = 6.0;
+    rect2.altura = 4.0;
+
+    // Impresión usando los métodos encapsulados del struct
+    std::cout << "Rectangulo 1, Area: " << rect1.area()
+              << ", Perimetro: " << rect1.perimetro() << std::endl;
+
+    std::cout << "Rectangulo 2, Area: " << rect2.area()
+              << ", Perimetro: " << rect2.perimetro() << std::endl;
 }
 
 int main() {
