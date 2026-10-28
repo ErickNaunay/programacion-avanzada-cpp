@@ -1,0 +1,83 @@
+#include <iostream>
+
+class Empleado {
+    private:
+        int codigo;
+    public:
+        void setCodigo(int nuevoCodigo) {
+            codigo = nuevoCodigo;
+        }
+
+        int getCodigo() {
+            return codigo;
+        }
+
+        virtual double salarioMensual() {
+            return 0.0;
+        }
+
+        virtual void imprimirRol() {
+            std::cout << "Empleado sin rol";
+        }
+};
+
+class Docente : public Empleado {
+    private:
+        double sueldoFijo;
+    public:
+        Docente(int nuevoCodigo, double nuevoSueldo) {
+            setCodigo(nuevoCodigo);
+            sueldoFijo = nuevoSueldo;
+        }
+
+            double salarioMensual() override {
+        return sueldoFijo;
+        }
+
+        void imprimirRol() override {
+
+        std::cout << "Docente";
+    }
+
+};
+
+class Contratista : public Empleado {
+    private:
+        double tarifaPorHora;
+        int horasDelMes;
+    public:
+        Contratista(int nuevoCodigo, double nuevaTarifa, int nuevasHoras) {
+            setCodigo(nuevoCodigo);
+            tarifaPorHora = nuevaTarifa;
+            horasDelMes = nuevasHoras;
+        }
+            double salarioMensual() override {
+        return tarifaPorHora * horasDelMes;
+
+        }
+
+            void imprimirRol() override {
+        std::cout << "Contratista";
+    }
+    
+};
+
+int main() {
+    Docente ana(101, 1800.0);
+    Contratista luis(202, 25.0, 40);
+
+    Empleado* nomina[2];
+    nomina[0] = &ana;
+    nomina[1] = &luis;
+
+    double total = 0.0;
+    for (int i = 0; i < 2; i++) {
+        std::cout << "Codigo " << nomina[i]->getCodigo() << " (";
+        nomina[i]->imprimirRol();
+        std::cout << "): " << nomina[i]->salarioMensual() << std::endl;
+        total = total + nomina[i]->salarioMensual();
+    }
+    std::cout << "Total de la nomina: " << total << std::endl;
+
+    return 0;
+}

@@ -1,0 +1,62 @@
+#include <iostream>
+
+class Figura {
+    public:
+            virtual double area() {
+        return 0.0;
+    }
+
+    void describir() {
+        std::cout << "Figura de area " << area() << std::endl;
+    }
+};
+
+class Circulo : public Figura {
+    private:
+        double radio;
+    public:
+        Circulo(double nuevoRadio) {
+            radio = nuevoRadio;
+        }
+
+        double area() {
+            return 3.14159 * radio * radio;
+        }
+};
+
+class Rectangulo : public Figura {
+    private:
+        double base;
+        double altura;
+    public:
+        Rectangulo(double nuevaBase, double nuevaAltura) {
+            base = nuevaBase;
+            altura = nuevaAltura;
+        }
+
+        double area() {
+            return base * altura;
+        }
+};
+
+int main() {
+    Circulo circulo(1.0);
+    Rectangulo rectangulo(2.0, 3.0);
+
+    std::cout << "Llamada directa:" << std::endl;
+    std::cout << "Circulo: " << circulo.area() << std::endl;
+    std::cout << "Rectangulo: " << rectangulo.area() << std::endl;
+
+        Figura* figuras[2];
+        figuras[0] = &circulo;
+        figuras[1] = &rectangulo;
+
+        std::cout << "A traves de Figura*:" << std::endl;
+
+            for (int i = 0; i < 2; i++) {
+        figuras[i]->describir();
+        
+    }
+
+    return 0;
+}
