@@ -1,6 +1,8 @@
 #include <iostream>
 #include <memory>
 #include <utility>
+using namespace std;
+
 
 // Salida esperada:
 // Medidores conectados: 3
@@ -15,18 +17,73 @@
 // su unidad ("C", "hPa", "km/h"). Sigue la convencion de interfaz de la
 // sesion: sin atributos.
 class IMedidor {
+public:
+    virtual double leer() = 0;
+    virtual void imprimirMagnitud() = 0;
+    virtual void imprimirUnidad() = 0;
+    virtual ~IMedidor() {}
 };
+
 
 // TODO: Termometro, Barometro y Anemometro implementan IMedidor. Cada uno
 // recibe su valor actual en el constructor y lo devuelve en la lectura.
 // Marca con override cada metodo que implementa la interfaz.
-class Termometro {
+class Termometro : public IMedidor {
+    private:
+        double gradosActuales;
+    public:
+        Termometro( double grados){
+            gradosActuales = grados;
+        }
+        double leer() override{
+            return gradosActuales;
+        }
+        void imprimirMagnitud() override{
+            cout<<"Temperatura";
+        }
+        void imprimirUnidad() override{
+            cout<<"C ";
+        }
+        
 };
 
-class Barometro {
+class Barometro : public IMedidor{
+    private:
+        double presionActual;
+
+    public:
+        Barometro( double presion){
+            presionActual = presion;
+        }
+        double leer() override{
+            return presionActual;
+        }
+        void imprimirMagnitud() override{
+            cout<<"Presion";
+        }
+        void imprimirUnidad() override{
+            cout<<"hPa ";
+        }
 };
 
-class Anemometro {
+class Anemometro : public IMedidor {
+    private:
+        double velocidadActual;
+    public:
+        Anemometro(double velocidad){
+            velocidadActual = velocidad;
+        }
+
+        double leer() override {
+            return velocidadActual;
+        }
+        void imprimirMagnitud() override{
+            cout<<"Viento";
+        }
+        void imprimirUnidad() override{
+            cout<<"km / h";
+        }   
+
 };
 
 class EstacionMeteorologica {
@@ -44,7 +101,12 @@ class EstacionMeteorologica {
         // y devuelve true. Si la estacion ya esta llena, devuelve false
         // sin guardar nada. Un unique_ptr no se copia.
         bool agregar(std::unique_ptr<IMedidor> nuevo) {
-            return false;
+
+            if(cantidad >= capacidad){
+                return false;
+            }   medidores[cantidad] =  move(nuevo) ;
+            cantidad++;
+            return true;
         }
 
         int getCantidad() {
@@ -55,6 +117,12 @@ class EstacionMeteorologica {
         // formato "<magnitud>: <valor> <unidad>". Esta clase no puede
         // mencionar Termometro, Barometro ni Anemometro en ningun lugar.
         void reportar() {
+            for (int i = 0; i < cantidad; i++){
+                medidores[i]->imprimirMagnitud();
+                cout << ": " << medidores[i]->leer() << " ";
+                medidores[i]->imprimirUnidad();
+                cout << endl;
+            }
         }
 };
 

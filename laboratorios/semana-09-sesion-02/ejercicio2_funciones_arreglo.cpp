@@ -43,6 +43,30 @@ std::ostream& operator<<(std::ostream& os, Vector2D v) {
 // umbral), que devuelve cuantos elementos del arreglo son mayores que
 // umbral (un int).
 
+template <typename T>
+T sumarArreglo(T datos[], int cantidad) {
+    T suma = datos[0];
+
+    for (int i = 1; i < cantidad; i++) {
+        suma = suma + datos[i];
+    }
+
+    return suma;
+}
+
+template <typename T>
+int contarMayoresQue(T datos[], int cantidad, T umbral) {
+    int contador = 0;
+
+    for (int i = 0; i < cantidad; i++) {
+        if (datos[i] > umbral) {
+            contador++;
+        }
+    }
+
+    return contador;
+}
+
 int main() {
     int pasos[3] = {4200, 1800, 3300};
     double temperaturas[3] = {20.5, 21.5, 22.5};

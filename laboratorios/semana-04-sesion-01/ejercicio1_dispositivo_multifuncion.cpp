@@ -25,7 +25,7 @@ class Dispositivo {
         }
 };
 
-class Impresora: public Dispositivo {
+class Impresora: public virtual Dispositivo {
     private:
         int paginasPorMinuto;
     public:
@@ -44,7 +44,7 @@ class Impresora: public Dispositivo {
         }
 };
 
-class Escaner: public Dispositivo {
+class Escaner: public virtual Dispositivo {
     private:
         int resolucionDPI;
     public:
@@ -77,8 +77,8 @@ int main() {
 
     // TODO: antes de descomentar, predice: ¿que error da el compilador
     // y sobre que palabra exactamente?
-    // mfp.setNumeroSerie(1234);
-    // mfp.describir();
+    mfp.setNumeroSerie(1234);
+    mfp.describir();
 
     return 0;
 }

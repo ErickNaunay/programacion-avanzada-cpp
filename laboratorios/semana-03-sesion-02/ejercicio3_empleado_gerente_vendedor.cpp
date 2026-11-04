@@ -19,7 +19,7 @@
 // Ejecutar:  ./bin/ejercicio3
 
 #include <iostream>
-
+using namespace std;
 class Empleado {
 private:
     double salarioBase;
@@ -35,13 +35,15 @@ public:
         // TODO: si nuevoSalario no es positivo, devuelve false sin
         // modificar salarioBase. Si no, asigna salarioBase = nuevoSalario
         // y devuelve true.
-        return false;
+        if(nuevoSalario<0)return false;
+        salarioBase = nuevoSalario; return true;
     }
 
     bool setAniosServicio(double nuevosAnios) {
         // TODO: mismo patron que setSalarioBase(), pero para
         // aniosServicio (no puede ser negativo).
-        return false;
+        if(nuevosAnios<0)return false;
+        aniosServicio = nuevosAnios; return true;
     }
 
     double getSalarioBase() { return salarioBase; }
@@ -50,11 +52,12 @@ public:
     void describir() {
         // TODO: imprime "Empleado con salario base " + salarioBase +
         // ", " + aniosServicio + " anios de servicio"
+        cout<<"Empleado con salario base "<< salarioBase<< ", " << aniosServicio<< " anios de servicio"<<endl;
     }
 
     double calcularBonoAntiguedad() {
         // TODO: retorna aniosServicio * 100.0
-        return 0.0;
+        return aniosServicio *100;
     }
 };
 

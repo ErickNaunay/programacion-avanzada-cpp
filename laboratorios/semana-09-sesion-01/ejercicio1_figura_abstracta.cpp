@@ -82,6 +82,8 @@ int main() {
     // siguiente linea, compila, lee el error y vuelve a comentarla.
     // Figura generica;
 
+
+
     std::unique_ptr<Figura> figuras[3];
     figuras[0] = std::make_unique<Circulo>(1.0);
     figuras[1] = std::make_unique<Rectangulo>(2.0, 3.0);

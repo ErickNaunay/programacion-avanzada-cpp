@@ -30,3 +30,67 @@
 // Salida esperada:
 // Puede despegar con 10%: false
 // Puede despegar con 45%: true
+#include <iostream>
+using namespace std;
+
+class Bateria {
+private:
+    int cargaPorcentaje;
+
+public:
+    bool setCargaPorcentaje(int c) {
+        if (c >= 0 && c <= 100) {
+            cargaPorcentaje = c;
+            return true;
+        }
+        return false;
+    }
+
+    int getCargaPorcentaje() {
+        return cargaPorcentaje;
+    }
+};
+
+class Dron {
+private:
+    Bateria bateria;       // composicion: Dron TIENE una Bateria
+    double altitudMetros;
+
+public:
+    bool configurarBateria(int c) {
+        return bateria.setCargaPorcentaje(c);
+    }
+
+    bool setAltitudMetros(double a) {
+        if (a >= 0 && a <= 500) {
+            altitudMetros = a;
+            return true;
+        }
+        return false;
+    }
+
+    bool puedeDespegar() {
+        return bateria.getCargaPorcentaje() >= 20;
+    }
+};
+
+int main() {
+    Dron dron;
+
+    dron.setAltitudMetros(0);
+
+    dron.configurarBateria(10);
+
+    cout << boolalpha;
+    cout << "Puede despegar con 10%: "
+         << dron.puedeDespegar()
+         << endl;
+
+    dron.configurarBateria(45);
+
+    cout << "Puede despegar con 45%: "
+         << dron.puedeDespegar()
+         << endl;
+
+    return 0;
+}

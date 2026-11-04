@@ -21,32 +21,53 @@ class ColaDeImpresion {
     public:
         void agregar(int id) {
             // TODO: agrega el trabajo al final de la fila.
+            trabajos.push_back(id);
         }
 
         void agregarUrgente(int id) {
             // TODO: agrega el trabajo al frente de la fila.
+            trabajos.push_front(id);
         }
 
         bool cancelar(int id) {
             // TODO: recorre la fila con un iterador. Si encuentras el
             // trabajo, borralo con trabajos.erase(...) y devuelve true.
             // Si no esta, devuelve false.
+             for (std::list<int>::iterator it = trabajos.begin();
+             it != trabajos.end();
+             it++) {
+
+            if (*it == id) {
+                trabajos.erase(it);
+                return true;
+            }
+        }
             return false;
         }
 
         int siguiente() {
             // TODO: devuelve el trabajo del frente y quitalo de la fila.
-            return 0;
+            int primero = trabajos.front();
+            trabajos.pop_front();
+
+            return primero;
         }
 
         int cantidad() {
             // TODO: cuantos trabajos quedan en la fila.
-            return 0;
+            return trabajos.size();
         }
 
         void imprimir() {
             // TODO: imprime "Fila:" y cada trabajo precedido de un
             // espacio, con un for de rango, y termina la linea.
+            std::cout << "Fila:";
+
+            for (int trabajo : trabajos) {
+                std::cout << " " << trabajo;
+            }
+
+            std::cout << std::endl;
         }
 };
 

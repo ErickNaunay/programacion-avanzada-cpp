@@ -1,5 +1,7 @@
 #include <iostream>
 #include <memory>
+#include <vector>
+using namespace std;
 
 // Historial<T> de la sesion pasada: capacidad fija, y rechaza el valor
 // que ya no cabe.
@@ -9,26 +11,20 @@ class Historial {
     private:
         // TODO (paso 1): reemplaza estos tres atributos por un solo
         // std::vector<T> llamado valores. Incluye <vector> arriba.
-        std::unique_ptr<T[]> valores;
-        int capacidad;
-        int usadas;
+        vector<T> valores;
+
     public:
         Historial(int capacidadInicial) {
             // TODO (paso 1): con el vector, reserva espacio para
             // capacidadInicial elementos con valores.reserve(...).
-            capacidad = capacidadInicial;
-            usadas = 0;
-            valores = std::make_unique<T[]>(capacidad);
+
+            valores.reserve(capacidadInicial);
         }
 
         bool agregar(T valor) {
             // TODO (paso 2): con push_back el historial ya no se llena.
             // Agrega el valor y devuelve true siempre.
-            if (usadas >= capacidad) {
-                return false;
-            }
-            valores[usadas] = valor;
-            usadas = usadas + 1;
+            valores.push_back(valor);
             return true;
         }
 
@@ -38,18 +34,19 @@ class Historial {
 
         T ultimo() {
             // TODO (paso 2): el ultimo elemento del vector.
-            return valores[usadas - 1];
+            return valores.back();
         }
 
         int getUsadas() {
             // TODO (paso 2): cuantos elementos tiene el vector.
-            return usadas;
+
+            return valores.size();
         }
 
         int getCapacidad() {
             // TODO (paso 3): cuantos elementos caben sin reservar memoria
             // nueva.
-            return capacidad;
+            return valores.capacity();
         }
 };
 
