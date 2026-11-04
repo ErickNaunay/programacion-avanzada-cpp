@@ -28,7 +28,11 @@ int main() {
         // TODO 2: atrapa la excepcion que lanza lecturaEn, para que una hora
         // sin lectura no detenga las consultas siguientes. En ese caso
         // imprime "Hora N: sin lectura".
-        std::cout << "Hora " << consultas[i] << ": " << lecturaEn(lecturas, consultas[i]) << std::endl;
+        try{
+            std::cout << "Hora " << consultas[i] << ": " << lecturaEn(lecturas, consultas[i]) << std::endl;
+        }catch (const std::out_of_range &error){
+            std::cout << "Hora " << consultas[i] << ": " << lecturaEn(lecturas, consultas[i]) << std::endl;
+        }
     }
 
     int desdes[3] = {1, 4, 3};
@@ -37,7 +41,12 @@ int main() {
         // TODO 4: un try con dos catch. Para std::invalid_argument imprime
         // "Promedio de D a H: error, " y el mensaje de la excepcion; para
         // std::out_of_range, "Promedio de D a H: error, faltan lecturas".
-        std::cout << "Promedio de " << desdes[i] << " a " << hastas[i] << ": " << promedioEntre(lecturas, desdes[i], hastas[i]) << std::endl;
+        try{
+            std::cout << "Promedio de " << desdes[i] << " a " << hastas[i] << ": " << promedioEntre(lecturas, desdes[i], hastas[i]) << std::endl;
+        }catch (const std::out_of_range &error){
+            std::cout << "Promedio de " << desdes[i] << " a " << hastas[i] << "no valores entre este rango"<< std::endl;    
+        }
+        
     }
 
     std::cout << "Fin del reporte" << std::endl;
