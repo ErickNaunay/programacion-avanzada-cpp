@@ -30,3 +30,51 @@
 // Promedio h1: 20
 // Promedio h2: 6
 // Fin del bloque
+#include <iostream>
+class Historial{
+    private:
+    double* registros;
+    int cantidad;
+    public:
+    Historial(int n){
+        cantidad=n;
+        registros=new double[cantidad];
+        for(int i=0;i<cantidad;i++){
+            registros[i]=0;
+        }
+    }
+    ~Historial(){
+        delete[] registros;
+    }
+    bool setRegistro(int indice,double valor){
+        if(indice>=0 and indice<cantidad){
+            registros[indice]=valor;
+            return true;
+        }
+        return false;
+    }
+    double promedio(){
+        double suma=0;
+        for(int i=0;i<cantidad;i++){
+            suma=suma+registros[i];
+        }
+        return suma/cantidad;
+    }
+};
+int main(){
+    {
+    Historial H1(3);
+    H1.setRegistro(0,10.0);
+    H1.setRegistro(1,20.0);
+    H1.setRegistro(2,30.0);
+    std::cout<<"Promedio h1: "<<H1.promedio()<<std::endl;
+
+    Historial H2(2);
+    H2.setRegistro(0,5.0);
+    H2.setRegistro(1,7.0);
+    std::cout<<"Promedio h2: "<<H2.promedio()<<std::endl;
+    }
+    std::cout<<"Fin del bloque"<<std::endl;
+    return 0;
+
+}

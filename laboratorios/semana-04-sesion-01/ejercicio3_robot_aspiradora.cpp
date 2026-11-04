@@ -33,8 +33,15 @@ class DispositivoElectronico {
 // sin herencia multiple). Agrega:
 // - void aspirar(): imprime "Aspirando el polvo del piso"
 // - void moverse(int distanciaCm): imprime "Moviendose <distanciaCm> cm hacia adelante"
-class RobotAspiradora {
-    // TODO
+class RobotAspiradora: virtual public DispositivoElectronico{
+    public:
+    void aspirar(){
+        std::cout<<"Aspirando el polvo del piso"<<std::endl;
+    }
+    void moverse(int distanciaCm){
+        std::cout<<"Moviendose "<<distanciaCm<<" cm hacia adelante"<<std::endl;
+    }
+
 };
 
 int main() {
@@ -46,3 +53,5 @@ int main() {
     r.moverse(150);
     return 0;
 }
+
+//g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-04-sesion-01/ejercicio3_robot_aspiradora.cpp -o bin/ejercicio3

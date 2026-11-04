@@ -16,7 +16,7 @@
 // Apertura: 8
 // Cierre: 18
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio6_horario_atencion.cpp -o bin/ejercicio6
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g psets/pset-01/ejercicio6_horario_atencion.cpp -o bin/ejercicio6
 // Ejecutar:  ./bin/ejercicio6
 
 #include <iostream>
@@ -28,9 +28,11 @@ private:
 
 public:
     bool setHorario(double apertura, double cierre) {
-        // TODO: valida apertura >= 0, cierre <= 24, apertura < cierre.
-        // Si algo falla, retorna false sin modificar los atributos. Si
-        // todo es valido, asigna los dos atributos juntos y retorna true.
+        if(apertura>=0 and cierre <=24 and apertura<cierre){
+            horaApertura=apertura;
+            horaCierre=cierre;
+            return true;
+        }
         return false;
     }
 
