@@ -39,3 +39,71 @@
 // Alerta con 110.0: true
 // Consumo: 5.5
 // Canal: 6
+
+#include <iostream>
+#include <iomanip>
+
+class Dispositivo {
+private:
+    double consumoWatts;
+public:
+    Dispositivo() : consumoWatts(0.0) {}
+    bool setConsumoWatts(double c) {
+        if (c > 0 && c <= 100) {
+            consumoWatts = c;
+            return true;
+        }
+        return false;
+    }
+    double getConsumoWatts() const {
+        return consumoWatts;
+    }
+};
+class DispositivoConectado : public Dispositivo {
+private:
+    int canalRed;
+public:
+    DispositivoConectado() : canalRed(0) {}
+    bool setCanalRed(int c) {
+        if (c >= 1 && c <= 11) {
+            canalRed = c;
+            return true;
+        }
+        return false;
+    }
+    int getCanalRed() const {
+        return canalRed;
+    }
+};
+class SensorTemperatura : public DispositivoConectado {
+private:
+    double lecturaActual;
+public:
+    SensorTemperatura() : lecturaActual(0.0) {}
+    bool setLecturaActual(double l) {
+        if (l >= -40 && l <= 125) {
+            lecturaActual = l;
+            return true;
+        }
+        return false;
+    }
+    double getLecturaActual() const {
+        return lecturaActual;
+    }
+    bool alertaCritica() const {
+        return lecturaActual > 100;
+    }
+};
+int main() {
+    SensorTemperatura sensor;
+    sensor.setConsumoWatts(5.5);
+    sensor.setCanalRed(6);
+    sensor.setLecturaActual(45.0);
+    std::cout << std::boolalpha;
+    std::cout << "Alerta con 45.0: " << sensor.alertaCritica() << std::endl;
+    sensor.setLecturaActual(110.0);
+    std::cout << "Alerta con 110.0: " << sensor.alertaCritica() << std::endl;
+    std::cout << "Consumo: " << sensor.getConsumoWatts() << std::endl;
+    std::cout << "Canal: " << sensor.getCanalRed() << std::endl;
+    return 0;
+}

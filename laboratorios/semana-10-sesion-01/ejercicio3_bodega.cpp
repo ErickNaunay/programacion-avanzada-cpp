@@ -1,4 +1,7 @@
 #include <iostream>
+#include <map>
+#include <vector>
+#include <set>
 
 // Salida esperada:
 // Stock: 120=2 210=5 305=10
@@ -51,6 +54,80 @@
 // - void imprimirAgotados(): "Agotados alguna vez:" y cada codigo
 //   precedido de un espacio. Termina la linea.
 
+class Bodega {
+    private:
+        // std::map mantiene las claves (códigos) ordenadas automáticamente de menor a mayor.
+        std::map<int, int> stock;
+
+        // std::vector permite guardar los retiros en orden secuencial con acceso por índice.
+        std::vector<int> historialRetiros;
+
+        // std::set garantiza elementos únicos sin repetición y ordenados de menor a mayor.
+        std::set<int> agotados;
+
+    public:
+        void ingresar(int codigo, int cantidad) {
+            stock[codigo] += cantidad;
+        }
+
+        bool retirar(int codigo, int cantidad) {
+            auto it = stock.find(codigo);
+            // Si el código no existe en el mapa o el stock es insuficiente, se rechaza.
+            if (it == stock.end() || it->second < cantidad) {
+                return false;
+            }
+
+            it->second -= cantidad;
+            historialRetiros.push_back(codigo);
+
+            if (it->second == 0) {
+                agotados.insert(codigo);
+            }
+
+            return true;
+        }
+
+        int stockDe(int codigo) const {
+            auto it = stock.find(codigo);
+            if (it != stock.end()) {
+                return it->second;
+            }
+            return 0;
+        }
+
+        int cantidadDeProductos() const {
+            return stock.size();
+        }
+
+        int retiroNumero(int posicion) const {
+            return historialRetiros[posicion];
+        }
+
+        void imprimirStock() const {
+            std::cout << "Stock:";
+            for (const auto& par : stock) {
+                std::cout << " " << par.first << "=" << par.second;
+            }
+            std::cout << std::endl;
+        }
+
+        void imprimirRetiros() const {
+            std::cout << "Retiros:";
+            for (int codigo : historialRetiros) {
+                std::cout << " " << codigo;
+            }
+            std::cout << std::endl;
+        }
+
+        void imprimirAgotados() const {
+            std::cout << "Agotados alguna vez:";
+            for (int codigo : agotados) {
+                std::cout << " " << codigo;
+            }
+            std::cout << std::endl;
+        }
+};
+
 void informarRetiro(int codigo, int cantidad, bool aceptado) {
     std::cout << "Retirar " << cantidad << " de " << codigo << ": ";
     if (aceptado) {
@@ -86,4 +163,4 @@ int main() {
     bodega.imprimirAgotados();
 
     return 0;
-}
+}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
