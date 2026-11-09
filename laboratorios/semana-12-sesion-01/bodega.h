@@ -28,10 +28,10 @@ class Bodega {
             if (cantidad <= 0) {
                 throw std::invalid_argument("cantidad no positiva");
             }
+            if (stock.count(codigo) == 0) {
+                throw std::out_of_range("codigo desconocido");
+            }
             if (stock[codigo] < cantidad) {
-                if (stock.count(codigo) == 0) {
-                    throw std::out_of_range("codigo desconocido");
-                }
                 throw std::runtime_error("stock insuficiente");
             }
             stock[codigo] = stock[codigo] - cantidad;
