@@ -22,3 +22,67 @@
 //
 //     g++ -std=c++20 -Wall -Wextra -g -I ejercicio3/version_a ejercicio3/test_tarifa.cpp -lgtest_main -lgtest -pthread -o bin/test_tarifa_a
 //     ./bin/test_tarifa_a
+
+
+// Minutos negativos deben lanzar std::invalid_argument.
+
+TEST(Tarifa, MinutosNegativosLanzan) {
+
+    EXPECT_THROW(
+        tarifaEnCentavos(-1),
+        std::invalid_argument
+    );
+}
+
+
+// Hasta 15 minutos inclusive son gratis.
+
+TEST(Tarifa, CeroMinutosEsGratis) {
+
+    EXPECT_EQ(tarifaEnCentavos(0), 0);
+}
+
+TEST(Tarifa, QuinceMinutosEsGratis) {
+
+    EXPECT_EQ(tarifaEnCentavos(15), 0);
+}
+
+
+// Desde el minuto 16 se cobra la primera hora.
+
+TEST(Tarifa, DieciseisMinutosCuestanCincuenta) {
+
+    EXPECT_EQ(tarifaEnCentavos(16), 50);
+}
+
+
+// 60 minutos siguen siendo una sola hora.
+
+TEST(Tarifa, SesentaMinutosCuestanCincuenta) {
+
+    EXPECT_EQ(tarifaEnCentavos(60), 50);
+}
+
+
+// 61 minutos cuentan como dos horas.
+
+TEST(Tarifa, SesentaYUnMinutosCuestanCien) {
+
+    EXPECT_EQ(tarifaEnCentavos(61), 100);
+}
+
+
+// Una estadia de 10 horas llega exactamente al maximo de 500 centavos.
+
+TEST(Tarifa, DiezHorasCuestanQuinientos) {
+
+    EXPECT_EQ(tarifaEnCentavos(600), 500);
+}
+
+
+// Aunque pase de 10 horas, nunca puede cobrar mas de 500 centavos.
+
+TEST(Tarifa, NuncaSuperaQuinientos) {
+
+    EXPECT_EQ(tarifaEnCentavos(601), 500);
+}

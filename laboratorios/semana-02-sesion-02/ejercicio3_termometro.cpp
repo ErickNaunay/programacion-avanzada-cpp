@@ -20,6 +20,7 @@
 // Ejecutar:  ./bin/ejercicio3
 
 #include <iostream>
+using namespace std;
 
 class Termometro {
 private:
@@ -34,11 +35,17 @@ public:
         //
         // TODO: despues de decidir el valor, imprime
         // "Termometro creado con " + gradosCelsius + " grados Celsius"
+        if(celsiusInicial < -273.15){ 
+            gradosCelsius = 0;
+            std :: cout<< "Aviso: temperatura invalida, se uso 0 por defecto";
+        }else gradosCelsius = celsiusInicial;
+    
+        std :: cout<<"Termometro creado con "<< gradosCelsius<< "grados Celsius"<<endl;
     }
-
     ~Termometro() {
         // TODO: imprime "Termometro destruido, ultima lectura: "
         // seguido de gradosCelsius y " C".
+        std :: cout<< "Termometro destruido, ultima lectura: "<<gradosCelsius <<" C"<<endl;
     }
 
     double getCelsius() {
@@ -48,7 +55,7 @@ public:
     double convertirAFahrenheit() {
         // TODO: retorna gradosCelsius convertido a Fahrenheit:
         // celsius * 9 / 5 + 32
-        return 0.0;
+        return gradosCelsius * 9 /5 + 32;
     }
 };
 
