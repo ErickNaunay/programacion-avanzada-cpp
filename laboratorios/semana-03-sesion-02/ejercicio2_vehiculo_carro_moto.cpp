@@ -10,7 +10,7 @@
 // Vehiculo a 90 km/h, 8000 km recorridos
 // Vrrrm!
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio2_vehiculo_carro_moto.cpp -o bin/ejercicio2
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-03-sesion-02/ejercicio2_vehiculo_carro_moto.cpp -o bin/ejercicio2
 // Ejecutar:  ./bin/ejercicio2
 
 #include <iostream>
@@ -27,24 +27,22 @@ public:
     }
 
     bool setVelocidadKmh(double nuevaVelocidad) {
-        // TODO: si nuevaVelocidad es negativa, devuelve false sin modificar
-        // velocidadKmh. Si no, asigna velocidadKmh = nuevaVelocidad y
-        // devuelve true.
-        return false;
+        if(nuevaVelocidad<0){return false;}
+        velocidadKmh=nuevaVelocidad;
+        return true;
     }
 
     bool setKilometraje(double nuevoKilometraje) {
-        // TODO: mismo patron que setVelocidadKmh(), pero para kilometraje
-        // (no puede ser negativo).
-        return false;
+        if(nuevoKilometraje<0){return false;}
+        kilometraje=nuevoKilometraje;
+        return true;
     }
 
     double getVelocidadKmh() { return velocidadKmh; }
     double getKilometraje() { return kilometraje; }
 
     void describir() {
-        // TODO: imprime "Vehiculo a " + velocidadKmh + " km/h, " +
-        // kilometraje + " km recorridos"
+        std::cout<<"Vehiculo a "<<velocidadKmh<<" km/h,"<<kilometraje<<" km recorridos"<<std::endl;
     }
 };
 
@@ -63,7 +61,7 @@ public:
 };
 
 int main() {
-    Carro c;
+    Carro c;  // si el constructor por defecto no lo definimos imprimen cualquier valor7
     c.setVelocidadKmh(120.0);
     c.setKilometraje(45000.0);
     c.describir();

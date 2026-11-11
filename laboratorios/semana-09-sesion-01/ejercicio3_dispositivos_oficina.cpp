@@ -27,17 +27,22 @@
 // Multifuncional 2: escanea 3 paginas
 // Fax:
 // Multifuncional 2: envia fax al 5550000
-
-class IDispositivoOficina {
+class IImpresora{
     public:
-        virtual void imprimir(int paginas) = 0;
-        virtual void escanear(int paginas) = 0;
-        virtual void enviarFax(int numero) = 0;
-        virtual ~IDispositivoOficina() {
-        }
+    virtual void imprimir(int paginas)=0;
+};
+class IEscaner{
+    public:
+    virtual void escanear(int paginas)=0;
+};
+class IFax{
+    public:
+    virtual void enviarFax(int numero)=0;
+
 };
 
-class ImpresoraBasica : public IDispositivoOficina {
+
+class ImpresoraBasica : public IImpresora{
     private:
         int id;
     public:
@@ -48,17 +53,9 @@ class ImpresoraBasica : public IDispositivoOficina {
         void imprimir(int paginas) override {
             std::cout << "Impresora basica " << id << ": imprime " << paginas << " paginas" << std::endl;
         }
-
-        void escanear(int paginas) override {
-            std::cout << "Impresora basica " << id << ": no puede escanear " << paginas << " paginas" << std::endl;
-        }
-
-        void enviarFax(int numero) override {
-            std::cout << "Impresora basica " << id << ": no puede enviar fax al " << numero << std::endl;
-        }
 };
 
-class Multifuncional : public IDispositivoOficina {
+class Multifuncional : public IImpresora,public IEscaner,public  IFax{
     private:
         int id;
     public:
@@ -79,13 +76,13 @@ class Multifuncional : public IDispositivoOficina {
         }
 };
 
-void imprimirLote(IDispositivoOficina* dispositivos[], int cantidad, int paginas) {
+void imprimirLote(IImpresora* dispositivos[], int cantidad, int paginas) {
     for (int i = 0; i < cantidad; i++) {
         dispositivos[i]->imprimir(paginas);
     }
 }
 
-void escanearLote(IDispositivoOficina* dispositivos[], int cantidad, int paginas) {
+void escanearLote(IEscaner* dispositivos[], int cantidad, int paginas) {
     for (int i = 0; i < cantidad; i++) {
         dispositivos[i]->escanear(paginas);
     }
@@ -95,22 +92,22 @@ int main() {
     ImpresoraBasica basica(1);
     Multifuncional multi(2);
 
-    IDispositivoOficina* impresoras[2];
+    IImpresora*  impresoras[2];
     impresoras[0] = &basica;
     impresoras[1] = &multi;
 
-    IDispositivoOficina* escaneres[2];
-    escaneres[0] = &basica;
-    escaneres[1] = &multi;
+    IEscaner* escaneres[1];
+    escaneres[0] = &multi;
 
     std::cout << "Lote de impresion:" << std::endl;
     imprimirLote(impresoras, 2, 5);
 
     std::cout << "Lote de escaneo:" << std::endl;
-    escanearLote(escaneres, 2, 3);
+    escanearLote(escaneres, 1, 3);
 
     std::cout << "Fax:" << std::endl;
-    multi.enviarFax(5550000);
+    IFax* fax=&multi;
+    fax->enviarFax(5550000);
 
     return 0;
 }

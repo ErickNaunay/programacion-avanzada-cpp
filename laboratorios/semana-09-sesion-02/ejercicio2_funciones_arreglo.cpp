@@ -38,11 +38,28 @@ std::ostream& operator<<(std::ostream& os, Vector2D v) {
 // TODO: escribe la plantilla de funcion sumarArreglo(datos, cantidad),
 // que recibe un arreglo de T y su cantidad de elementos y devuelve la
 // suma de todos. Tiene que funcionar para int, double y Vector2D.
+template<typename T>
+T sumarArreglo(T datos[],int cantidad){
+    T suma= datos[0];
 
+    for(int i=1;i<cantidad;i++){
+        suma=suma+datos[i];
+    }
+    return suma;
+}
 // TODO: escribe la plantilla de funcion contarMayoresQue(datos, cantidad,
 // umbral), que devuelve cuantos elementos del arreglo son mayores que
 // umbral (un int).
-
+template<typename T>
+int contarMayoresQue(T datos[],int cantidad,T umbral){
+    int contador=0;
+    for(int i=0;i<cantidad;i++){
+        if(datos[i]>umbral){
+            contador=contador+1;
+        }
+    }
+    return contador;
+}
 int main() {
     int pasos[3] = {4200, 1800, 3300};
     double temperaturas[3] = {20.5, 21.5, 22.5};

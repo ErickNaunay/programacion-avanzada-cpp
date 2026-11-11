@@ -1,0 +1,5 @@
+if(EXISTS "/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio2/build-asan/pruebas[1]_tests.cmake")
+  include("/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio2/build-asan/pruebas[1]_tests.cmake")
+else()
+  add_test(pruebas_NOT_BUILT pruebas_NOT_BUILT)
+endif()

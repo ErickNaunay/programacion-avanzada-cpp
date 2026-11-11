@@ -16,7 +16,7 @@
 // 25 C equivalen a 77 F
 // Termometro destruido, ultima lectura: 25 C
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio3_termometro.cpp -o bin/ejercicio3
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-02-sesion-02/ejercicio3_termometro.cpp -o bin/ejercicio3
 // Ejecutar:  ./bin/ejercicio3
 
 #include <iostream>
@@ -27,28 +27,33 @@ private:
 
 public:
     Termometro(double celsiusInicial) {
-        // TODO: si celsiusInicial es menor que -273.15, asigna
-        // gradosCelsius = 0.0 y avisa por consola:
-        // "Aviso: temperatura invalida, se uso 0 por defecto"
-        // Si no, asigna gradosCelsius = celsiusInicial.
-        //
-        // TODO: despues de decidir el valor, imprime
-        // "Termometro creado con " + gradosCelsius + " grados Celsius"
+        if (!setCelsius(celsiusInicial)){
+            gradosCelsius=0.0;
+            std::cout<<"Aviso: temperatura invalida, se uso 0 por defecto"<<std::endl;
+        }
+        std::cout<<"Termometro creado con "<<gradosCelsius<<" grados Celsius"<<std::endl;
+        
     }
 
     ~Termometro() {
-        // TODO: imprime "Termometro destruido, ultima lectura: "
-        // seguido de gradosCelsius y " C".
+        std::cout<<"Termometro destruido, ultima lectura:"<<gradosCelsius<<" C"<<std::endl;
+
     }
 
     double getCelsius() {
         return gradosCelsius;
     }
 
+    bool setCelsius(double nuevo_gradoCelcius){
+        if(nuevo_gradoCelcius < -273.15){
+            return false;
+        }
+        gradosCelsius=nuevo_gradoCelcius;
+        return true;
+    }
+
     double convertirAFahrenheit() {
-        // TODO: retorna gradosCelsius convertido a Fahrenheit:
-        // celsius * 9 / 5 + 32
-        return 0.0;
+        return gradosCelsius* 9 / 5 + 32;
     }
 };
 

@@ -15,41 +15,42 @@
 //   toman 3 minutos, 20 paginas toman 2.
 // - minutosTotales() suma los minutos de todos los trabajos de la cola.
 
-int minutosDeImpresion(int paginas) {
-    return paginas / 10;
+inline int minutosDeImpresion(int paginas) {
+    return (paginas + 9) / 10;
 }
 
 class ColaDeImpresion {
-    private:
-        std::vector<int> trabajos;
-    public:
-        void agregar(int paginas) {
-            trabajos.push_back(paginas);
-        }
+private:
+    std::vector<int> trabajos;
 
-        int cantidad() {
-            return trabajos.size();
-        }
+public:
+    void agregar(int paginas) {
+        trabajos.push_back(paginas);
+    }
 
-        int paginasDe(int posicion) {
-            return trabajos.at(posicion);
-        }
+    int cantidad() {
+        return trabajos.size();
+    }
 
-        void dividirGrandes() {
-            for (auto it = trabajos.begin(); it != trabajos.end(); ++it) {
-                if (*it > 20) {
-                    int resto = *it - 20;
-                    *it = 20;
-                    trabajos.push_back(resto);
-                }
+    int paginasDe(int posicion) {
+        return trabajos.at(posicion);
+    }
+
+    void dividirGrandes() {
+        for (int i = 0; i < cantidad(); i++) {
+            if (trabajos[i] > 20) {
+                int resto = trabajos[i] - 20;
+                trabajos[i] = 20;
+                trabajos.push_back(resto);
             }
         }
+    }
 
-        int minutosTotales() {
-            int total = 0;
-            for (int i = 0; i < cantidad(); i++) {
-                total = total + minutosDeImpresion(trabajos[i]);
-            }
-            return total;
+    int minutosTotales() {
+        int total = 0;
+        for (int i = 0; i < cantidad(); i++) {
+            total = total + minutosDeImpresion(trabajos[i]);
         }
+        return total;
+    }
 };

@@ -7,7 +7,7 @@
 // Salida esperada:
 // Temperatura actual: 21.5
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio4_termostato.cpp -o bin/ejercicio4
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g psets/pset-01/ejercicio4_termostato.cpp -o bin/ejercicio4
 // Ejecutar:  ./bin/ejercicio4
 
 #include <iostream>
@@ -18,12 +18,12 @@ private:
 
 public:
     double getTemperaturaActual() {
-        // TODO: retorna temperaturaActual
-        return 0.0;
+        return temperaturaActual;
     }
 
     void fijarTemperaturaInicial(double t) {
-        // TODO: asigna t a temperaturaActual
+        temperaturaActual=t;
+        // TODO: asigna t a temperaturaActual 
     }
 };
 

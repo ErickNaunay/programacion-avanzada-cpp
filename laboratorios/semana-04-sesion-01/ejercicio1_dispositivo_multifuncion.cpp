@@ -72,13 +72,15 @@ int main() {
     mfp.setPaginasPorMinuto(20);
     mfp.imprimir();
 
-    mfp.setResolucionDPI(600);
+    mfp.setResolucionDPI();
     mfp.escanear();
 
     // TODO: antes de descomentar, predice: ¿que error da el compilador
     // y sobre que palabra exactamente?
-    // mfp.setNumeroSerie(1234);
-    // mfp.describir();
+    // El error es que falta enviarle un argumento ‘ImpresoraMultifuncion::setResolucionDPI()’
+    //Ademas en setNumero nos suela una ambigueda a momento de pedir
+    mfp.setNumeroSerie(1234);
+    mfp.describir();
 
     return 0;
 }

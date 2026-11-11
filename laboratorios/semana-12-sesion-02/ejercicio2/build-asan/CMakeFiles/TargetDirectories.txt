@@ -1,0 +1,5 @@
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio2/build-asan/CMakeFiles/promedios.dir
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio2/build-asan/CMakeFiles/pruebas.dir
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio2/build-asan/CMakeFiles/test.dir
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio2/build-asan/CMakeFiles/edit_cache.dir
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio2/build-asan/CMakeFiles/rebuild_cache.dir

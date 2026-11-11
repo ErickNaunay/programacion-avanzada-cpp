@@ -12,5 +12,3 @@ build/
 
 # Logs
 *.log
-# Carpetas de compilacion de CMake (Semana 12)
-build-asan/

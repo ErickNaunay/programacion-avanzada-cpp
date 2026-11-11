@@ -19,6 +19,24 @@
 // Escribe aqui tus pruebas a partir de esta descripcion, antes de abrir
 // cualquier tarifa.h. Compila el mismo archivo contra cada version
 // cambiando la carpeta de -I:
+TEST(tarifaEnCentavo, minutos_negativos){
+    EXPECT_THROW(tarifaEnCentavos(-1),std::invalid_argument);
+}
+TEST(tarifaEnCentavo, No_se_cobra){
+    EXPECT_EQ(tarifaEnCentavos(0), 0);
+    EXPECT_EQ(tarifaEnCentavos(13), 0);
+    EXPECT_EQ(tarifaEnCentavos(15), 0);
+}
+TEST(tarifaEnCentavo, Se_cobra){
+    EXPECT_EQ(tarifaEnCentavos(16), 50);
+    EXPECT_EQ(tarifaEnCentavos(60), 50);
+    EXPECT_EQ(tarifaEnCentavos(61), 100);
+}
+TEST(tarifaEnCentavo, Cobro_maximo){
+    EXPECT_EQ(tarifaEnCentavos(600), 500);
+    EXPECT_EQ(tarifaEnCentavos(700), 500);
+    EXPECT_EQ(tarifaEnCentavos(1000), 500);
+}
 //
 //     g++ -std=c++20 -Wall -Wextra -g -I ejercicio3/version_a ejercicio3/test_tarifa.cpp -lgtest_main -lgtest -pthread -o bin/test_tarifa_a
 //     ./bin/test_tarifa_a

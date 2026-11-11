@@ -6,13 +6,9 @@ class Figura {
         // TODO (paso 1): ninguna Figura "generica" tiene un area ni un
         // nombre que tenga sentido. Convierte estos dos metodos en
         // funciones virtuales puras.
-        virtual double area() {
-            return 0.0;
-        }
+        virtual double area() =0 ;
 
-        virtual void imprimirNombre() {
-            std::cout << "Figura";
-        }
+        virtual void imprimirNombre()=0;
 
         void describir() {
             imprimirNombre();
@@ -68,7 +64,9 @@ class Triangulo : public Figura {
             base = nuevaBase;
             altura = nuevaAltura;
         }
-
+        double area() override{
+            return (base*altura)/2;
+        }
         void imprimirNombre() override {
             std::cout << "Triangulo";
         }
@@ -81,6 +79,8 @@ int main() {
     // TODO (paso 2): despues del paso 1, quita el comentario de la
     // siguiente linea, compila, lee el error y vuelve a comentarla.
     // Figura generica;
+    // El error que asoma es en la clase hija de triangulo donde dice que no se implemento
+    //la funcion pura, esto se debe a que la hija no tiene la funcion area
 
     std::unique_ptr<Figura> figuras[3];
     figuras[0] = std::make_unique<Circulo>(1.0);

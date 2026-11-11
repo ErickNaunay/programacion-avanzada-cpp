@@ -15,7 +15,7 @@
 // 75 esta en rango: true
 // 50 esta en rango: false
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio3_rango_notas.cpp -o bin/ejercicio3
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g laboratorios/semana-02-sesion-01/ejercicio3_rango_notas.cpp -o bin/ejercicio3
 // Ejecutar:  ./bin/ejercicio3
 
 #include <iostream>
@@ -30,16 +30,22 @@ public:
     double getMaxima() { return maxima; }
 
     bool setRango(double nuevaMinima, double nuevaMaxima) {
-        // TODO: si nuevaMinima es menor que 0, o nuevaMaxima es mayor que
-        // 100, o nuevaMinima es mayor que nuevaMaxima, devuelve false sin
-        // modificar minima ni maxima. Si las tres condiciones son
-        // validas, asigna minima y maxima, y devuelve true.
-        return false;
+        if(nuevaMinima<0 or nuevaMaxima>100 or nuevaMinima>nuevaMaxima){
+            return false;
+        }
+        else{
+            minima=nuevaMinima;
+            maxima=nuevaMaxima;
+            return true;
+        }
     }
 
     bool estaEnRango(double nota) {
+        if(nota>maxima or nota<minima){
+            return false;
+        }
+        return true;
         // TODO: retorna true si nota esta entre minima y maxima (incluidos).
-        return false;
     }
 };
 

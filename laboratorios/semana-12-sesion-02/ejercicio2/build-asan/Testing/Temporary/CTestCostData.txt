@@ -1,0 +1,4 @@
+PromedioMovil.PrimerPromedioDeTres 1 0.0525742
+PromedioMovil.VentanaDeUnoDevuelveLasMismasLecturas 2 0.0262952
+PromedioMovil.CantidadDePromedios 1 0.053157
+---

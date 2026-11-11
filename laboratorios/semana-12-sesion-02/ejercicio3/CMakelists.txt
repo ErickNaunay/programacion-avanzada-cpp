@@ -1,0 +1,16 @@
+
+# Configuracion de CMake para Cola de Impresion
+
+# TODO 1: Version minima y configuracion de C++20
+cmake_minimum_required(VERSION 3.20)
+project(ColaDeImpresion LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# TODO 2: Crear el ejecutable con main.cpp
+add_executable(cola_impresion main.cpp)
+
+# TODO 3: Activar advertencias del compilador
+target_compile_options(cola_impresion PRIVATE -Wall -Wextra)
