@@ -16,7 +16,10 @@
 // - minutosTotales() suma los minutos de todos los trabajos de la cola.
 
 int minutosDeImpresion(int paginas) {
-    return paginas / 10;
+    if (paginas <= 0) {
+        return 0;
+    }
+    return (paginas + 9) / 10;
 }
 
 class ColaDeImpresion {
@@ -36,10 +39,10 @@ class ColaDeImpresion {
         }
 
         void dividirGrandes() {
-            for (auto it = trabajos.begin(); it != trabajos.end(); ++it) {
-                if (*it > 20) {
-                    int resto = *it - 20;
-                    *it = 20;
+            for (size_t i = 0; i < trabajos.size(); ++i) {
+                if (trabajos[i] > 20) {
+                    int resto = trabajos[i] - 20;
+                    trabajos[i] = 20;
                     trabajos.push_back(resto);
                 }
             }

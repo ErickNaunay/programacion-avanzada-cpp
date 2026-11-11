@@ -33,6 +33,8 @@ public:
     ~Buffer() {
         // TODO: esta es la fuga. Libera datos con delete[], y despues imprime
         // "Buffer liberado" seguido de un salto de linea.
+        delete[] datos;
+        std::cout << "Buffer liberado" << std::endl;
     }
     bool setDato(int indice, int valor) {
         if (indice >= 0 && indice < tamano) {

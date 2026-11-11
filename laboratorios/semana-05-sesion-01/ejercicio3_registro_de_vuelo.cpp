@@ -11,6 +11,28 @@
 //   e imprima "Registro de vuelo destruido, memoria liberada", para atar
 //   la vida de esa memoria a la vida del objeto (RAII).
 class RegistroDeVuelo {
+    private:
+        double* alturas;
+        int capacidad;
+    public:
+        RegistroDeVuelo(int nuevaCapacidad) {
+            capacidad = nuevaCapacidad;
+            alturas = new double[capacidad];
+            std::cout << "Registro de vuelo creado para " << capacidad << " lecturas" << std::endl;
+        }
+
+        void guardarAltura(int indice, double valor) {
+            alturas[indice] = valor;
+        }
+
+        double getAltura(int indice) {
+            return alturas[indice];
+        }
+
+        ~RegistroDeVuelo() {
+            delete[] alturas;
+            std::cout << "Registro de vuelo destruido, memoria liberada" << std::endl;
+        }
 };
 
 bool procesarVuelo(int capacidad, double alturaMinima) {

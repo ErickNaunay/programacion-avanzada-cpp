@@ -6,13 +6,9 @@ class Figura {
         // TODO (paso 1): ninguna Figura "generica" tiene un area ni un
         // nombre que tenga sentido. Convierte estos dos metodos en
         // funciones virtuales puras.
-        virtual double area() {
-            return 0.0;
-        }
+        virtual double area() = 0;
 
-        virtual void imprimirNombre() {
-            std::cout << "Figura";
-        }
+        virtual void imprimirNombre() = 0;
 
         void describir() {
             imprimirNombre();
@@ -75,6 +71,9 @@ class Triangulo : public Figura {
 
         // TODO (paso 3): despues del paso 1, compila y lee el error que
         // aparece en main. Agrega lo que le falta a Triangulo.
+        double area() override {
+        return (base * altura) / 2.0;
+        }
 };
 
 int main() {

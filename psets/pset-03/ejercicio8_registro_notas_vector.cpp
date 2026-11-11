@@ -25,28 +25,57 @@ public:
     bool agregar(double nota) {
         // TODO: si nota esta entre 0 y 20 (incluidos), la agrega al final con
         // push_back y devuelve true; si no, devuelve false.
+        if (nota >= 0.0 && nota <= 20.0) {
+            notas.push_back(nota);
+            return true;
+        }
         return false;
     }
     int cantidad() {
         // TODO: devuelve el tamano del vector.
-        return 0;
+        return static_cast<int>(notas.size());
     }
     double promedio() {
         // TODO: devuelve la suma de las notas dividida para la cantidad, o 0 si no
         // hay ninguna.
-        return 0;
+        if (notas.empty()) {
+            return 0.0;
+        }
+        double suma = 0.0;
+        for (double nota : notas) {
+            suma += nota;
+        }
+        return suma / notas.size();
     }
     double mejor() {
         // TODO: devuelve la nota mas alta, o 0 si no hay ninguna.
-        return 0;
+        if (notas.empty()) {
+            return 0.0;
+        }
+        double maxima = notas[0];
+        for (double nota : notas) {
+            if (nota > maxima) {
+                maxima = nota;
+            }
+        }
+        return maxima;
     }
     int cuantasDesde(double minimo) {
         // TODO: cuenta las notas mayores o iguales a minimo.
-        return 0;
+        int contador = 0;
+        for (double nota : notas) {
+            if (nota >= minimo) {
+                contador++;
+            }
+        }
+        return contador;
     }
     double ultima() {
         // TODO: devuelve la ultima nota agregada (back()), o 0 si no hay ninguna.
-        return 0;
+        if (notas.empty()) {
+            return 0.0;
+        }
+        return notas.back();
     }
 };
 

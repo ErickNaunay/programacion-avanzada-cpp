@@ -20,13 +20,25 @@
 template <typename T>
 T mayorDeTres(T a, T b, T c) {
     // TODO: devuelve el mayor de los tres valores, usando solo operator>.
+    if (b > a && b > c) {
+        return b;
+    }
+    if (c > a) {
+        return c;
+    }
     return a;
 }
 
 template <typename T>
 int contarEnRango(T valores[], int cantidad, T minimo, T maximo) {
     // TODO: cuenta cuantos valores estan entre minimo y maximo, ambos incluidos.
-    return 0;
+    int contador = 0;
+    for (int i = 0; i < cantidad; i++) {
+        if (valores[i] >= minimo && valores[i] <= maximo) {
+            contador++;
+        }
+    }
+    return contador;
 }
 
 int main() {
