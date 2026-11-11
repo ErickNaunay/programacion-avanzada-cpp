@@ -10,6 +10,26 @@
 # TODO 1: la version minima de CMake (3.20), el nombre del proyecto
 # (Estacionamiento, en lenguaje CXX) y el estandar C++20 obligatorio, sin
 # extensiones de GCC (para que compile con -std=c++20, como hasta ahora).
+cmake_minimum_required(VERSION 3.20)
+project(Estacionamiento LANGUAGES CXX)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+add_executable(estacionamiento main.cpp)
+target_compile_options(estacionamiento PRIVATE -Wall -Wextra)
+
+find_package(GTest REQUIRED)
+enable_testing()
+include(GoogleTest)
+
+add_executable(pruebas test_estacionamiento.cpp)
+target_compile_options(pruebas PRIVATE -Wall -Wextra)
+target_link_libraries(pruebas PRIVATE GTest::gtest_main)
+
+gtest_discover_tests(pruebas)
+add_executable(reporte reporte_tiempos.cpp)
+target_compile_options(reporte PRIVATE -Wall -Wextra)
 
 # TODO 2: el ejecutable estacionamiento, a partir de main.cpp, compilado
 # con -Wall -Wextra.
