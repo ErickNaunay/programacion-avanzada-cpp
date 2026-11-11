@@ -23,3 +23,11 @@ TEST(PromedioMovil, VentanaDeUnoDevuelveLasMismasLecturas) {
 // TODO 4: escribe la prueba CantidadDePromedios: con 6 lecturas y ventana
 // 3 tiene que haber exactamente 4 promedios. Tiene que fallar antes de que
 // corrijas lecturas.h.
+
+TEST(PromedioMovil, CantidadDePromedios) {
+    std::vector<double> lecturas = {18.0, 19.0, 20.0, 21.0, 22.0, 23.0};
+
+    std::vector<double> promedios = promedioMovil(lecturas, 3);
+
+    EXPECT_EQ(promedios.size(), 4);
+}

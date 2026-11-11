@@ -10,7 +10,7 @@
 std::vector<double> promedioMovil(std::vector<double> lecturas, int ventana) {
     std::vector<double> promedios;
     int cantidad = lecturas.size();
-    for (int inicio = 0; inicio < cantidad; inicio++) {
+    for (int inicio = 0; inicio <= cantidad - ventana; inicio++) {
         double suma = 0.0;
         for (int j = 0; j < ventana; j++) {
             suma = suma + lecturas[inicio + j];
