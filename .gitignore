@@ -14,3 +14,6 @@ build/
 *.log
 # Carpetas de compilacion de CMake (Semana 12)
 build-asan/
+
+# Compilacion con ThreadSanitizer (Semana 14)
+build-tsan/
