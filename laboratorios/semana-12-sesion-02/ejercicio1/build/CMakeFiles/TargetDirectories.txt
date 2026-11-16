@@ -1,0 +1,6 @@
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/CMakeFiles/estacionamiento.dir
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/CMakeFiles/pruebas.dir
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/CMakeFiles/reporte.dir
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/CMakeFiles/test.dir
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/CMakeFiles/edit_cache.dir
+/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/CMakeFiles/rebuild_cache.dir

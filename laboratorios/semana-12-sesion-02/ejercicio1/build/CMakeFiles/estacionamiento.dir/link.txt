@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/estacionamiento.dir/main.cpp.o -o estacionamiento 

@@ -1,0 +1,111 @@
+Start testing: Nov 11 12:46 UTC
+----------------------------------------------------------
+1/4 Testing: Estacionamiento.PrimeraPlacaRecibePuestoCero
+1/4 Test: Estacionamiento.PrimeraPlacaRecibePuestoCero
+Command: "/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/pruebas" "--gtest_filter=Estacionamiento.PrimeraPlacaRecibePuestoCero" "--gtest_also_run_disabled_tests"
+Directory: /workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build
+"Estacionamiento.PrimeraPlacaRecibePuestoCero" start time: Nov 11 12:46 UTC
+Output:
+----------------------------------------------------------
+Running main() from ./googletest/src/gtest_main.cc
+Note: Google Test filter = Estacionamiento.PrimeraPlacaRecibePuestoCero
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Estacionamiento
+[ RUN      ] Estacionamiento.PrimeraPlacaRecibePuestoCero
+[       OK ] Estacionamiento.PrimeraPlacaRecibePuestoCero (0 ms)
+[----------] 1 test from Estacionamiento (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"Estacionamiento.PrimeraPlacaRecibePuestoCero" end time: Nov 11 12:46 UTC
+"Estacionamiento.PrimeraPlacaRecibePuestoCero" time elapsed: 00:00:00
+----------------------------------------------------------
+
+2/4 Testing: Estacionamiento.LlenoDevuelveVacio
+2/4 Test: Estacionamiento.LlenoDevuelveVacio
+Command: "/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/pruebas" "--gtest_filter=Estacionamiento.LlenoDevuelveVacio" "--gtest_also_run_disabled_tests"
+Directory: /workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build
+"Estacionamiento.LlenoDevuelveVacio" start time: Nov 11 12:46 UTC
+Output:
+----------------------------------------------------------
+Running main() from ./googletest/src/gtest_main.cc
+Note: Google Test filter = Estacionamiento.LlenoDevuelveVacio
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Estacionamiento
+[ RUN      ] Estacionamiento.LlenoDevuelveVacio
+[       OK ] Estacionamiento.LlenoDevuelveVacio (0 ms)
+[----------] 1 test from Estacionamiento (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.06 sec
+----------------------------------------------------------
+Test Passed.
+"Estacionamiento.LlenoDevuelveVacio" end time: Nov 11 12:46 UTC
+"Estacionamiento.LlenoDevuelveVacio" time elapsed: 00:00:00
+----------------------------------------------------------
+
+3/4 Testing: Estacionamiento.PlacaRepetidaLanza
+3/4 Test: Estacionamiento.PlacaRepetidaLanza
+Command: "/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/pruebas" "--gtest_filter=Estacionamiento.PlacaRepetidaLanza" "--gtest_also_run_disabled_tests"
+Directory: /workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build
+"Estacionamiento.PlacaRepetidaLanza" start time: Nov 11 12:46 UTC
+Output:
+----------------------------------------------------------
+Running main() from ./googletest/src/gtest_main.cc
+Note: Google Test filter = Estacionamiento.PlacaRepetidaLanza
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Estacionamiento
+[ RUN      ] Estacionamiento.PlacaRepetidaLanza
+[       OK ] Estacionamiento.PlacaRepetidaLanza (18 ms)
+[----------] 1 test from Estacionamiento (18 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (18 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.12 sec
+----------------------------------------------------------
+Test Passed.
+"Estacionamiento.PlacaRepetidaLanza" end time: Nov 11 12:46 UTC
+"Estacionamiento.PlacaRepetidaLanza" time elapsed: 00:00:00
+----------------------------------------------------------
+
+4/4 Testing: Estacionamiento.PuestoLiberadoSeReusa
+4/4 Test: Estacionamiento.PuestoLiberadoSeReusa
+Command: "/workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build/pruebas" "--gtest_filter=Estacionamiento.PuestoLiberadoSeReusa" "--gtest_also_run_disabled_tests"
+Directory: /workspaces/programacion-avanzada-cpp/laboratorios/semana-12-sesion-02/ejercicio1/build
+"Estacionamiento.PuestoLiberadoSeReusa" start time: Nov 11 12:46 UTC
+Output:
+----------------------------------------------------------
+Running main() from ./googletest/src/gtest_main.cc
+Note: Google Test filter = Estacionamiento.PuestoLiberadoSeReusa
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from Estacionamiento
+[ RUN      ] Estacionamiento.PuestoLiberadoSeReusa
+[       OK ] Estacionamiento.PuestoLiberadoSeReusa (0 ms)
+[----------] 1 test from Estacionamiento (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (0 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.10 sec
+----------------------------------------------------------
+Test Passed.
+"Estacionamiento.PuestoLiberadoSeReusa" end time: Nov 11 12:46 UTC
+"Estacionamiento.PuestoLiberadoSeReusa" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: Nov 11 12:46 UTC

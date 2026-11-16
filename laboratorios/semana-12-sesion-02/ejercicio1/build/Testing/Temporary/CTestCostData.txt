@@ -1,0 +1,5 @@
+Estacionamiento.PrimeraPlacaRecibePuestoCero 1 0.0589182
+Estacionamiento.LlenoDevuelveVacio 1 0.0562047
+Estacionamiento.PlacaRepetidaLanza 1 0.124363
+Estacionamiento.PuestoLiberadoSeReusa 1 0.101585
+---

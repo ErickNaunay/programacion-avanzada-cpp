@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/pruebas.dir/test_estacionamiento.cpp.o -o pruebas  /usr/lib/x86_64-linux-gnu/libgtest_main.a /usr/lib/x86_64-linux-gnu/libgtest.a 
