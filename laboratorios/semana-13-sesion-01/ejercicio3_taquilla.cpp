@@ -40,7 +40,49 @@
 // Pares a medias: 0
 
 // TODO: escribe aqui la clase Taquilla.
-
+class Taquilla{
+    private:
+    std::vector <int> asientos;
+    std::mutex candado;
+    int totalvendidos=0;
+    public:
+    Taquilla(int asientos) : asientos(asientos,0){
+    }
+    bool reservar(int asiento, int comprador){
+        std::lock_guard guardia(candado);
+        if(asientos.size()<=asiento or asiento<0 or asientos[asiento]!=0){
+            return false;
+        }
+        else{
+            asientos[asiento]=comprador;
+            totalvendidos=totalvendidos+1;
+            return true;
+        }
+    }
+    bool reservarPar(int a,int b,int comprador){
+        std::lock_guard guardia(candado);
+    if(a>=0 and b>=0 and a<asientos.size() and b<asientos.size() and a!=b and asientos[a]==0 and asientos[b]==0){
+        asientos[a]=comprador;
+        asientos[b]=comprador;
+        totalvendidos=totalvendidos+2;
+        return true;
+    }
+    else{
+        return false;
+    }
+}
+    int duenoDe(int asiento){
+        std::lock_guard guardia(candado);
+        if(asiento<0 or asiento>=asientos.size()){
+            return 0;
+        }
+        return asientos[asiento];
+    }
+    int vendidos(){
+        std::lock_guard guardia(candado);
+        return totalvendidos;
+    }
+};
 void vendedor(Taquilla* taquilla, int comprador, int* logradas) {
     for (int asiento = 0; asiento < 20000; asiento++) {
         if (taquilla->reservar(asiento, comprador)) {
