@@ -20,3 +20,30 @@
 # TODO 3: el ejecutable promedios (main.cpp) y el ejecutable pruebas
 # (test_lecturas.cpp, con GoogleTest y registrado para ctest), los dos
 # con -Wall -Wextra.
+
+cmake_minimum_required(VERSION 3.20)
+project(PromedioMovil LANGUAGES CXX)
+
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+option("CON_SANITIZERS Y UNDEFINEBEHAIVORSANITIZER" OFF)
+
+if(CON_SANITIZERS)
+    add_compile_options(-fsanitize=address,undefined -fno-omit-frame-pointer)
+    add_link_options(-fsanitize=address,undefined)
+endif()
+
+add_executable(promedios main.cpp)
+target_compile_options(promedios PRIVATE -Wall -Wextra)
+
+find_package(GTest REQUIRED)
+enable_testing()
+
+add_executable(pruebas test_lecturas.cpp)
+target_compile_options(pruebas PRIVATE -Wall -Wextra)
+target_link_libraries(pruebas PRIVATE GTest::gtest_main)
+
+include(GoogleTest)
+gtest_discover_tests(pruebas)
