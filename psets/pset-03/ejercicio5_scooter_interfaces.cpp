@@ -39,24 +39,38 @@ public:
     }
     int nivelBateria() override {
         // TODO: devuelve bateria.
-        return 0;
+        return bateria;
     }
     void cargar(int porcentaje) override {
         // TODO: suma porcentaje a bateria, sin pasar de 100. Si porcentaje es
         // negativo, no hace nada.
+        if (porcentaje <= 0) {
+            return;
+        }
+        bateria += porcentaje;
+        if (bateria > 100) {
+            bateria = 100;
+        }
     }
     int zona() override {
         // TODO: devuelve zonaActual.
-        return 0;
+        return zonaActual;
     }
     void moverA(int nuevaZona) override {
         // TODO: las zonas validas van de 1 a 9. Si nuevaZona es valida, la asigna;
         // si no, no cambia nada.
+        if (nuevaZona >= 1 && nuevaZona <= 9) {
+            zonaActual = nuevaZona;
+        }
     }
 };
 
 void cargarCompleto(Cargable* dispositivo) {
     // TODO: carga el dispositivo con lo que le falta para llegar a 100.
+    int faltante = 100 - dispositivo->nivelBateria();
+    if (faltante > 0) {
+        dispositivo->cargar(faltante);
+    }
 }
 
 int main() {
