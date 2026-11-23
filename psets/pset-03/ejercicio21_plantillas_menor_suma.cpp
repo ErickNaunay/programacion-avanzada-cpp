@@ -34,3 +34,63 @@
 // Intercambio de enteros: 7 3
 // Intercambio de decimales: 9.5 1.5
 // Menor de 5, 2.5 y 4: 2.5
+
+#include <iostream>
+#include <map>
+#include <optional>
+#include <set>
+#include <memory>
+
+template <typename T>
+T menorDeTres(T a, T b, T c) {
+    if (a < b && a < c) {
+        return a;
+    } else if (b < c) {
+        return b;
+    } else {
+        return c;
+    }
+}
+
+template <typename T>
+T sumarArreglo(T valores[], int cantidad) {
+    T suma = T();
+    for (int i = 0; i < cantidad; i++) {
+        suma += valores[i];
+    }
+    return suma;    
+ 
+   
+    }
+ template <typename T>
+    void intercambiar(T* a, T* b) {
+        T temp = *a;
+        *a = *b;
+        *b = temp;
+    }
+
+int main() {
+    std::cout << "Menor de 14, 9 y 30: " << menorDeTres(14, 9, 30) << std::endl;
+    std::cout << "Menor de 0.75, 1.5 y 0.25: " << menorDeTres(0.75, 1.5, 0.25) << std::endl;
+    std::cout << "Menor de q, c y x: " << menorDeTres('q', 'c', 'x') << std::endl;
+
+    int enteros[] = {4, 8, 15, 16, 23, 42};
+    std::cout << "Suma de enteros: " << sumarArreglo(enteros, 6) << std::endl;
+
+    double decimales[] = {1.5, 2.25, 0.25};
+    std::cout << "Suma de decimales: " << sumarArreglo(decimales, 3) << std::endl;
+
+    int a = 3;
+    int b = 7;
+    intercambiar(&a, &b);
+    std::cout << "Intercambio de enteros: " << a << " " << b << std::endl;
+
+    double x = 1.5;
+    double y = 9.5;
+    intercambiar(&x, &y);
+    std::cout << "Intercambio de decimales: " << x << " " << y << std::endl;
+
+    std::cout << "Menor de 5, 2.5 y 4: " << menorDeTres<double>(5, 2.5, 4) << std::endl;
+
+    return 0;
+}

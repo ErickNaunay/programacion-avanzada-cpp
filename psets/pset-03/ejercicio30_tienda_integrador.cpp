@@ -71,3 +71,199 @@
 // Precio del 310: 6
 // Precio del 999: no existe
 // Mayor precio final: 8
+
+#include <iostream>
+#include <optional>
+#include <memory>
+#include <algorithm>
+#include <vector>
+#include <numeric>
+#include <stdexcept>
+#include <utility>
+
+class Producto {
+private:
+    int codigo;
+    double precio;
+
+public:
+    void setDatos(int c, double p) {
+        codigo = c;
+        precio = p;
+    }
+
+    int getCodigo() const {
+        return codigo;
+    }
+
+    double getPrecio() const {
+        return precio;
+    }
+
+    virtual double precioFinal() = 0;
+    virtual ~Producto() = default;
+};
+
+class ProductoNormal : public Producto {
+public:
+    ProductoNormal(int codigo, double precio) {
+        setDatos(codigo, precio);
+    }
+
+    double precioFinal() override {
+        return getPrecio();
+    }
+};
+
+class ProductoEnOferta : public Producto {
+private:
+    double porcentaje;
+
+public:
+    ProductoEnOferta(int codigo, double precio, double porcentaje)
+        : porcentaje(porcentaje) {
+        setDatos(codigo, precio);
+    }
+
+    double precioFinal() override {
+        return getPrecio() * (1 - porcentaje / 100);
+    }
+};
+
+class ProductoPorPeso : public Producto {
+private:
+    double kilos;
+
+public:
+    ProductoPorPeso(int codigo, double precioPorKilo, double kilos)
+        : kilos(kilos) {
+        setDatos(codigo, precioPorKilo);
+    }
+
+    double precioFinal() override {
+        return getPrecio() * kilos;
+    }
+};
+
+class Tienda {
+private:
+    std::vector<std::unique_ptr<Producto>> productos;
+public:
+    void agregar(std::unique_ptr<Producto> producto) {
+        if (producto->getPrecio() <= 0) {
+            throw std::invalid_argument("precio no positivo");
+        }
+        for (const auto& p : productos) {   
+            if (p->getCodigo() == producto->getCodigo()) {
+                throw std::invalid_argument("codigo repetido");
+            }
+        }
+        productos.push_back(std::move(producto));
+    }       
+
+    int cantidad() const {
+        return static_cast<int>(productos.size());
+    }
+
+    std::optional<double> precioDe(int codigo) const {
+        for (const auto& producto : productos) {
+            if (producto->getCodigo() == codigo) {
+                return producto->precioFinal();
+            }
+        }
+        return std::nullopt;
+    }
+
+    std::vector<double> preciosFinales() const {
+        std::vector<double> precios;
+        precios.reserve(productos.size());
+        for (std::size_t i = 0; i < productos.size(); ++i) {
+            precios.push_back(productos[i]->precioFinal());
+        }
+        return precios;
+    }
+
+    double total() const {
+        const std::vector<double> precios = preciosFinales();
+        return std::accumulate(precios.begin(), precios.end(), 0.0);
+    }
+
+    int cuantosBajo(double limite) const {
+        const std::vector<double> precios = preciosFinales();
+        return static_cast<int>(std::count_if(
+            precios.begin(), precios.end(),
+            [limite](double precio) { return precio < limite; }));
+    }
+
+    std::optional<int> codigoMasCaro() const {
+        if (productos.empty()) {
+            return std::nullopt;
+        }
+
+        std::size_t indiceMayor = 0;
+        for (std::size_t i = 1; i < productos.size(); ++i) {
+            if (productos[i]->precioFinal() >
+                productos[indiceMayor]->precioFinal()) {
+                indiceMayor = i;
+            }
+        }
+        return productos[indiceMayor]->getCodigo();
+    }
+};
+
+template <typename T>
+T mayorDe(std::vector<T> valores) {
+    if (valores.empty()) {
+        return T();
+    }
+    return *std::max_element(valores.begin(), valores.end());
+}
+
+int main() {
+    Tienda tienda;
+
+    try {
+        tienda.agregar(std::make_unique<ProductoNormal>(101, 2.5));
+    } catch (const std::invalid_argument& e) {
+        std::cout << "No se agrego: " << e.what() << std::endl;
+    }
+    try {
+        tienda.agregar(std::make_unique<ProductoEnOferta>(205, 10, 20));
+    } catch (const std::invalid_argument& e) {
+        std::cout << "No se agrego: " << e.what() << std::endl;
+    }
+    try {
+        tienda.agregar(std::make_unique<ProductoPorPeso>(310, 4, 1.5));
+    } catch (const std::invalid_argument& e) {
+        std::cout << "No se agrego: " << e.what() << std::endl;
+    }
+    try {
+        tienda.agregar(std::make_unique<ProductoNormal>(101, 3));
+    } catch (const std::invalid_argument& e) {
+        std::cout << "No se agrego: " << e.what() << std::endl;
+    }
+    try {
+        tienda.agregar(std::make_unique<ProductoNormal>(400, 0));
+    } catch (const std::invalid_argument& e) {
+        std::cout << "No se agrego: " << e.what() << std::endl;
+    }
+
+    std::cout << "Productos: " << tienda.cantidad() << std::endl;
+    std::cout << "Total: " << tienda.total() << std::endl;
+    std::cout << "Cuestan menos de 7: " << tienda.cuantosBajo(7) << std::endl;
+    const auto codigo = tienda.codigoMasCaro();
+    if (codigo.has_value()) {
+        std::cout << "Mas caro: " << *codigo << std::endl;
+    }
+    std::cout << "Precio del 310: " << tienda.precioDe(310).value_or(0)
+              << std::endl;
+    const auto precioInexistente = tienda.precioDe(999);
+    if (precioInexistente.has_value()) {
+        std::cout << "Precio del 999: " << *precioInexistente << std::endl;
+    } else {
+        std::cout << "Precio del 999: no existe" << std::endl;
+    }
+    std::cout << "Mayor precio final: " << mayorDe(tienda.preciosFinales())
+              << std::endl;
+    return 0;
+}

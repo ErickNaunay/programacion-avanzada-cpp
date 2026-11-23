@@ -28,3 +28,83 @@
 // Promedio: 9812.38
 // Dias con meta: 5
 // Mejor racha: 2
+
+#include <iostream>
+#include <map>
+#include <optional>
+#include <set>
+#include <memory>
+#include <vector>
+
+
+class HistorialDePasos {
+private:
+    std::vector<int> pasos;
+public:
+    bool registrar(int cantidad) {
+        if (cantidad < 0) {
+            return false;
+        }
+        pasos.push_back(cantidad);
+        return true;
+    }
+    int dias() {
+        return pasos.size();
+    }
+    double promedio() {
+        if (pasos.empty()) {
+            return 0;
+        }
+        double suma = 0;
+        for (int paso : pasos) {
+            suma += paso;
+        }
+        return suma / pasos.size();
+    }
+    int diasSobreMeta(int meta) {
+        int contador = 0;
+
+
+        for (int paso : pasos) {
+            if (paso >= meta) {
+                contador++;
+            }
+        }
+        return contador;
+    }
+    int mejorRacha(int meta) {
+        int rachaActual = 0;
+        int mejorRacha = 0;
+        for (int paso : pasos) {
+            if (paso >= meta) {
+                rachaActual++;
+                if (rachaActual > mejorRacha) {
+                    mejorRacha = rachaActual;
+                }
+            } else {
+                rachaActual = 0;
+            }
+        }
+        return mejorRacha;
+    }
+};
+
+int main() {
+    HistorialDePasos historial;
+    std::cout << "Registrar -50: " << historial.registrar(-50) << std::endl;
+    historial.registrar(8000);
+    historial.registrar(12000);
+    historial.registrar(10500);
+    historial.registrar(4000);
+    historial.registrar(11000);
+    historial.registrar(13000);
+    historial.registrar(9999);
+    historial.registrar(10000);
+
+    std::cout << "Dias registrados: " << historial.dias() << std::endl;
+    std::cout << "Promedio: " << historial.promedio() << std::endl;
+    std::cout << "Dias con meta: " << historial.diasSobreMeta(10000) << std::endl;
+    std::cout << "Mejor racha: " << historial.mejorRacha(10000) << std::endl;
+
+    return 0;
+}

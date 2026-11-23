@@ -33,12 +33,19 @@ public:
     int libresEn(int fila) {
         // TODO: devuelve los libres de esa fila con at(), que lanza
         // std::out_of_range si la fila no existe.
-        return 0;
+        return libresPorFila.at(fila);
+    
     }
     double precioDe(int zona) {
         // TODO: devuelve el precio de la zona con at() del map: lanza
         // std::out_of_range si la zona no existe, sin crearla.
-        return 0;
+        if (precioPorZona.count(zona) == 0) {
+            throw std::out_of_range("map::at");
+        }
+        return precioPorZona.at(zona);
+
+
+        
     }
     double comprar(int fila, int zona, int cantidad) {
         // TODO: en este orden: lee los libres de la fila y el precio de la zona
@@ -47,7 +54,16 @@ public:
         // mayor que los libres, lanza std::runtime_error("asientos
         // insuficientes"). Si todo esta bien, resta cantidad a esa fila y
         // devuelve cantidad * precio.
-        return 0;
+        int libres = libresEn(fila);
+        double precio = precioDe(zona);
+        if (cantidad <= 0) {
+            throw std::invalid_argument("cantidad no positiva");
+        }
+        if (cantidad > libres) {
+            throw std::runtime_error("asientos insuficientes"); 
+        }
+        libresPorFila[fila] -= cantidad;
+        return cantidad * precio;
     }
 };
 
@@ -58,6 +74,16 @@ void procesar(Teatro* teatro, int fila, int zona, int cantidad) {
     // std::out_of_range ("Rechazada (no existe): "), std::invalid_argument
     // ("Rechazada (dato invalido): ") y std::runtime_error ("Rechazada (no
     // alcanza): "), cada uno seguido de e.what().
+    try {
+        double total = teatro->comprar(fila, zona, cantidad);
+        std::cout << "Compra aceptada: " << cantidad << " asientos en la fila " << fila << ", total " << total << std::endl;
+    } catch (const std::out_of_range& e) {
+        std::cout << "Rechazada (no existe): " << e.what() << std::endl;
+    } catch (const std::invalid_argument& e) {
+        std::cout << "Rechazada (dato invalido): " << e.what() << std::endl;
+    } catch (const std::runtime_error& e) {
+        std::cout << "Rechazada (no alcanza): " << e.what() << std::endl;
+    }
 }
 
 int main() {

@@ -33,3 +33,65 @@
 // Costo: 12
 // Costo: 2
 // El mas barato cuesta 6.5
+
+#include <iostream>
+#include <map>
+#include <optional>
+#include <set>
+#include <memory>
+
+class envio {
+public:
+    virtual ~envio() {}
+    virtual double costo() = 0;
+};  
+
+class envioNacional : public envio {
+private:
+    double pesoKg;
+public:
+    envioNacional(double peso) {    
+        pesoKg = (peso < 0) ? 0 : peso;
+    }
+    double costo() override {
+        return 2 + (pesoKg * 1.5);
+    }
+};
+
+class envioInternacional : public envio {
+private:
+    double pesoKg;
+public:
+    envioInternacional(double peso) {
+        pesoKg = (peso < 0) ? 0 : peso;
+    }
+    double costo() override {
+        return 10 + (pesoKg * 4);
+    }
+};
+
+void imprimirCosto(envio* envio) {
+    std::cout << "Costo: " << envio->costo() << std::endl;
+}
+
+void masBarato(envio* a, envio* b) {
+    if (a->costo() <= b->costo()) {
+        std::cout << "El mas barato cuesta " << a->costo() << std::endl;
+    } else {
+        std::cout << "El mas barato cuesta " << b->costo() << std::endl;
+    }
+}
+
+int main() {
+    envioNacional nacional1(3);
+    envioInternacional internacional(0.5);
+    envioNacional nacional2(-4);
+
+    imprimirCosto(&nacional1);
+    imprimirCosto(&internacional);
+    imprimirCosto(&nacional2);
+
+    masBarato(&nacional1, &internacional);
+
+    return 0;
+}

@@ -29,3 +29,47 @@
 // Lecturas liberadas
 // Sensor apagado
 // Fin del programa
+
+#include <iostream>
+#include <map>
+#include <optional>
+#include <set>
+#include <memory>
+
+class sensor {
+public:
+    virtual ~sensor() {
+        std::cout << "Sensor apagado" << std::endl;
+    }
+    virtual double promedio() { 
+        return 0;
+    }
+};  
+
+class SensorDeHumedad : public sensor {
+private:
+    double* lecturas;
+public:
+    SensorDeHumedad(double a, double b, double c) {
+        lecturas = new double[3];
+        lecturas[0] = a;
+        lecturas[1] = b;
+        lecturas[2] = c;
+    }
+    ~SensorDeHumedad() override {
+        delete[] lecturas;
+        std::cout << "Lecturas liberadas" << std::endl;
+    }
+    double promedio() override {
+        return (lecturas[0] + lecturas[1] + lecturas[2]) / 3;
+    }
+};
+
+int main() {
+    {
+        std::unique_ptr<sensor> sensorHumedad = std::make_unique<SensorDeHumedad>(60, 72, 81);
+        std::cout << "Humedad promedio: " << sensorHumedad->promedio() << std::endl;
+    }
+    std::cout << "Fin del programa" << std::endl;
+    return 0;
+}

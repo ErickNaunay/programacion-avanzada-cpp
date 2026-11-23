@@ -32,6 +32,7 @@ public:
     }
     virtual double calcularPago() {
         // TODO: devuelve el sueldo base, sin nada adicional.
+        return sueldoBase;
         return 0;
     }
 };
@@ -46,7 +47,7 @@ public:
     }
     double calcularPago() override {
         // TODO: devuelve el sueldo base (con getSueldoBase) mas 25 por cada hora extra.
-        return 0;
+        return getSueldoBase() + (horasExtra * 25);
     }
 };
 
@@ -60,14 +61,18 @@ public:
     }
     double calcularPago() override {
         // TODO: devuelve el sueldo base mas el bono.
-        return 0;
+        return getSueldoBase() + bono;
     }
 };
 
 double totalPlanilla(Empleado* planilla[], int cantidad) {
     // TODO: recorre el arreglo y suma calcularPago() de cada empleado, a traves
     // del puntero (planilla[i]->calcularPago()). Devuelve la suma.
-    return 0;
+    double total = 0;
+    for (int i = 0; i < cantidad; i++) {
+        total += planilla[i]->calcularPago();
+    }
+    return total;
 }
 
 int main() {
