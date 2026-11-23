@@ -11,7 +11,7 @@ if(CON_SANITIZERS)
     add_link_options(-fsanitize=address,undefined)
 endif()
 
-# TODO 6: una opcion CON_TSAN, apagada por defecto, que compile y enlace
+# TODO 10: una opcion CON_TSAN, apagada por defecto, que compile y enlace
 # todo con -fsanitize=thread (como CON_SANITIZERS, en la Semana 12). Las dos
 # opciones no se usan a la vez: ThreadSanitizer no se combina con
 # AddressSanitizer.
