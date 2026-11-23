@@ -43,35 +43,6 @@ _(tu respuesta)_
 
 _(tu respuesta)_
 
-**La versión completa, tal como la resuelvo yo:**
-
-_(anota aquí el constructor, las tres funciones y los dos tiempos)_
-
-## Durante los ConcepTests
-
-**ConcepTest 1. Tu voto, antes de discutir en pareja** (A, B, C o D):
-
-_(tu voto)_
-
-**Tu razonamiento:**
-
-_(tu respuesta)_
-
-**Después de discutir en pareja, ¿cambiaste de voto? ¿Por qué?**
-
-_(tu respuesta)_
-
-**ConcepTest 2. Tu voto, antes de discutir en pareja** (A, B, C o D):
-
-_(tu voto)_
-
-**Tu razonamiento:**
-
-_(tu respuesta)_
-
-**Después de discutir en pareja, ¿cambiaste de voto? ¿Por qué?**
-
-_(tu respuesta)_
 
 ## Ejercicio 2: el presupuesto de un cuadro
 
