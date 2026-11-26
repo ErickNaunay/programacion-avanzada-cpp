@@ -43,3 +43,101 @@
 // Nivel tras bajar: 9
 // Encendida al final: false
 // Nivel al final: 0
+
+#include <iostream>
+
+class Encendible {
+public:
+    virtual ~Encendible() {}
+    virtual void encender() = 0;
+    virtual void apagar() = 0;
+    virtual bool estaEncendido() const = 0;
+};
+
+class Regulable {
+public:
+    virtual ~Regulable() {}
+    virtual int nivel() const = 0;
+    virtual void subir() = 0;
+    virtual void bajar() = 0;
+};
+
+class LamparaInteligente : public Encendible, public Regulable {
+private:
+    bool encendida;
+    int brillo;
+
+public:
+    LamparaInteligente() : encendida(false), brillo(0) {}
+
+    void encender() override {
+        encendida = true;
+        if (brillo == 0) {
+            brillo = 5;
+        }
+    }
+
+    void apagar() override {
+        encendida = false;
+        brillo = 0;
+    }
+
+    bool estaEncendido() const override {
+        return encendida;
+    }
+
+    int nivel() const override {
+        return brillo;
+    }
+
+    void subir() override {
+        if (encendida && brillo < 10) {
+            brillo++;
+        }
+    }
+
+    void bajar() override {
+        if (encendida && brillo > 1) {
+            brillo--;
+        }
+    }
+};
+
+void subirAlMaximo(Regulable* r) {
+    while (r->nivel() < 10) {
+        r->subir();
+    }
+}
+
+void apagarSiEstaEncendido(Encendible* e) {
+    if (e->estaEncendido()) {
+        e->apagar();
+    }
+}
+
+int main() {
+    LamparaInteligente lampara;
+    Encendible* ptrEncendible = &lampara;
+    Regulable* ptrRegulable = &lampara;
+
+    std::cout << std::boolalpha;
+    std::cout << "Encendida al inicio: " << ptrEncendible->estaEncendido() << std::endl;
+
+    ptrRegulable->subir();
+    std::cout << "Nivel tras subir apagada: " << ptrRegulable->nivel() << std::endl;
+
+    ptrEncendible->encender();
+    std::cout << "Nivel al encender: " << ptrRegulable->nivel() << std::endl;
+
+    subirAlMaximo(ptrRegulable);
+    std::cout << "Nivel al maximo: " << ptrRegulable->nivel() << std::endl;
+
+    ptrRegulable->bajar();
+    std::cout << "Nivel tras bajar: " << ptrRegulable->nivel() << std::endl;
+
+    apagarSiEstaEncendido(ptrEncendible);
+    std::cout << "Encendida al final: " << ptrEncendible->estaEncendido() << std::endl;
+    std::cout << "Nivel al final: " << ptrRegulable->nivel() << std::endl;
+
+    return 0;
+}

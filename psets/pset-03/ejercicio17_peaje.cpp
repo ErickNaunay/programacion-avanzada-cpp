@@ -37,3 +37,85 @@
 // Vehiculo 2 paga: 4
 // Vehiculo 3 paga: 2
 // Recaudacion: 15
+
+#include <iostream>
+
+class Vehiculo {
+private:
+    double tarifaBase;
+
+public:
+    Vehiculo() : tarifaBase(0) {}
+
+    void setTarifaBase(double t) {
+        tarifaBase = t;
+    }
+
+    double getTarifaBase() const {
+        return tarifaBase;
+    }
+
+    virtual ~Vehiculo() {}
+
+    virtual double peaje() const {
+        return tarifaBase;
+    }
+};
+
+class Camion : public Vehiculo {
+private:
+    int ejes;
+
+public:
+    Camion(double tarifa, int e) : ejes(e) {
+        setTarifaBase(tarifa);
+    }
+
+    double peaje() const override {
+        return getTarifaBase() + 1.5 * ejes;
+    }
+};
+
+class Bus : public Vehiculo {
+private:
+    int pasajeros;
+
+public:
+    Bus(double tarifa, int p) : pasajeros(p) {
+        setTarifaBase(tarifa);
+    }
+
+    double peaje() const override {
+        if (pasajeros > 30) {
+            return getTarifaBase() * 2.0;
+        }
+        return getTarifaBase();
+    }
+};
+
+double recaudacion(Vehiculo* fila[], int cantidad) {
+    double total = 0.0;
+    for (int i = 0; i < cantidad; i++) {
+        total += fila[i]->peaje();
+    }
+    return total;
+}
+
+int main() {
+    Vehiculo v0;
+    v0.setTarifaBase(1);
+
+    Camion v1(2, 4);
+    Bus v2(2, 45);
+    Bus v3(2, 12);
+
+    Vehiculo* fila[4] = {&v0, &v1, &v2, &v3};
+
+    for (int i = 0; i < 4; i++) {
+        std::cout << "Vehiculo " << i << " paga: " << fila[i]->peaje() << std::endl;
+    }
+
+    std::cout << "Recaudacion: " << recaudacion(fila, 4) << std::endl;
+
+    return 0;
+}

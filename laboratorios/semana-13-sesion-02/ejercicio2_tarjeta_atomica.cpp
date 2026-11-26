@@ -12,8 +12,8 @@
 // cobrarIngenuo ya esta escrito asi. Tu escribes cobrar, que tiene que ser
 // correcto sin mutex.
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio2_tarjeta_atomica.cpp -o bin/ejercicio2
-// Ejecutar:  ./bin/ejercicio2
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio2_tarjeta_atomica.cpp -o ejercicio2
+// Ejecutar:  ./ejercicio2
 //
 // Salida esperada (el numero de la primera linea cambia de una corrida a
 // otra, y casi nunca es 0; las tres ultimas lineas no cambian):
@@ -46,12 +46,17 @@ class TarjetaAtomica {
 
         // Cobra monto solo si alcanza, sin mutex.
         void cobrar(int monto) {
-            // TODO 1: lee el saldo en una variable local (int actual = saldo;).
-            // 2: en un ciclo: si actual < monto, cuenta un rechazo y sale.
-            // Si no, intenta saldo.compare_exchange_weak(actual, actual - monto):
-            // cambia el saldo solo si sigue valiendo actual. Si lo logra,
-            // cuenta un cobro aceptado y sale. Si no, compare_exchange_weak
-            // ya dejo en actual el saldo nuevo: el ciclo vuelve a decidir.
+            int actual = saldo.load();
+            while (true) {
+                if (actual < monto) {
+                    rechazados++;
+                    return;
+                }
+                if (saldo.compare_exchange_weak(actual, actual - monto)) {
+                    aceptados++;
+                    return;
+                }
+            }
         }
 
         int getSaldo() {

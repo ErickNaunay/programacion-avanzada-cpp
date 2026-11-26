@@ -8,10 +8,10 @@
 // Las dos puertas trabajan al mismo tiempo, cada una en su propio hilo.
 // Hoy entran 1000000 personas por cada puerta.
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio1_contador_visitas.cpp -o bin/ejercicio1
-// Ejecutar:  ./bin/ejercicio1
+// Compilar:  g++ -std=c++20 -Wall -Wextra -g ejercicio1_contador_visitas.cpp -o ejercicio1
+// Ejecutar:  ./ejercicio1
 // Con ThreadSanitizer:
-//   g++ -std=c++20 -Wall -Wextra -g -fsanitize=thread ejercicio1_contador_visitas.cpp -o bin/ejercicio1_tsan
+//   g++ -std=c++20 -Wall -Wextra -g -fsanitize=thread ejercicio1_contador_visitas.cpp -o ejercicio1_tsan
 //
 // Salida esperada (cuando el contador es correcto):
 // Visitas registradas: 2000000
@@ -20,6 +20,7 @@ class ContadorDeVisitas {
     private:
         int total;
         // TODO 2: un std::mutex que proteja total.
+        std::mutex candado;
     public:
         ContadorDeVisitas() {
             total = 0;
@@ -28,6 +29,7 @@ class ContadorDeVisitas {
         void registrar() {
             // TODO 2: antes de tocar total, toma el candado con
             // std::lock_guard<std::mutex> guardia(candado);
+            std::lock_guard<std::mutex> guardia(candado);
             total = total + 1;
         }
 
@@ -48,8 +50,11 @@ int main() {
     // TODO 1: reemplaza las dos llamadas por dos std::thread que ejecuten
     // puerta(&contador, 1000000) al mismo tiempo, y espera a que terminen
     // los dos con join() antes de imprimir.
-    puerta(&contador, 1000000);
-    puerta(&contador, 1000000);
+    std::thread puerta1(puerta, &contador, 1000000);
+    std::thread puerta2(puerta, &contador, 1000000);
+
+    puerta1.join();
+    puerta2.join();
 
     std::cout << "Visitas registradas: " << contador.getTotal() << std::endl;
     return 0;

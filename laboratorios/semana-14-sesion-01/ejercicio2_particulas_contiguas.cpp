@@ -8,8 +8,8 @@
 // solo std::vector<Particula>, en memoria contigua. Las dos versiones
 // tienen que imprimir la misma altura promedio.
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -O2 ejercicio2_particulas_contiguas.cpp -o bin/ejercicio2_contiguas
-// Medir:     time ./bin/ejercicio2_contiguas
+// Compilar:  g++ -std=c++20 -Wall -Wextra -O2 ejercicio2_particulas_contiguas.cpp -o ejercicio2_contiguas
+// Medir:     time ./ejercicio2_contiguas
 
 const int PARTICULAS = 300000;
 const int CUADROS = 600;
@@ -45,14 +45,30 @@ private:
 };
 
 int main() {
-    // TODO 1: un std::vector<Particula> con espacio reservado para todas,
-    // y las mismas particulas que la otra version (mismas velocidades),
-    // agregadas con push_back(Particula(...)).
+    std::vector<Particula> particulas;
+    particulas.reserve(PARTICULAS);
 
-    // TODO 2: los CUADROS cuadros, actualizando cada particula con
-    // dt = 1 / 60 de segundo.
+    unsigned int semilla = 12345;
+    for (int i = 0; i < PARTICULAS; i++) {
+        semilla = semilla * 1103515245 + 12345;
+        float vx = -10.0f + ((semilla >> 8) % 2000) / 100.0f;
+        semilla = semilla * 1103515245 + 12345;
+        float vy = 10.0f + ((semilla >> 8) % 2000) / 100.0f;
+        particulas.push_back(Particula(0.0f, 0.0f, vx, vy));
+    }
 
-    // TODO 3: la altura promedio al final, con el mismo mensaje que la otra
-    // version.
+    float dt = 1.0f / 60.0f;
+    for (int c = 0; c < CUADROS; c++) {
+        for (int i = 0; i < PARTICULAS; i++) {
+            particulas[i].actualizar(dt);
+        }
+    }
+
+    double sumaY = 0.0;
+    for (int i = 0; i < PARTICULAS; i++) {
+        sumaY += particulas[i].getY();
+    }
+
+    std::cout << "Altura promedio: " << sumaY / PARTICULAS << std::endl;
     return 0;
 }

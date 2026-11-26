@@ -1,5 +1,6 @@
 #include <iostream>
 #include <map>
+#include <optional>
 
 // Registro por hora de la camara de frio del laboratorio de biologia. No
 // todas las horas tienen lectura: el sensor a veces no reporta.
@@ -8,9 +9,9 @@
 
 // TODO 1: cambia el tipo de retorno a std::optional<double> y devuelve
 // std::nullopt cuando no hay lectura. Incluye <optional> arriba.
-double buscarTemperatura(std::map<int, double> registro, int hora) {
+std::optional<double> buscarTemperatura(std::map<int, double> registro, int hora) {
     if (registro.count(hora) == 0) {
-        return -1;
+        return std::nullopt;
     }
     return registro[hora];
 }
@@ -25,23 +26,29 @@ int main() {
     for (int i = 0; i < 4; i++) {
         // TODO 2: con el resultado como std::optional, pregunta si tiene
         // valor antes de leerlo con *.
-        double temperatura = buscarTemperatura(registro, horas[i]);
-        if (temperatura == -1) {
+        std::optional<double> temperatura = buscarTemperatura(registro, horas[i]);
+        if (!temperatura.has_value()) {
             std::cout << "Hora " << horas[i] << ": sin lectura" << std::endl;
         } else {
-            std::cout << "Hora " << horas[i] << ": " << temperatura << std::endl;
+            std::cout << "Hora " << horas[i] << ": " << *temperatura << std::endl;
         }
     }
 
     // TODO 3: la temperatura de la hora 8 para el reporte, o 4.0 (la
     // temperatura de referencia de la camara) si no hay lectura, con
     // value_or.
-    double paraReporte = buscarTemperatura(registro, 8);
+    double paraReporte = buscarTemperatura(registro, 8).value_or(4.0);
     std::cout << "Hora 8 para el reporte: " << paraReporte << std::endl;
 
     // TODO 4: lee la hora 8 con .value() dentro de un try, y atrapa
     // std::bad_optional_access imprimiendo "Hora 8 con value(): " y el
     // mensaje de la excepcion.
+    try {
+        double tempVal = buscarTemperatura(registro, 8).value();
+        std::cout << "Hora 8 con value(): " << tempVal << std::endl;
+    } catch (const std::bad_optional_access& e) {
+        std::cout << "Hora 8 con value(): " << e.what() << std::endl;
+    }
 
     return 0;
 }

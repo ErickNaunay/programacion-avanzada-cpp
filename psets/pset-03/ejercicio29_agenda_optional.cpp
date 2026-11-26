@@ -40,3 +40,77 @@
 // A las 12: 0
 // Nadie a las 13
 // Paciente 505: 8
+
+#include <iostream>
+#include <map>
+#include <optional>
+
+class AgendaDelConsultorio {
+private:
+    std::map<int, int> pacientePorHora;
+
+public:
+    std::optional<int> pacienteEn(int hora) const {
+        auto it = pacientePorHora.find(hora);
+        if (it == pacientePorHora.end()) {
+            return std::nullopt;
+        }
+        return it->second;
+    }
+
+    std::optional<int> primeraLibreDesde(int hora) const {
+        int inicio = (hora < 8) ? 8 : hora;
+        for (int h = inicio; h <= 17; ++h) {
+            if (pacientePorHora.find(h) == pacientePorHora.end()) {
+                return h;
+            }
+        }
+        return std::nullopt;
+    }
+
+    std::optional<int> agendar(int paciente, int desde) {
+        std::optional<int> libre = primeraLibreDesde(desde);
+        if (!libre.has_value()) {
+            return std::nullopt;
+        }
+        pacientePorHora[*libre] = paciente;
+        return *libre;
+    }
+
+    bool cancelar(int hora) {
+        return pacientePorHora.erase(hora) > 0;
+    }
+};
+
+void imprimirAsignacion(const char* etiqueta, std::optional<int> horaAsignada) {
+    std::cout << etiqueta << ": ";
+    if (horaAsignada.has_value()) {
+        std::cout << *horaAsignada << std::endl;
+    } else {
+        std::cout << "sin hora" << std::endl;
+    }
+}
+
+int main() {
+    AgendaDelConsultorio agenda;
+
+    imprimirAsignacion("Paciente 501", agenda.agendar(501, 8));
+    imprimirAsignacion("Paciente 502", agenda.agendar(502, 8));
+    imprimirAsignacion("Paciente 503", agenda.agendar(503, 16));
+    imprimirAsignacion("Paciente 504", agenda.agendar(504, 16));
+    imprimirAsignacion("Paciente 504 otra vez", agenda.agendar(504, 16));
+
+    std::cout << "A las 9: " << *agenda.pacienteEn(9) << std::endl;
+    std::cout << "A las 12: " << agenda.pacienteEn(12).value_or(0) << std::endl;
+
+    try {
+        std::cout << agenda.pacienteEn(13).value() << std::endl;
+    } catch (const std::bad_optional_access&) {
+        std::cout << "Nadie a las 13" << std::endl;
+    }
+
+    agenda.cancelar(8);
+    imprimirAsignacion("Paciente 505", agenda.agendar(505, 7));
+
+    return 0;
+}

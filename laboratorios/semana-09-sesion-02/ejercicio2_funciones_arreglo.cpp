@@ -17,11 +17,13 @@ class Vector2D {
             y = yInicial;
         }
 
-        double getX() {
+        // Se agrega 'const' para permitir llamar a getX() desde objetos constantes
+        double getX() const {
             return x;
         }
 
-        double getY() {
+        // Se agrega 'const' para permitir llamar a getY() desde objetos constantes
+        double getY() const {
             return y;
         }
 
@@ -38,10 +40,28 @@ std::ostream& operator<<(std::ostream& os, Vector2D v) {
 // TODO: escribe la plantilla de funcion sumarArreglo(datos, cantidad),
 // que recibe un arreglo de T y su cantidad de elementos y devuelve la
 // suma de todos. Tiene que funcionar para int, double y Vector2D.
+template <typename T>
+T sumarArreglo(const T datos[], int cantidad) {
+    T suma = datos[0];
+    for (int i = 1; i < cantidad; ++i) {
+        suma = suma + datos[i];
+    }
+    return suma;
+}
 
 // TODO: escribe la plantilla de funcion contarMayoresQue(datos, cantidad,
 // umbral), que devuelve cuantos elementos del arreglo son mayores que
 // umbral (un int).
+template <typename T, typename U>
+int contarMayoresQue(const T datos[], int cantidad, U umbral) {
+    int contador = 0;
+    for (int i = 0; i < cantidad; ++i) {
+        if (datos[i] > umbral) {
+            contador++;
+        }
+    }
+    return contador;
+}
 
 int main() {
     int pasos[3] = {4200, 1800, 3300};

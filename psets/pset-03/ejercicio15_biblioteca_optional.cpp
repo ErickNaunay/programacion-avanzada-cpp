@@ -25,24 +25,42 @@ class Biblioteca {
 private:
     std::map<int, int> anioPorCodigo;
     std::set<int> prestados;
+
 public:
     void agregar(int codigo, int anio) {
         anioPorCodigo[codigo] = anio;
     }
+
     std::optional<int> anioDe(int codigo) {
-        // TODO: si el codigo no esta, devuelve std::nullopt; si esta, su anio.
-        return std::nullopt;
+        auto it = anioPorCodigo.find(codigo);
+        if (it == anioPorCodigo.end()) {
+            return std::nullopt;
+        }
+        return it->second;
     }
+
     std::optional<int> masAntiguo() {
-        // TODO: devuelve el anio mas antiguo de todos los libros, o std::nullopt
-        // si no hay libros.
-        return std::nullopt;
+        if (anioPorCodigo.empty()) {
+            return std::nullopt;
+        }
+
+        auto it = anioPorCodigo.begin();
+        int minimoAnio = it->second;
+        for (++it; it != anioPorCodigo.end(); ++it) {
+            if (it->second < minimoAnio) {
+                minimoAnio = it->second;
+            }
+        }
+        return minimoAnio;
     }
+
     std::optional<int> prestar(int codigo, int hoy) {
-        // TODO: si el libro no existe o ya esta prestado, devuelve std::nullopt.
-        // Si no, lo marca como prestado y devuelve el dia de devolucion,
-        // hoy + 7.
-        return std::nullopt;
+        if (anioPorCodigo.find(codigo) == anioPorCodigo.end() || prestados.count(codigo) > 0) {
+            return std::nullopt;
+        }
+
+        prestados.insert(codigo);
+        return hoy + 7;
     }
 };
 

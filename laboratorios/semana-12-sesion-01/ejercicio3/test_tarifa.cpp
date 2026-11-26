@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+#include <stdexcept>
 
 #include "tarifa.h"
 
@@ -22,3 +23,41 @@
 //
 //     g++ -std=c++20 -Wall -Wextra -g -I ejercicio3/version_a ejercicio3/test_tarifa.cpp -lgtest_main -lgtest -pthread -o bin/test_tarifa_a
 //     ./bin/test_tarifa_a
+
+// TODO 1: Minutos negativos lanza std::invalid_argument.
+TEST(TarifaTest, MinutosNegativosLanzaExcepcion) {
+    EXPECT_THROW(tarifaEnCentavos(-1), std::invalid_argument);
+    EXPECT_THROW(tarifaEnCentavos(-60), std::invalid_argument);
+}
+
+// TODO 2: Hasta 15 minutos inclusive es gratis (0 centavos).
+TEST(TarifaTest, Hasta15MinutosEsGratis) {
+    EXPECT_EQ(tarifaEnCentavos(0), 0);
+    EXPECT_EQ(tarifaEnCentavos(1), 0);
+    EXPECT_EQ(tarifaEnCentavos(15), 0);
+}
+
+// TODO 3: Cobro por horas y fracciones de hora a partir del minuto 16.
+TEST(TarifaTest, CobroPorHoraYFraccion) {
+    // 16 a 60 minutos = 1 hora -> 50 centavos
+    EXPECT_EQ(tarifaEnCentavos(16), 50);
+    EXPECT_EQ(tarifaEnCentavos(30), 50);
+    EXPECT_EQ(tarifaEnCentavos(60), 50);
+
+    // 61 a 120 minutos = 2 horas -> 100 centavos
+    EXPECT_EQ(tarifaEnCentavos(61), 100);
+    EXPECT_EQ(tarifaEnCentavos(120), 100);
+
+    // 121 minutos = 3 horas -> 150 centavos
+    EXPECT_EQ(tarifaEnCentavos(121), 150);
+}
+
+// TODO 4: Tope máximo de 500 centavos.
+TEST(TarifaTest, TopeMaximoDeCobro) {
+    // 10 horas = 500 centavos
+    EXPECT_EQ(tarifaEnCentavos(600), 500);
+
+    // Más de 10 horas debe mantenerse en el tope de 500 centavos
+    EXPECT_EQ(tarifaEnCentavos(601), 500);
+    EXPECT_EQ(tarifaEnCentavos(1440), 500);
+}

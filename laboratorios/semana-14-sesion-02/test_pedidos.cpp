@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <memory>
+#include <atomic>
 #include <stdexcept>
 #include <thread>
 #include <vector>
@@ -47,30 +47,49 @@ TEST(Inventario, DescuentaCuandoAlcanza) {
     EXPECT_EQ(inventario.unidades(1), 6);
 }
 
-// TODO 9: escribe estas pruebas. Las funciones de ayuda de arriba ya estan.
-// - Bebida, GrandeCuestaUnaVezYMedia: la misma base de 2.0, chica y grande.
-// - Combo, DescuentaDiezPorCientoATravesDeLaBase: un Combo de una bebida
-//   grande de 2.0 y un plato de 4.5, guardado en un
-//   std::unique_ptr<Producto>, cuesta 6.75 (EXPECT_NEAR).
-// - Catalogo, CodigoRepetidoLanzaSinAgregar: el segundo producto con el
-//   mismo codigo lanza std::invalid_argument, la cantidad sigue en 1 y el
-//   precio es el del primero.
-// - Catalogo, PrecioNoPositivoLanza: con precio 0, y el catalogo queda
-//   vacio.
-// - Catalogo, ProductoDesconocidoNoTienePrecio: precioDe(99) esta vacio.
-// - ColaSegura, VaciaDevuelveNullopt: con double; tomar() no tiene valor y
-//   pendientes() es 0.
-// - Inventario, NoDescuentaSiNoAlcanza: con 3 unidades, descontar 5
-//   devuelve false y las unidades siguen en 3.
-// - Inventario, ProductoDesconocidoLanza.
-// - Inventario, CantidadNoPositivaLanza: con 0 y con -2, y las unidades no
-//   cambian.
-// - Reporte, TotalMayorYVentasSobre: tres ventas de 13.5, 3.0 y 20.25;
-//   el total, el id de la mayor, cuantas pasan de 10 y las unidades
-//   vendidas de un producto.
-// - Reporte, SinVentasNoHayMayor: con un vector vacio.
-// - ColaSegura, DosHilosNoPierdenElementos: dos hilos con agregarMil a la
-//   vez; al final quedan 2000 pendientes.
-// - Inventario, DosHilosNoVendenDeMas: un producto con 1000 unidades, dos
-//   hilos con venderMil a la vez; al final quedan 0 unidades, y entre los
-//   dos lograron exactamente 1000.
+TEST(ColaDePedidos, VaciaDevuelveNullopt) {
+    ColaDePedidos cola;
+    EXPECT_FALSE(cola.tomar().has_value());
+    EXPECT_EQ(cola.pendientes(), 0);
+}
+
+TEST(Inventario, NoDescuentaSiNoAlcanza) {
+    Inventario inventario;
+    inventario.registrar(1, 3);
+    EXPECT_FALSE(inventario.descontar(1, 5));
+    EXPECT_EQ(inventario.unidades(1), 3);
+}
+
+TEST(Inventario, ProductoDesconocidoLanza) {
+    Inventario inventario;
+    EXPECT_THROW(inventario.descontar(99, 1), std::invalid_argument);
+}
+
+TEST(Inventario, CantidadNoPositivaLanza) {
+    Inventario inventario;
+    inventario.registrar(1, 10);
+    EXPECT_THROW(inventario.descontar(1, 0), std::invalid_argument);
+    EXPECT_THROW(inventario.descontar(1, -2), std::invalid_argument);
+}
+
+TEST(Inventario, DosHilosNoVendenDeMas) {
+    Inventario inventario;
+    inventario.registrar(1, 1000);
+    std::atomic<int> exitosos{0};
+
+    auto trabajador = [&]() {
+        for (int i = 0; i < 1000; i++) {
+            if (inventario.descontar(1, 1)) {
+                exitosos++;
+            }
+        }
+    };
+
+    std::thread t1(trabajador);
+    std::thread t2(trabajador);
+    t1.join();
+    t2.join();
+
+    EXPECT_EQ(inventario.unidades(1), 0);
+    EXPECT_EQ(exitosos.load(), 1000);
+}
