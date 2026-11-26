@@ -3,26 +3,41 @@
 #include <atomic>
 #include <stdexcept>
 #include <thread>
+#include <vector>
 
 #include "pedidos.h"
+#include "productos.h"
+#include "reporte.h"
 
-// Pruebas de las tres clases. Las dos primeras ya estan escritas; las
-// demas te tocan (ver el README).
+void agregarMil(ColaSegura<int>* cola) {
+    for (int i = 0; i < 1000; i++) {
+        cola->agregar(i);
+    }
+}
 
-TEST(ColaDePedidos, EntregaEnElOrdenEnQueLlegaron) {
-    ColaDePedidos cola;
-    Pedido primero;
-    primero.id = 1;
-    primero.producto = 2;
-    primero.cantidad = 1;
-    Pedido segundo;
-    segundo.id = 2;
-    segundo.producto = 3;
-    segundo.cantidad = 2;
-    cola.agregar(primero);
-    cola.agregar(segundo);
-    EXPECT_EQ(cola.tomar()->id, 1);
-    EXPECT_EQ(cola.tomar()->id, 2);
+void venderMil(Inventario* inventario, int* logradas) {
+    for (int i = 0; i < 1000; i++) {
+        if (inventario->descontar(1, 1)) {
+            (*logradas)++;
+        }
+    }
+}
+
+Venta crearVenta(int id, int producto, int cantidad, double total) {
+    Venta venta;
+    venta.id = id;
+    venta.producto = producto;
+    venta.cantidad = cantidad;
+    venta.total = total;
+    return venta;
+}
+
+TEST(ColaSegura, EntregaEnElOrdenEnQueLlegaron) {
+    ColaSegura<int> cola;
+    cola.agregar(7);
+    cola.agregar(9);
+    EXPECT_EQ(cola.tomar().value(), 7);
+    EXPECT_EQ(cola.tomar().value(), 9);
 }
 
 TEST(Inventario, DescuentaCuandoAlcanza) {

@@ -9,10 +9,10 @@
 
 // Laboratorio Integrador II: los pedidos de la cafeteria del campus.
 //
-// Tres cajas toman pedidos al mismo tiempo y los dejan en una cola. Despues,
-// dos cocineros sacan pedidos de la cola al mismo tiempo, descuentan los
-// productos del inventario y anotan el resultado en las estadisticas.
-// Cada clase de este archivo la usan varios hilos a la vez.
+// Tres cajas dejan pedidos en una cola al mismo tiempo. Despues, dos
+// cocineros sacan pedidos de la cola al mismo tiempo, descuentan el
+// inventario, registran cada venta y anotan el resultado. Cada clase de este
+// archivo la usan varios hilos a la vez.
 
 struct Pedido {
     int id;
@@ -20,9 +20,22 @@ struct Pedido {
     int cantidad;
 };
 
-class ColaDePedidos {
+struct Venta {
+    int id;
+    int producto;
+    int cantidad;
+    double total;
+};
+
+// Una cola que pueden usar varios hilos a la vez.
+//
+// TODO 3: hoy la cola solo guarda Pedido. main la usa como
+// ColaSegura<Pedido> y las pruebas como ColaSegura<int> y
+// ColaSegura<double>: conviertela en una plantilla de clase. Hasta que lo
+// hagas, el proyecto no compila.
+class ColaSegura {
 public:
-    ColaDePedidos() {
+    ColaSegura() {
         siguiente = 0;
     }
 
@@ -32,7 +45,7 @@ public:
         pedidos.push_back(pedido);
     }
 
-    // Saca el pedido mas antiguo que no se haya sacado todavia, o
+    // Saca el elemento mas antiguo que no se haya sacado todavia, o
     // std::nullopt si ya no quedan.
     std::optional<Pedido> tomar() {
         std::lock_guard<std::mutex> guardia(candado);
@@ -40,20 +53,20 @@ public:
         if (siguiente >= total) {
             return std::nullopt;
         }
-        Pedido pedido = pedidos[siguiente];
+        Pedido elemento = elementos[siguiente];
         siguiente++;
-        return pedido;
+        return elemento;
     }
 
-    // Cuantos pedidos quedan sin tomar.
+    // Cuantos elementos quedan sin tomar.
     int pendientes() {
         std::lock_guard<std::mutex> guardia(candado);
-        int total = pedidos.size();
+        int total = elementos.size();
         return total - siguiente;
     }
 
 private:
-    std::vector<Pedido> pedidos;
+    std::vector<Pedido> elementos;
     int siguiente;
     std::mutex candado;
 };

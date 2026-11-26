@@ -43,39 +43,10 @@ _(tu respuesta)_
 
 _(tu respuesta)_
 
-**La versión completa, tal como la resuelvo yo:**
-
-_(anota aquí el constructor, las tres funciones y los dos tiempos)_
-
-## Durante los ConcepTests
-
-**ConcepTest 1. Tu voto, antes de discutir en pareja** (A, B, C o D):
-
-_(tu voto)_
-
-**Tu razonamiento:**
-
-_(tu respuesta)_
-
-**Después de discutir en pareja, ¿cambiaste de voto? ¿Por qué?**
-
-_(tu respuesta)_
-
-**ConcepTest 2. Tu voto, antes de discutir en pareja** (A, B, C o D):
-
-_(tu voto)_
-
-**Tu razonamiento:**
-
-_(tu respuesta)_
-
-**Después de discutir en pareja, ¿cambiaste de voto? ¿Por qué?**
-
-_(tu respuesta)_
 
 ## Ejercicio 2: el presupuesto de un cuadro
 
-Archivos: [`ejercicio2_particulas_punteros.cpp`](./ejercicio2_particulas_punteros.cpp) (no lo modifiques) y [`ejercicio2_particulas_contiguas.cpp`](./ejercicio2_particulas_contiguas.cpp). Solo o en pareja.
+Archivos: [`ejercicio2_particulas_punteros.cpp`](./ejercicio2_particulas_punteros.cpp) (no lo modifiques) y [`ejercicio2_particulas_contiguas.cpp`](./ejercicio2_particulas_contiguas.cpp). En casa, solo o en pareja; vence el domingo de la Semana 14.
 
 Un juego a 60 cuadros por segundo tiene 16.7 milisegundos por cuadro para todo. La versión de punteros simula 600 cuadros de una explosión de 300000 partículas, cada una creada con `std::make_unique`. La tuya guarda las mismas partículas, con la misma clase, dentro de un `std::vector<Particula>`.
 
@@ -92,7 +63,7 @@ _(tu respuesta)_
 
 ## Ejercicio 3: el sensor del motor de un dron
 
-Archivo: [`ejercicio3_buffer_sensor.cpp`](./ejercicio3_buffer_sensor.cpp). Solo o en pareja.
+Archivo: [`ejercicio3_buffer_sensor.cpp`](./ejercicio3_buffer_sensor.cpp). En casa, solo o en pareja; vence el domingo de la Semana 14.
 
 El microcontrolador del motor de un dron lee la temperatura 1000 veces por segundo y recuerda las últimas 64 lecturas. En ese tipo de sistema hay una regla: una vez que el programa arranca, no se pide memoria dinámica nunca más. El encabezado describe la clase `BufferCircular`; esta vez no hay código de partida para la clase. [`contador_reservas.h`](./contador_reservas.h) cuenta cada vez que el programa pide memoria dinámica (no lo modifiques). El `main` ya está escrito. Mientras no escribas la clase, el archivo no compila.
 
@@ -112,7 +83,7 @@ Ninguna en el código que escribes: `std::vector`, `std::map`, `std::unique_ptr`
 
 ## Antes de la próxima sesión
 
-La próxima sesión es el Laboratorio Integrador II, sin lectura nueva: vas a trabajar en el Proyecto Final (PSet 5), que se asigna hoy, con concurrencia, pruebas y CMake en el mismo programa.
+La próxima sesión no tiene clase. Hasta el domingo de la Semana 14 tienes los Ejercicios 2 y 3 de hoy y el Laboratorio Integrador II ([`laboratorios/semana-14-sesion-02/`](../semana-14-sesion-02/)), que junta en un solo proyecto los temas de la Semana 8 a la Semana 13. Hoy también se asigna el Proyecto Final (PSet 4), en [`psets/pset-04/`](../../psets/pset-04/).
 
 Hoy cada ventaja de C++ salió de controlar algo: dónde vive la memoria, cuándo se pide, qué hace el procesador en cada paso. Ese control también es la fuente de los errores que viste en el semestre (un puntero colgante, un data race). En el sistema de tu Proyecto Final, ¿qué tendrías que controlar tú, y cómo vas a comprobar que no rompiste nada?
 
