@@ -9,8 +9,8 @@
 // ejercicio1_libro_mapa.cpp, y las dos versiones tienen que imprimir los
 // mismos numeros.
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -O2 ejercicio1_libro_arreglo.cpp -o bin/ejercicio1_arreglo
-// Medir:     time ./bin/ejercicio1_arreglo
+// Compilar:  g++ -std=c++20 -Wall -Wextra -O2 ejercicio1_libro_arreglo.cpp -o ejercicio1_arreglo
+// Medir:     time ./ejercicio1_arreglo
 
 const int PRECIO_MINIMO = 10000;
 const int NIVELES = 1000;
@@ -19,22 +19,26 @@ const int EVENTOS = 20000000;
 class LibroArreglo {
 public:
     LibroArreglo() {
-        // TODO 1: deja el vector con NIVELES casillas en 0 (reserve y
-        // push_back), antes de que llegue el primer evento.
+        cantidades.reserve(NIVELES);
+        for (int i = 0; i < NIVELES; i++) {
+            cantidades.push_back(0);
+        }
     }
 
     void agregar(int precio, int cantidad) {
-        // TODO 2: suma la cantidad en la casilla de ese precio.
+        cantidades[precio - PRECIO_MINIMO] += cantidad;
     }
 
     void cancelar(int precio, int cantidad) {
-        // TODO 2: resta la cantidad, sin bajar de 0 (como el mapa, que borra
-        // el nivel cuando se cancela todo lo que habia).
+        int indice = precio - PRECIO_MINIMO;
+        cantidades[indice] -= cantidad;
+        if (cantidades[indice] < 0) {
+            cantidades[indice] = 0;
+        }
     }
 
     int cantidadEn(int precio) {
-        // TODO 3: devuelve lo que hay en la casilla de ese precio.
-        return 0;
+        return cantidades[precio - PRECIO_MINIMO];
     }
 
 private:

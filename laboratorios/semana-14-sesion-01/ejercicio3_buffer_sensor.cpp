@@ -27,8 +27,8 @@
 // No cambies el main: lee un millon de valores, y cuenta cuantas reservas
 // de memoria dinamica hubo mientras el sensor corria.
 //
-// Compilar:  g++ -std=c++20 -Wall -Wextra -O2 ejercicio3_buffer_sensor.cpp -o bin/ejercicio3
-// Ejecutar:  ./bin/ejercicio3
+// Compilar:  g++ -std=c++20 -Wall -Wextra -O2 ejercicio3_buffer_sensor.cpp -o ejercicio3
+// Ejecutar:  ./ejercicio3
 //
 // Salida esperada:
 // Lecturas guardadas: 64
@@ -40,7 +40,62 @@
 const int CAPACIDAD = 64;
 const int LECTURAS = 1000000;
 
-// TODO: escribe aqui la clase BufferCircular.
+class BufferCircular {
+private:
+    double lecturas[CAPACIDAD];
+    int inicio;
+    int cantidad;
+
+public:
+    BufferCircular() : inicio(0), cantidad(0) {}
+
+    void agregar(double valor) {
+        if (cantidad < CAPACIDAD) {
+            int pos = (inicio + cantidad) % CAPACIDAD;
+            lecturas[pos] = valor;
+            cantidad++;
+        } else {
+            lecturas[inicio] = valor;
+            inicio = (inicio + 1) % CAPACIDAD;
+        }
+    }
+
+    int getCantidad() const {
+        return cantidad;
+    }
+
+    double masAntigua() const {
+        if (cantidad == 0) {
+            return 0.0;
+        }
+        return lecturas[inicio];
+    }
+
+    double promedio() const {
+        if (cantidad == 0) {
+            return 0.0;
+        }
+        double suma = 0.0;
+        for (int i = 0; i < cantidad; i++) {
+            suma += lecturas[(inicio + i) % CAPACIDAD];
+        }
+        return suma / cantidad;
+    }
+
+    double minimo() const {
+        if (cantidad == 0) {
+            return 0.0;
+        }
+        double minVal = lecturas[inicio];
+        for (int i = 1; i < cantidad; i++) {
+            double actual = lecturas[(inicio + i) % CAPACIDAD];
+            if (actual < minVal) {
+                minVal = actual;
+            }
+        }
+        return minVal;
+    }
+};
 
 int main() {
     BufferCircular buffer;

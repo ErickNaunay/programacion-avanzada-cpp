@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 
+#include <atomic>
 #include <stdexcept>
 #include <thread>
 
@@ -31,14 +32,49 @@ TEST(Inventario, DescuentaCuandoAlcanza) {
     EXPECT_EQ(inventario.unidades(1), 6);
 }
 
-// TODO 5: escribe estas pruebas.
-// - ColaDePedidos, VaciaDevuelveNullopt: tomar() en una cola vacia no
-//   tiene valor, y pendientes() es 0.
-// - Inventario, NoDescuentaSiNoAlcanza: con 3 unidades, descontar 5
-//   devuelve false y las unidades siguen en 3.
-// - Inventario, ProductoDesconocidoLanza: EXPECT_THROW con
-//   std::invalid_argument.
-// - Inventario, CantidadNoPositivaLanza: con 0 y con -2.
-// - Inventario, DosHilosNoVendenDeMas: un producto con 1000 unidades, dos
-//   hilos que intentan descontar 1 unidad 1000 veces cada uno; al final
-//   quedan 0 unidades, y entre los dos lograron exactamente 1000.
+TEST(ColaDePedidos, VaciaDevuelveNullopt) {
+    ColaDePedidos cola;
+    EXPECT_FALSE(cola.tomar().has_value());
+    EXPECT_EQ(cola.pendientes(), 0);
+}
+
+TEST(Inventario, NoDescuentaSiNoAlcanza) {
+    Inventario inventario;
+    inventario.registrar(1, 3);
+    EXPECT_FALSE(inventario.descontar(1, 5));
+    EXPECT_EQ(inventario.unidades(1), 3);
+}
+
+TEST(Inventario, ProductoDesconocidoLanza) {
+    Inventario inventario;
+    EXPECT_THROW(inventario.descontar(99, 1), std::invalid_argument);
+}
+
+TEST(Inventario, CantidadNoPositivaLanza) {
+    Inventario inventario;
+    inventario.registrar(1, 10);
+    EXPECT_THROW(inventario.descontar(1, 0), std::invalid_argument);
+    EXPECT_THROW(inventario.descontar(1, -2), std::invalid_argument);
+}
+
+TEST(Inventario, DosHilosNoVendenDeMas) {
+    Inventario inventario;
+    inventario.registrar(1, 1000);
+    std::atomic<int> exitosos{0};
+
+    auto trabajador = [&]() {
+        for (int i = 0; i < 1000; i++) {
+            if (inventario.descontar(1, 1)) {
+                exitosos++;
+            }
+        }
+    };
+
+    std::thread t1(trabajador);
+    std::thread t2(trabajador);
+    t1.join();
+    t2.join();
+
+    EXPECT_EQ(inventario.unidades(1), 0);
+    EXPECT_EQ(exitosos.load(), 1000);
+}

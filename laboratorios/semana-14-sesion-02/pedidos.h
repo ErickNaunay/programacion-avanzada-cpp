@@ -28,17 +28,14 @@ public:
 
     // Deja un pedido al final de la cola.
     void agregar(Pedido pedido) {
-        // TODO 1: la cola la usan tres cajas a la vez. Protege el push_back
-        // con el candado de la clase.
+        std::lock_guard<std::mutex> guardia(candado);
         pedidos.push_back(pedido);
     }
 
     // Saca el pedido mas antiguo que no se haya sacado todavia, o
     // std::nullopt si ya no quedan.
     std::optional<Pedido> tomar() {
-        // TODO 2: dos cocineros toman a la vez. Mirar si quedan pedidos y
-        // avanzar siguiente tienen que pasar juntos, sin que otro hilo
-        // se meta en medio.
+        std::lock_guard<std::mutex> guardia(candado);
         int total = pedidos.size();
         if (siguiente >= total) {
             return std::nullopt;
@@ -74,11 +71,19 @@ public:
     // std::invalid_argument si el producto no existe o si la cantidad no es
     // positiva.
     bool descontar(int producto, int cantidad) {
-        // TODO 3: escribe descontar. Dos cocineros pueden descontar el mismo
-        // producto a la vez: preguntar si alcanza y restar son una sola
-        // seccion critica. Si lanzas una excepcion con el candado tomado,
-        // ¿quien lo suelta?
-        return false;
+        std::lock_guard<std::mutex> guardia(candado);
+        if (cantidad <= 0) {
+            throw std::invalid_argument("La cantidad debe ser positiva");
+        }
+        auto it = stock.find(producto);
+        if (it == stock.end()) {
+            throw std::invalid_argument("El producto no existe");
+        }
+        if (it->second < cantidad) {
+            return false;
+        }
+        it->second -= cantidad;
+        return true;
     }
 
     // Unidades que quedan del producto (0 si no existe).
@@ -98,7 +103,9 @@ private:
 class Estadisticas {
 public:
     Estadisticas() {
-        // TODO 4: los tres contadores empiezan en 0.
+        despachados = 0;
+        sinStock = 0;
+        invalidos = 0;
     }
 
     void anotarDespachado() {
@@ -126,10 +133,7 @@ public:
     }
 
 private:
-    // TODO 4: los dos cocineros anotan a la vez, y cada anotacion es una
-    // sola operacion sobre un numero: cambia el tipo de los tres contadores
-    // para que no se pierda ninguna.
-    int despachados;
-    int sinStock;
-    int invalidos;
+    std::atomic<int> despachados;
+    std::atomic<int> sinStock;
+    std::atomic<int> invalidos;
 };

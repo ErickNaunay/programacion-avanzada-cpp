@@ -11,19 +11,23 @@ if(CON_SANITIZERS)
     add_link_options(-fsanitize=address,undefined)
 endif()
 
-# TODO 6: una opcion CON_TSAN, apagada por defecto, que compile y enlace
-# todo con -fsanitize=thread (como CON_SANITIZERS, en la Semana 12). Las dos
-# opciones no se usan a la vez: ThreadSanitizer no se combina con
-# AddressSanitizer.
+option(CON_TSAN "Compilar con ThreadSanitizer" OFF)
+if(CON_TSAN)
+    add_compile_options(-fsanitize=thread -fno-omit-frame-pointer)
+    add_link_options(-fsanitize=thread)
+endif()
+
+find_package(Threads REQUIRED)
 
 add_executable(cafeteria main.cpp)
 target_compile_options(cafeteria PRIVATE -Wall -Wextra)
+target_link_libraries(cafeteria PRIVATE Threads::Threads)
 
 find_package(GTest REQUIRED)
 add_executable(pruebas test_pedidos.cpp)
 target_compile_options(pruebas PRIVATE -Wall -Wextra)
-target_link_libraries(pruebas PRIVATE GTest::gtest_main)
+target_link_libraries(pruebas PRIVATE GTest::gtest_main Threads::Threads)
 
 enable_testing()
 include(GoogleTest)
-gtest_discover_tests(pruebas)
+gtest_discover_tests(pruebas DISCOVERY_MODE PRE_TEST)
